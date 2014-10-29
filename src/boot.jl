@@ -1,3 +1,20 @@
+function boot(x, fun::Function, m::Int; method::Symbol = :basic)
+
+    if method == :basic
+        boot_basic(x, fun, m)
+    #elseif method == :weight
+    #    boot_weight(x, fun, m, weight)
+    elseif method == :balanced
+        boot_balanced(x, fun, m)
+    elseif method == :exact
+        boot_exact(x, fun)
+    else
+        error("Method '$(method)' is not implemented")
+    end
+
+end
+
+
 function boot_basic(x, fun::Function, m::Int)
     n = length(x)
     t0 = fun(x)
@@ -5,7 +22,7 @@ function boot_basic(x, fun::Function, m::Int)
     for i in 1:m
         t1[i] = fun(sample(x, n, replace = true))
     end
-    res = BootstrapSample(t0, t1, fun, x, m, 0, "basic")
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :basic)
 
     return res
 end
@@ -18,7 +35,7 @@ function boot_weight(x, fun::Function, m::Int, weight::WeightVec)
     for i in 1:m
         t1[i] = fun(sample(x, weight, n, replace = true))
     end
-    res = BootstrapSample(t0, t1, fun, x, m, weight, "weighted")
+    res = BootstrapSample(t0, t1, fun, x, m, weight, :weighted)
 
     return res
 end
@@ -37,7 +54,7 @@ function boot_balanced(x, fun::Function, m::Int)
     for i in 1:m
         t1[i]= fun(x[ridx[:,i]])
     end
-    res = BootstrapSample(t0, t1, fun, x, m, 0, "balanced")
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :balanced)
 
     return res
 end
@@ -45,17 +62,13 @@ end
 
 function boot_exact(x, fun::Function)
     n = length(x)
-    if n > 8
-        warn("'n' is very large:  Consider random sampling.")
-    end
     t0 = fun(x)
-    p = product( [x for i in 1:n]... )
-    m = length(p)
+    m = binomial(2*n-1, n)
     t1 = zeros(m)
-    for (i, s) in enumerate(p)
-        t1[i] = fun(s)
+    for (i, s) in enumerate(sample_exact(n))
+        t1[i] = fun(x[s])
     end
-    res = BootstrapSample(t0, t1, fun, x, m, 0, "exact")
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
 
     return res
 end
