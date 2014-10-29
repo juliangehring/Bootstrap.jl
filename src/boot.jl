@@ -1,4 +1,4 @@
-function boot(x, fun::Function, m::Int; method::Symbol = :basic)
+function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 
     if method == :basic
         boot_basic(x, fun, m)
@@ -15,7 +15,7 @@ function boot(x, fun::Function, m::Int; method::Symbol = :basic)
 end
 
 
-function boot_basic(x, fun::Function, m::Int)
+function boot_basic(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = fun(x)
     t1 = zeros(m)
@@ -28,7 +28,7 @@ function boot_basic(x, fun::Function, m::Int)
 end
 
 
-function boot_weight(x, fun::Function, m::Int, weight::WeightVec)
+function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
     n = length(x)
     t0 = fun(x)
     t1 = zeros(m)
@@ -41,7 +41,7 @@ function boot_weight(x, fun::Function, m::Int, weight::WeightVec)
 end
 
 
-function boot_balanced(x, fun::Function, m::Int)
+function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = fun(x)
     t1 = zeros(m)
@@ -60,7 +60,7 @@ function boot_balanced(x, fun::Function, m::Int)
 end
 
 
-function boot_exact(x, fun::Function)
+function boot_exact(x::AbstractVector, fun::Function)
     n = length(x)
     t0 = fun(x)
     m = binomial(2*n-1, n)

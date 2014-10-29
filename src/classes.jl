@@ -2,7 +2,7 @@ type BootstrapSample
     t0
     t1
     fun::Function
-    x
+    x::AbstractVector
     m::Integer
     wv
     method::Symbol
