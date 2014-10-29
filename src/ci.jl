@@ -49,11 +49,3 @@ end
 
 function ci_bca(x::BootstrapSample)
 end
-
-x = randn(10);
-
-bs = boot_basic(x, mean, 100);
-
-ci_basic(bs)
-
-ci_perc(bs)
