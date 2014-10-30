@@ -11,7 +11,7 @@ data = (rn, ru);
 ## statistic functions
 funs = (mean, median)
 b_methods = (:basic, :balanced)
-ci_methods = (:basic, :perc)
+ci_methods = (:basic, :perc, :normal)
 
 for r in data, f in funs, b in b_methods
     bs = boot(r, f, nSamples, method = b)

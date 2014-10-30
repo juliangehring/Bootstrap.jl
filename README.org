@@ -19,7 +19,7 @@ especially in the absence of closed-form solutions.
 - Confidence intervals:
   + basic
   + percentile
-  + normal [coming soon]
+  + normal
 
 
 * References
