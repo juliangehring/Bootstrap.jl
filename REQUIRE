@@ -2,4 +2,3 @@ julia 0.3-
 StatsBase
 Iterators
 Distributions
-#Gadfly

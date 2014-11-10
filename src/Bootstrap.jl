@@ -4,9 +4,6 @@ using StatsBase
 using Iterators
 using Distributions
 
-#import Base: show
-#import Gadfly
-
 export
     ## types
     BootstrapSample,
@@ -29,13 +26,11 @@ export
     ci_basic,
     ci_perc,
     ci_normal
-    #plot
 
 include("classes.jl")
 include("sample.jl")
 include("boot.jl")
 include("ci.jl")
-#include("plot.jl")
 include("show.jl")
 
 end # module
