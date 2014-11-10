@@ -45,3 +45,5 @@ for r in data, f in funs, b in b_methods
         @test interval(bci)[2] > estimate(bci)
     end
 end
+
+workspace() ## cleanup

@@ -19,3 +19,5 @@ for (alpha, ref) in qnorm
     v = quantile(Normal(), alpha)
     @test_approx_eq_eps(v, ref, 1e-6)
 end
+
+workspace() ## cleanup
