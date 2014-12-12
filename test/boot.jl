@@ -47,7 +47,7 @@ for r in data, f in funs, b in b_methods
 end
 
 ## small version for boot_exact
-nSamples = 0;
+nSamples = 0;  ## not used
 
 ## sample data
 ru = rand(8);
@@ -90,5 +90,11 @@ for r in data, f in funs, b in b_methods
         @test interval(bci)[2] > estimate(bci)
     end
 end
+
+## check if unknown method is caught
+@test_throws ErrorException boot(randn(10), mean, 1000, method = :unknown)
+
+bs = boot(randn(10), mean, 1000, method = :basic);
+@test_throws ErrorException ci(bs, method = :unknown)
 
 workspace() ## cleanup
