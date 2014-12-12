@@ -48,9 +48,6 @@ function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     idx = repmat([1:n], m)
     ridx = sample(idx, n*m, replace = false)
     ridx = reshape(ridx, n, m)
-    if sum(idx) != sum(ridx)
-        error("Sampling not balanced")
-    end
     for i in 1:m
         t1[i]= fun(x[ridx[:,i]])
     end
