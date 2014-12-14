@@ -3,7 +3,10 @@
 
 * Package Status
 
-Julia Release [![Bootstrap](http://pkg.julialang.org/badges/Bootstrap_release.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=release) Julia Nightly [![Bootstrap](http://pkg.julialang.org/badges/Bootstrap_nightly.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=nightly) [![Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master)](https://travis-ci.org/julian-gehring/Bootstrap.jl) [![Coverage Status](https://img.shields.io/coveralls/julian-gehring/Bootstrap.jl.svg)](https://coveralls.io/r/julian-gehring/Bootstrap.jl)
+[[http://pkg.julialang.org/badges/Bootstrap_release.svg][file:http://pkg.julialang.org/?pkg=Bootstrap&ver=release]] 
+[[http://pkg.julialang.org/?pkg=Bootstrap&ver=nightly][file:http://pkg.julialang.org/badges/Bootstrap_nightly.svg ]]
+[[https://travis-ci.org/julian-gehring/Bootstrap.jl][file:https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master]] 
+[[https://coveralls.io/r/julian-gehring/Bootstrap.jl][file:https://img.shields.io/coveralls/julian-gehring/Bootstrap.jl.svg]]
 
 
 * Motivation
@@ -26,18 +29,6 @@ especially in the absence of closed-form solutions.
   + basic
   + percentile
   + normal
-
-
-* References
-
-The [[https://en.wikipedia.org/wiki/Bootstrapping_(statistics)][bootstrapping wikipdia article]] is a comprehensive summary of the topic.  An
-extensive description of the bootstrap is the focus of the book
-
-Davison and Hinkley (1997): Bootstrap Methods and Their Application. Cambridge
-University Press, http://statwww.epfl.ch/davison/BMA/
-
-Most of the methodology covered in the book is implemented in the [[http://cran.r-project.org/web/packages/boot/index.html][boot]] package
-for the [[http://www.r-project.org/][R programming language]].
 
 
 * Examples
@@ -75,4 +66,16 @@ for the [[http://www.r-project.org/][R programming language]].
   ## percentile CIs
   bci2 = ci(bs1, level = 0.95, method = :perc);
 #+END_SRC
+
+
+* References
+
+The [[https://en.wikipedia.org/wiki/Bootstrapping_(statistics)][bootstrapping wikipdia article]] is a comprehensive summary of the topic.  An
+extensive description of the bootstrap is the focus of the book
+
+Davison and Hinkley (1997): Bootstrap Methods and Their Application. Cambridge
+University Press, http://statwww.epfl.ch/davison/BMA/
+
+Most of the methodology covered in the book is implemented in the [[http://cran.r-project.org/web/packages/boot/index.html][boot]] package
+for the [[http://www.r-project.org/][R programming language]].
 
