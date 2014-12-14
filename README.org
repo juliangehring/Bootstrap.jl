@@ -14,6 +14,8 @@
 Bootstrapping is a widely applicable technique for statistical estimation,
 especially in the absence of closed-form solutions.
 
+[[file:img/bootstraps.png][Bootstraps]]
+
 
 * Functionality
 
