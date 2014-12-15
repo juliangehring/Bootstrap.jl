@@ -75,8 +75,8 @@ especially in the absence of closed-form solutions.
 The [[https://en.wikipedia.org/wiki/Bootstrapping_(statistics)][bootstrapping wikipdia article]] is a comprehensive summary of the topic.  An
 extensive description of the bootstrap is the focus of the book
 
-Davison and Hinkley (1997): Bootstrap Methods and Their Application. Cambridge
-University Press, http://statwww.epfl.ch/davison/BMA/
+Davison and Hinkley (1997): [[http://statwww.epfl.ch/davison/BMA/][Bootstrap Methods and Their Application]]. Cambridge
+University Press
 
 Most of the methodology covered in the book is implemented in the [[http://cran.r-project.org/web/packages/boot/index.html][boot]] package
 for the [[http://www.r-project.org/][R programming language]].
