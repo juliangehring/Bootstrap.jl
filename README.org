@@ -3,7 +3,7 @@
 
 * Package Status
 
-[[http://pkg.julialang.org/?pkg%3DBootstrap&ver%3Drelease][file:http://pkg.julialang.org/badges/Bootstrap_release.svg]] 
+[[http://pkg.julialang.org/?pkg=Bootstrap&ver=release][file:http://pkg.julialang.org/badges/Bootstrap_release.svg]] 
 [[http://pkg.julialang.org/?pkg=Bootstrap&ver=nightly][file:http://pkg.julialang.org/badges/Bootstrap_nightly.svg]] 
 [[https://travis-ci.org/julian-gehring/Bootstrap.jl][file:https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master]] 
 [[https://coveralls.io/r/julian-gehring/Bootstrap.jl][file:https://img.shields.io/coveralls/julian-gehring/Bootstrap.jl.svg]]
