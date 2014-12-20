@@ -19,7 +19,7 @@ function boot_basic(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = fun(x)
     t1 = zeros(typeof(t0), m)
-    boot_sample = zeros(eltype(x), n)
+    boot_sample = zeros(x)
     for i in 1:m
         t1[i] = fun(sample!(x, boot_sample))
     end
@@ -32,7 +32,7 @@ function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec
     n = length(x)
     t0 = fun(x)
     t1 = zeros(typeof(t0), m)
-    boot_sample = zeros(eltype(x), n)
+    boot_sample = zeros(x)
     for i in 1:m
         t1[i] = fun(sample!(x, weight, boot_sample))
     end
