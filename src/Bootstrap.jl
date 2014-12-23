@@ -3,6 +3,9 @@ module Bootstrap
 using StatsBase
 using Iterators
 using Distributions
+using DataFrames
+
+import StatsBase: sample
 
 export
     ## types
