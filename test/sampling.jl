@@ -17,5 +17,3 @@ dfu = sample(df, m, replace = false)
 
 dfw = sample(df, wv, m)
 @test nrow(dfw) == m
-
-workspace() ## cleanup

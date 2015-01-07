@@ -96,5 +96,3 @@ end
 
 bs = boot(randn(10), mean, 1000, method = :basic);
 @test_throws ErrorException ci(bs, method = :unknown)
-
-workspace() ## cleanup
