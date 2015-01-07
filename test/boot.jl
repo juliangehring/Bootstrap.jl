@@ -6,14 +6,14 @@ nSamples = 100;
 ## sample data
 rn = randn(100);
 ru = rand(20);
-data = (rn, ru);
+r_data = (rn, ru);
 
 ## statistic functions
 funs = (mean, median)
 b_methods = (:basic, :balanced)
 ci_methods = (:basic, :perc, :normal)
 
-for r in data, f in funs, b in b_methods
+for r in r_data, f in funs, b in b_methods
     bs = boot(r, f, nSamples, method = b)
     ## testing
     ## return type
@@ -23,6 +23,8 @@ for r in data, f in funs, b in b_methods
     @test estimate(bs) == f(r)
     ## straps t1
     @test length(straps(bs)) == nSamples
+    ## data
+    @test data(bs) == r
     ## accessors
     @test method(bs) == b
     ## bias and se
@@ -51,14 +53,14 @@ nSamples = 0;  ## not used
 
 ## sample data
 ru = rand(8);
-data = (ru, );
+r_data = (ru, );
 
 ## statistic functions
 funs = (mean, median)
 b_methods = (:exact, )
 ci_methods = (:basic, :perc, :normal)
 
-for r in data, f in funs, b in b_methods
+for r in r_data, f in funs, b in b_methods
     bs = boot(r, f, nSamples, method = b)
     ## testing
     ## return type
