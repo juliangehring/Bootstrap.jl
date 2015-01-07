@@ -4,7 +4,7 @@ using Base.Test
 nSamples = 100;
 
 ## sample data
-rn = randn(100);
+rn = randn(20);
 ru = rand(20);
 r_data = (rn, ru);
 
@@ -52,7 +52,7 @@ end
 nSamples = 0;  ## not used
 
 ## sample data
-ru = rand(8);
+ru = rand(6);
 r_data = (ru, );
 
 ## statistic functions
@@ -94,7 +94,7 @@ for r in r_data, f in funs, b in b_methods
 end
 
 ## check if unknown method is caught
-@test_throws ErrorException boot(randn(10), mean, 1000, method = :unknown)
+@test_throws ErrorException boot(randn(10), mean, 100, method = :unknown)
 
-bs = boot(randn(10), mean, 1000, method = :basic);
+bs = boot(randn(10), mean, 100, method = :basic);
 @test_throws ErrorException ci(bs, method = :unknown)
