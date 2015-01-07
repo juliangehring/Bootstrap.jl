@@ -47,8 +47,8 @@ function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     t0 = fun(x)
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n], m)
-    ridx = sample(idx, n*m, replace = false)
-    ridx = reshape(ridx, n, m)
+    ridx = zeros(Integer, n, m)
+    sample!(idx, ridx, replace = false)
     for i in 1:m
         t1[i]= fun(x[ridx[:,i]])
     end
