@@ -3,6 +3,7 @@ using Base.Test
 
 ### Sampling of a DataFrame ###
 using DataFrames
+using StatsBase
 
 m = 5
 df = DataFrame(a = [1:5], b = [5:-1:1])
