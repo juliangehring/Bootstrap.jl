@@ -33,7 +33,8 @@ end
 ### Sampling methods for 'Array'
 
 function sample{T}(a::AbstractArray{T}, d::Integer, n::Integer; replace::Bool=true, ordered::Bool=false)
-    index = sample([1:size(a, d)], n, replace = replace, ordered = ordered)
+    index = sample(1:size(a, d), n, replace = replace, ordered = ordered)
     a = slicedim(a, d, index)
     return a
 end
+
