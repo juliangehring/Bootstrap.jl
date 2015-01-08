@@ -41,6 +41,18 @@ function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
     return res
 end
 
+function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+    n = size(x, dim)
+    t0 = fun(x)
+    t1 = zeros(typeof(t0), m)
+    for i in 1:m
+        t1[i] = fun(sample(x, dim, n, replace = true))
+    end
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :basic)
+
+    return res
+end
+
 
 ### boot_weight ###
 

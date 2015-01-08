@@ -95,6 +95,7 @@ test_all_ci(bs1, ci_funs, ci_methods)
 
 
 ### DataFrames
+
 using DataFrames
 df = DataFrame(a = r, b = reverse(r));
 fun_df(x::DataFrame; column::Symbol = :a) = mean(x[:,column])
@@ -122,6 +123,16 @@ bs1 = boot_exact(df2, fun_df)
 test_boot(bs1, df2, :exact, fun_df)
 test_all_ci(bs1, ci_funs, ci_methods)
 
+
+### Arrays
+y = randn(25, 2);
+mu_hat = mean(y, 1)
+fun_array(x::AbstractArray) = norm(mean(x, 1) - mu_hat)
+fun_array(y)
+
+## boot_basic
+bs1 = boot_basic(y, fun_array, nSamples, 1)
+test_boot(bs1, y, :basic, fun_array)
 
 ### check if unknown method is caught
 @test_throws ErrorException boot(randn(10), mean, 100, method = :unknown)
