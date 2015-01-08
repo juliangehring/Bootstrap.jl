@@ -19,12 +19,12 @@ end
 
 ### Sampling methods for 'DataFrame'
 
-function sample(df::DataFrame, n::Integer; replace::Bool=true, ordered::Bool=false)
+function StatsBase.sample(df::DataFrame, n::Integer; replace::Bool=true, ordered::Bool=false)
     index = sample(1:nrow(df), n, replace = replace, ordered = ordered)
     df[index,:]
 end
 
-function sample(df::DataFrame, wv::WeightVec, n::Integer; replace::Bool=true, ordered::Bool=false)
+function StatsBase.sample(df::DataFrame, wv::WeightVec, n::Integer; replace::Bool=true, ordered::Bool=false)
     index = sample(1:nrow(df), wv, n, replace = replace, ordered = ordered)
     df[index,:]
 end
