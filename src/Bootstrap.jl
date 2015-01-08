@@ -14,7 +14,7 @@ export
     ## methods
     boot,
     boot_basic,
-    #boot_weight,
+    boot_weight,
     boot_balanced,
     boot_exact,
     estimate,
