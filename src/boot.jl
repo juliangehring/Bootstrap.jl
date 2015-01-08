@@ -57,7 +57,7 @@ function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec
     return res
 end
 
-function boot_weight(x::DataFrame, fun::Function, m::Int, weight::WeightVec)
+function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Int, weight::WeightVec)
     n = nrow(x)
     t0 = fun(x)
     t1 = zeros(typeof(t0), m)
@@ -95,7 +95,7 @@ function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
     ridx = zeros(Integer, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
-        t1[i]= fun(x[ridx[:,i]],:)
+        t1[i]= fun(x[ridx[:,i],:])
     end
     res = BootstrapSample(t0, t1, fun, x, m, 0, :balanced)
 
