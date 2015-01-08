@@ -30,6 +30,12 @@ for r in r_data, f in funs, b in b_methods
     ## bias and se
     @test bias(bs) > -1.0 && bias(bs) < 1.0
     @test se(bs) > 0
+    ## show method
+    io_tmp = IOBuffer()
+    @test length(takebuf_string(io_tmp)) == 0
+    show(io_tmp, bs)
+    @test length(takebuf_string(io_tmp)) > 0
+    close(io_tmp)
     ## confidence intervals
     for c in ci_methods
         bci = ci(bs, method = c)
@@ -45,6 +51,12 @@ for r in r_data, f in funs, b in b_methods
         ## CI bounds: interval
         @test interval(bci)[1] < estimate(bci)
         @test interval(bci)[2] > estimate(bci)
+        ## show method
+        io_tmp = IOBuffer()
+        @test length(takebuf_string(io_tmp)) == 0
+        show(io_tmp, bci)
+        @test length(takebuf_string(io_tmp)) > 0
+        close(io_tmp)
     end
 end
 
