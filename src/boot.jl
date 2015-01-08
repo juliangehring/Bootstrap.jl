@@ -57,7 +57,6 @@ function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec
     return res
 end
 
-
 function boot_weight(x::DataFrame, fun::Function, m::Int, weight::WeightVec)
     n = nrow(x)
     t0 = fun(x)
@@ -119,7 +118,6 @@ function boot_exact(x::AbstractVector, fun::Function)
     return res
 end
 
-
 function boot_exact(x::DataFrames.DataFrame, fun::Function)
      n = nrow(x)
      t0 = fun(x)
@@ -131,4 +129,4 @@ function boot_exact(x::DataFrames.DataFrame, fun::Function)
      res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
 
      return res
- end
+end
