@@ -125,9 +125,10 @@ test_all_ci(bs1, ci_funs, ci_methods)
 
 
 ### Arrays
+## example taken from https://github.com/julian-gehring/Bootstrap.jl/issues/2
 y = randn(25, 2);
 mu_hat = mean(y, 1)
-fun_array(x::AbstractArray) = norm(mean(x, 1) - mu_hat)
+fun_array(x::AbstractArray) = norm(mean(x) - mu_hat)
 fun_array(y)
 
 ## boot_basic
