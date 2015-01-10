@@ -34,17 +34,30 @@ function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 end
 
 ### boot_basic ###
-@doc """
+@doc* """
+
+# Interface
+
+```julia
+bs::BootstrapSample = boot_basic(x::AbstractVector, fun::Function, m::Int)
+bs::BootstrapSample = boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+bs::BootstrapSample = boot_basic(x::DataFrame, fun::Function, m::Int)
+
+```
+
 
 # Arguments
 
-* x: AbstractVector
-* fun: Function
-* m: Int
+* x :: AbstractVector, AbstracArray, DataFrame
+* fun :: Function
+* m :: Int
+* dim :: Int
+
 
 # Return value
 
 Object of class 'BootstrapSample'
+
 
 # Examples
 
