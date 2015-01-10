@@ -1,3 +1,22 @@
+@doc """
+
+# Arguments
+
+* x: AbstractVector
+* fun: Function
+* m: Int
+
+# Return value
+
+Object of class 'BootstrapSample'
+
+# Examples
+
+```julia
+bs = boot_basic(randn(20), mean, 100)
+```
+
+""" ->
 function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 
     if method == :basic
@@ -15,7 +34,25 @@ function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 end
 
 ### boot_basic ###
+@doc """
 
+# Arguments
+
+* x: AbstractVector
+* fun: Function
+* m: Int
+
+# Return value
+
+Object of class 'BootstrapSample'
+
+# Examples
+
+```julia
+bs = boot_basic(randn(20), mean, 100)
+```
+
+""" ->
 function boot_basic(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = fun(x)

@@ -30,6 +30,10 @@ export
     ci_perc,
     ci_normal
 
+## documentation
+using Docile
+using Lexicon
+
 include("classes.jl")
 include("sample.jl")
 include("boot.jl")
