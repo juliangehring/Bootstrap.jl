@@ -95,8 +95,11 @@ function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
     t0 = fun(x)
     t1 = zeros(typeof(t0), m)
+    index = [1:n]
+    boot_index = zeros(Int, n)
     for i in 1:m
-        t1[i] = fun(sample(x, dim, n, replace = true))
+        sample!(index, boot_index)
+        t1[i] = fun(slicedim(x, dim, boot_index))
     end
     res = BootstrapSample(t0, t1, fun, x, m, 0, :basic)
 
