@@ -140,3 +140,9 @@ test_boot(bs1, y, :basic, fun_array)
 
 bs = boot(randn(10), mean, 100, method = :basic);
 @test_throws ErrorException ci(bs, method = :unknown)
+
+
+### check return value
+@test Bootstrap.checkReturn(1) == 1
+@test_throws ErrorException Bootstrap.checkReturn([1:2])
+@test_throws ErrorException Bootstrap.checkReturn(rand(2, 2))

@@ -68,7 +68,7 @@ bs = boot_basic(randn(20), mean, 100)
 """ ->
 function boot_basic(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
     for i in 1:m
@@ -93,7 +93,7 @@ end
 
 function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     index = [1:n]
     boot_index = zeros(Int, n)
@@ -111,7 +111,7 @@ end
 
 function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
     n = length(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
     for i in 1:m
@@ -124,7 +124,7 @@ end
 
 function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Int, weight::WeightVec)
     n = nrow(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     for i in 1:m
         t1[i] = fun(sample(x, weight, n, replace = true))
@@ -139,7 +139,7 @@ end
 
 function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n], m)
     ridx = zeros(Integer, n, m)
@@ -154,7 +154,7 @@ end
 
 function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
     n = nrow(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n], m)
     ridx = zeros(Integer, n, m)
@@ -172,7 +172,7 @@ end
 
 function boot_exact(x::AbstractVector, fun::Function)
     n = length(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
     t1 = zeros(m)
     for (i, s) in enumerate(sample_exact(n))
@@ -185,7 +185,7 @@ end
 
 function boot_exact(x::DataFrames.DataFrame, fun::Function)
      n = nrow(x)
-     t0 = fun(x)
+     t0 = checkReturn(fun(x))
      m = binomial(2*n-1, n)
      t1 = zeros(typeof(t0), m)
      for (i, s) in enumerate(sample_exact(n))
@@ -194,4 +194,10 @@ function boot_exact(x::DataFrames.DataFrame, fun::Function)
      res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
 
      return res
+end
+
+
+### check return value
+function checkReturn{T}(x::T)
+    length(x) != 1 ? error("Return value must be a scalar.") : x
 end
