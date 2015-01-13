@@ -81,7 +81,7 @@ end
 
 function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
     n = nrow(x)
-    t0 = fun(x)
+    t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     for i in 1:m
         t1[i] = fun(sample(x, n, replace = true))
