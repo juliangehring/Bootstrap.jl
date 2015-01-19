@@ -170,6 +170,21 @@ function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Int, weight::Wei
     return res
 end
 
+function boot_weight(x::AbstractArray, fun::Function, m::Int, weight::WeightVec, dim::Int = 1)
+    n = size(x, dim)
+    t0 = checkReturn(fun(x))
+    t1 = zeros(typeof(t0), m)
+    index = [1:n]
+    boot_index = zeros(Int, n)
+    for i in 1:m
+        sample!(index, weight, boot_index)
+        t1[i] = fun(slicedim(x, dim, boot_index))
+    end
+    res = BootstrapSample(t0, t1, fun, x, m, weight, :weighted)
+
+    return res
+end
+
 
 ### boot_balanced ###
 
