@@ -4,7 +4,7 @@ type BootstrapSample{E,S,D}
     fun::Function
     x::D
     m::Integer
-    wv
+    wv::Union(WeightVec, Integer)
     method::Symbol
 end
 
@@ -36,10 +36,10 @@ function method(bs::BootstrapSample)
     return bs.method
 end
 
-type BootstrapCI
-    t0
-    lower
-    upper
+type BootstrapCI{E}
+    t0::E
+    lower::FloatingPoint
+    upper::FloatingPoint
     level::FloatingPoint
     method::Symbol
 end
