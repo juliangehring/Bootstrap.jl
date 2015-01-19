@@ -44,11 +44,3 @@ function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
     res = BootstrapCI(t0, lower, upper, level, :normal)
     return res
 end
-
-function ci_stud(x::BootstrapSample)
-    ## need var estimates for t0 and t1
-    ## compute from data if not provided?
-end
-
-function ci_bca(x::BootstrapSample)
-end
