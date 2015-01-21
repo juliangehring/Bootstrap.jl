@@ -135,6 +135,16 @@ fun_array(y)
 bs1 = boot_basic(y, fun_array, nSamples, 1)
 test_boot(bs1, y, :basic, fun_array)
 
+## boot_balanced
+bs1 = boot_balanced(y, fun_array, nSamples, 1)
+test_boot(bs1, y, :balanced, fun_array)
+
+## boot_exact
+y2 = y[1:5,:]
+bs1 = boot_exact(y2, fun_array, 1)
+test_boot(bs1, y2, :exact, fun_array)
+
+
 ### check if unknown method is caught
 @test_throws ErrorException boot(randn(10), mean, 100, method = :unknown)
 

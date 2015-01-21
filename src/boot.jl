@@ -218,6 +218,21 @@ function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
     return res
 end
 
+function boot_balanced(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+    n = size(x, dim)
+    t0 = checkReturn(fun(x))
+    t1 = zeros(typeof(t0), m)
+    idx = repmat([1:n], m)
+    ridx = zeros(Integer, n, m)
+    sample!(idx, ridx, replace = false)
+    for i in 1:m
+        t1[i]= fun(slicedim(x, dim, ridx[:,i]))
+    end
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :balanced)
+
+    return res
+end
+
 
 ### boot_exact ###
 
@@ -225,7 +240,7 @@ function boot_exact(x::AbstractVector, fun::Function)
     n = length(x)
     t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
-    t1 = zeros(m)
+    t1 = zeros(typeof(t0), m)
     for (i, s) in enumerate(sample_exact(n))
         t1[i] = fun(x[s])
     end
@@ -235,16 +250,29 @@ function boot_exact(x::AbstractVector, fun::Function)
 end
 
 function boot_exact(x::DataFrames.DataFrame, fun::Function)
-     n = nrow(x)
-     t0 = checkReturn(fun(x))
-     m = binomial(2*n-1, n)
-     t1 = zeros(typeof(t0), m)
-     for (i, s) in enumerate(sample_exact(n))
-         t1[i] = fun(x[s,:])
-     end
-     res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
+    n = nrow(x)
+    t0 = checkReturn(fun(x))
+    m = binomial(2*n-1, n)
+    t1 = zeros(typeof(t0), m)
+    for (i, s) in enumerate(sample_exact(n))
+        t1[i] = fun(x[s,:])
+    end
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
 
-     return res
+    return res
+end
+
+function boot_exact(x::AbstractArray, fun::Function, dim::Int = 1)
+    n = size(x, dim)
+    t0 = checkReturn(fun(x))
+    m = binomial(2*n-1, n)
+    t1 = zeros(typeof(t0), m)
+    for (i, s) in enumerate(sample_exact(n))
+        t1[i] = fun(slicedim(x, dim, s))
+    end
+    res = BootstrapSample(t0, t1, fun, x, m, 0, :exact)
+
+    return res
 end
 
 
