@@ -1,7 +1,3 @@
-function sample_exact(n::Integer)
-    return imap(sample_set, combinations([1:(2n-1)], n))
-end
-
 function sample_set(c::Array) ## Integer,1
     v = Array(Int, length(c))
     j = 1
@@ -17,14 +13,18 @@ function sample_set(c::Array) ## Integer,1
     return v
 end
 
+function sample_exact(n::Integer)
+    return imap(sample_set, combinations([1:(2n-1)], n))
+end
+
 ### Sampling methods for 'DataFrame'
 
-function StatsBase.sample(df::DataFrame, n::Integer; replace::Bool=true, ordered::Bool=false)
+function StatsBase.sample(df::DataFrames.DataFrame, n::Integer; replace::Bool=true, ordered::Bool=false)
     index = sample(1:nrow(df), n, replace = replace, ordered = ordered)
     df[index,:]
 end
 
-function StatsBase.sample(df::DataFrame, wv::WeightVec, n::Integer; replace::Bool=true, ordered::Bool=false)
+function StatsBase.sample(df::DataFrames.DataFrame, wv::WeightVec, n::Integer; replace::Bool=true, ordered::Bool=false)
     index = sample(1:nrow(df), wv, n, replace = replace, ordered = ordered)
     df[index,:]
 end
