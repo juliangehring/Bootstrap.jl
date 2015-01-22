@@ -6,6 +6,8 @@ function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :b
         ci_perc(x, level)
     elseif method == :normal
         ci_normal(x, level)
+    elseif method == :bca
+        ci_bca(x, level)
     else
         error("Method '$(method)' is not implemented")
     end
@@ -42,5 +44,22 @@ function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
     lower = t0 - b - merr
     upper = t0 - b + merr
     res = BootstrapCI(t0, lower, upper, level, :normal)
+    return res
+end
+
+
+function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
+    t0 = x.t0
+    t1 = x.t1
+    alpha = ([-level, level] + 1)/2 ## optim
+    z0 = quantile(Normal(), mean(t1 .< t0))
+    jkt = jack_knife_estimate(x.x, x.fun)
+    resid = t0 - jkt ## check sides
+    a = sum(resid.^3) / (6.*(sum(resid.^2)).^(1.5))
+    qn = quantile(Normal(), alpha)
+    z1 = z0 + qn
+    zalpha = cdf(Normal(), z0 + (z1) ./ (1-a*(z1)))
+    lower, upper = quantile(t1, zalpha) ## optim
+    res = BootstrapCI(t0, lower, upper, level, :bca)
     return res
 end

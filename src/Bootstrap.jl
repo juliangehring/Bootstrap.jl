@@ -28,13 +28,15 @@ export
     ci,
     ci_basic,
     ci_perc,
-    ci_normal
+    ci_normal,
+    ci_bca
 
 ## documentation
 using Docile
 using Lexicon
 
 include("classes.jl")
+include("utils.jl")
 include("sample.jl")
 include("boot.jl")
 include("ci.jl")

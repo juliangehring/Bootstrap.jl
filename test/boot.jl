@@ -63,8 +63,8 @@ function test_all_ci(bs, ci_funs, ci_methods)
     end
 end
 
-ci_funs = (ci_basic, ci_normal, ci_perc)
-ci_methods = (:basic, :normal, :perc) 
+ci_funs = (ci_basic, ci_normal, ci_perc, ci_bca)
+ci_methods = (:basic, :normal, :perc, :bca)
 
 ## boot_basic
 bs1 = boot_basic(r, fun, nSamples);
