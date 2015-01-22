@@ -63,3 +63,8 @@ function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     res = BootstrapCI(t0, lower, upper, level, :bca)
     return res
 end
+
+
+function width(x::BootstrapCI)
+    return x.upper - x.lower
+end

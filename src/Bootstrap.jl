@@ -29,7 +29,8 @@ export
     ci_basic,
     ci_perc,
     ci_normal,
-    ci_bca
+    ci_bca,
+    width
 
 ## documentation
 using Docile

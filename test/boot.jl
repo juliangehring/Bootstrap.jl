@@ -48,6 +48,7 @@ function test_ci(bci::BootstrapCI, bs::BootstrapSample, c::Symbol)
     ## CI bounds: interval
     @test interval(bci)[1] < estimate(bci)
     @test interval(bci)[2] > estimate(bci)
+    @test width(bci) > 0.
     ## show method
     io_tmp = IOBuffer()
     @test length(takebuf_string(io_tmp)) == 0
