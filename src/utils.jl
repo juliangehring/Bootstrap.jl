@@ -1,6 +1,6 @@
-function jack_knife_estimate(x::AbstractVector, fun::Function)
+function jack_knife_estimate(x::AbstractVector, fun::Function, typ::Type = typeof(fun(x)))
     n = length(x)
-    y = zeros(n)
+    y = zeros(typ, n)
     idx = trues(n)
     for i in 1:n
         idx[i] = false
@@ -12,9 +12,9 @@ function jack_knife_estimate(x::AbstractVector, fun::Function)
     return y
 end
 
-function jack_knife_estimate(x::DataFrame, fun::Function)
+function jack_knife_estimate(x::DataFrames.DataFrame, fun::Function, typ::Type = typeof(fun(x)))
     n = nrow(x)
-    y = zeros(n)
+    y = zeros(typ, n)
     idx = trues(n)
     for i in 1:n
         idx[i] = false
@@ -25,4 +25,3 @@ function jack_knife_estimate(x::DataFrame, fun::Function)
     end
     return y
 end
-
