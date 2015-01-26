@@ -1,3 +1,9 @@
+### check return value
+function checkReturn{T}(x::T)
+    length(x) != 1 ? error("Return value must be a scalar.") : x
+end
+
+
 function jack_knife_estimate(x::AbstractVector, fun::Function, typ::Type = typeof(fun(x)))
     n = length(x)
     y = zeros(typ, n)

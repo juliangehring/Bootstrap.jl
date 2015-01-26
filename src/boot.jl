@@ -412,9 +412,3 @@ function boot_exact(x::AbstractArray, fun::Function, dim::Int = 1)
 
     return res
 end
-
-
-### check return value
-function checkReturn{T}(x::T)
-    length(x) != 1 ? error("Return value must be a scalar.") : x
-end
