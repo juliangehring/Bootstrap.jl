@@ -33,8 +33,7 @@ export
     width
 
 ## documentation
-using Docile
-using Lexicon
+VERSION < v"0.4-" && using Docile
 
 include("classes.jl")
 include("utils.jl")
