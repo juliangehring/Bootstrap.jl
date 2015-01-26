@@ -2,4 +2,4 @@
 
 * Notebooks
 
-[[file:notebooks/city.ipynb][Bootstrap Analysis of City Dataset]]
+[[http://nbviewer.ipython.org/github/julian-gehring/Bootstrap.jl/blob/master/doc/notebooks/city.ipynb?flush_cache%3Dtrue][Bootstrap Analysis of City Dataset]]
