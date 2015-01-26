@@ -1,4 +1,4 @@
-@doc """
+@doc doc"""
 
 # Arguments
 
@@ -8,12 +8,12 @@
 
 # Return value
 
-Object of class 'BootstrapSample'
+Object of class `BootstrapSample`
 
 # Examples
 
 ```julia
-bs = boot_basic(randn(20), mean, 100)
+bs = boot(randn(20), mean, 100, method = :basic)
 ```
 
 """ ->
@@ -34,7 +34,10 @@ function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 end
 
 ### boot_basic ###
-@doc* """
+@doc doc"""
+# boot_basic: Ordinary Bootstrap
+
+Ordinary bootstrapping by resampling with replacement.  This resamples the data `x` `m`-times and compute an estimate through the function `fun` each time. 
 
 # Interface
 
@@ -45,7 +48,6 @@ bs::BootstrapSample = boot_basic(x::DataFrame, fun::Function, m::Int)
 
 ```
 
-
 # Arguments
 
 * x :: AbstractVector, AbstracArray, DataFrame
@@ -53,11 +55,15 @@ bs::BootstrapSample = boot_basic(x::DataFrame, fun::Function, m::Int)
 * m :: Int
 * dim :: Int
 
-
 # Return value
 
-Object of class 'BootstrapSample'
+Object of class `BootstrapSample`
 
+# Related
+
+boot_weight, boot_balanced, boot_exact
+
+ci_basic, ci_normal, ci_perc, ci_bca
 
 # Examples
 
@@ -79,6 +85,16 @@ function boot_basic(x::AbstractVector, fun::Function, m::Int)
     return res
 end
 
+@doc doc"""
+
+```julia
+using DataFrames
+df = DataFrame(a = randn(10), b = randn(10))
+fun(x::DataFrame) = median(df[:,:a] - df[:,:b])
+bs = boot_basic(df, fun, 100)
+```
+
+""" ->
 function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
     n = nrow(x)
     t0 = checkReturn(fun(x))
@@ -91,6 +107,16 @@ function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
     return res
 end
 
+
+@doc doc"""
+
+```julia
+a = randn(5, 2)
+fun(x::AbstractArray) = median(x[:,1] - x[:,2])
+bs = boot_basic(a, fun, 100)
+```
+
+""" ->
 function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
@@ -144,7 +170,46 @@ end
 
 
 ### boot_weight ###
+@doc doc"""
+# boot_weight: Weighted Bootstrap
 
+Weighted bootstrapping by weighted resampling with replacement.  This resamples the data `x` `m`-times with weights `w` and compute an estimate through the function `fun` each time. 
+
+# Interface
+
+```julia
+bs::BootstrapSample = boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
+bs::BootstrapSample = boot_weight(x::AbstractArray, fun::Function, m::Int, dim::Int = 1, weight::WeightVec)
+bs::BootstrapSample = boot_weight(x::DataFrame, fun::Function, m::Int, weight::WeightVec)
+
+```
+
+# Arguments
+
+* x :: AbstractVector, AbstracArray, DataFrame
+* fun :: Function
+* m :: Int
+* weight :: WeightVec from the 'StatsBase' package
+* dim :: Int
+
+# Return value
+
+Object of class `BootstrapSample`
+
+# Related
+
+boot_basic, boot_balanced, boot_exact
+
+ci_basic, ci_normal, ci_perc, ci_bca
+
+# Examples
+
+```julia
+using StatsBase
+bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
+```
+
+""" ->
 function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
     n = length(x)
     t0 = checkReturn(fun(x))
@@ -187,7 +252,44 @@ end
 
 
 ### boot_balanced ###
+@doc doc"""
+# boot_balanced: First-Order Balanced Bootstrap
 
+Balanced bootstrapping resampling with replacement.  This resamples the data `x` `m`-times, such that the original frequency of observations is retained through over all resamplings, and compute an estimate through the function `fun` each time. Balanced resampling is a good strategy if the observations are correlated.
+
+# Interface
+
+```julia
+bs::BootstrapSample = boot_balanced(x::AbstractVector, fun::Function, m::Int)
+bs::BootstrapSample = boot_balanced(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+bs::BootstrapSample = boot_balanced(x::DataFrame, fun::Function, m::Int)
+
+```
+
+# Arguments
+
+* x :: AbstractVector, AbstracArray, DataFrame
+* fun :: Function
+* m :: Int
+* dim :: Int
+
+# Return value
+
+Object of class `BootstrapSample`
+
+# Related
+
+boot_basic, boot_weight, boot_exact
+
+ci_basic, ci_normal, ci_perc, ci_bca
+
+# Examples
+
+```julia
+bs = boot_balanced(randn(20), mean, 100)
+```
+
+""" ->
 function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = checkReturn(fun(x))
@@ -235,7 +337,43 @@ end
 
 
 ### boot_exact ###
+@doc doc"""
+# boot_exact: The ''exact'' bootstrap
 
+This resamples the data `x` such that all possible permutations with replacement are chosen, and compute an estimate through the function `fun` each time. This is only suited for small sample sizes (<= 8) since the number of permutations grows fast.
+
+# Interface
+
+```julia
+bs::BootstrapSample = boot_exact(x::AbstractVector, fun::Function)
+bs::BootstrapSample = boot_exact(x::AbstractArray, fun::Function, dim::Int = 1)
+bs::BootstrapSample = boot_exact(x::DataFrame, fun::Function)
+
+```
+
+# Arguments
+
+* x :: AbstractVector, AbstracArray, DataFrame
+* fun :: Function
+* dim :: Int
+
+# Return value
+
+Object of class `BootstrapSample`
+
+# Related
+
+boot_basic, boot_weight, boot_balanced
+
+ci_basic, ci_normal, ci_perc, ci_bca
+
+# Examples
+
+```julia
+bs = boot_exact(randn(6), mean)
+```
+
+""" ->
 function boot_exact(x::AbstractVector, fun::Function)
     n = length(x)
     t0 = checkReturn(fun(x))

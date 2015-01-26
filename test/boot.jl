@@ -140,7 +140,6 @@ test_boot(bs1, y, :basic, fun_array)
 bs1 = boot_weight(y, fun_array, nSamples, WeightVec(rand(25)), 1)
 test_boot(bs1, y, :weighted, fun_array)
 
-
 ## boot_balanced
 bs1 = boot_balanced(y, fun_array, nSamples, 1)
 test_boot(bs1, y, :balanced, fun_array)
