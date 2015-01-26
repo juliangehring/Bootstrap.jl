@@ -22,15 +22,15 @@ especially in the absence of closed-form solutions.
 - Bootstrapping statistics with different sampling methods:
   + Random resampling with replacement (the =basic= bootstrap)
   + Random weighted resampling with replacement (the =weighted= bootstrap)
-    [almost done]
   + Balanced random resampling, reducing the bias (the =balanced= bootstrap)
   + Exact resampling, iterating through all unique samples (the =exact=,
     deterministic bootstrap, suited only for small samples sizes)
 
 - Confidence intervals:
-  + basic
-  + percentile
-  + normal
+  + Basic
+  + Percentile
+  + Normal distribution
+  + Bias-corrected and accelerated (BCA)
 
 
 * Examples
@@ -45,7 +45,7 @@ especially in the absence of closed-form solutions.
   ## not the most interesting case, but let's start light and simple
 
   ## basic bootstrap
-  bs1 = boot(r, mean, 1000);
+  bs1 = boot_basic(r, mean, 1000);
 
   bs1
 
@@ -54,19 +54,20 @@ especially in the absence of closed-form solutions.
   se(bs1)
 
   ## balanced bootstrap
-  bs2 = boot(r, mean, 1000, method = :balanced);
+  bs2 = boot_balanced(r, mean, 1000);
 
   bias(bs2)
   se(bs2)
 
   ## 95% confidence intervals
   ## basic CIs
-  bci1 = ci(bs1, level = 0.95);
-
-  interval(bci1)
+  bci1 = ci_basic(bs1, 0.95);
 
   ## percentile CIs
-  bci2 = ci(bs1, level = 0.95, method = :perc);
+  bci2 = ci_perc(bs1, 0.95);
+
+  interval(bci1)
+  interval(bci2)
 #+END_SRC
 
 
