@@ -51,10 +51,11 @@ end
 function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0
     t1 = x.t1
+    n = length(x.t1)
     alpha = ([-level, level] + 1)/2 ## optim
     z0 = quantile(Normal(), mean(t1 .< t0))
     jkt = jack_knife_estimate(x.x, x.fun)
-    resid = t0 - jkt ## check sides
+    resid = (n-1) .* (t0 - jkt)
     a = sum(resid.^3) / (6.*(sum(resid.^2)).^(1.5))
     qn = quantile(Normal(), alpha)
     z1 = z0 + qn
