@@ -19,7 +19,7 @@ function test_boot(bs::BootstrapSample, r::Any, b::Symbol, f::Function)
     @test length(estimate(bs)) == 1
     @test estimate(bs) == f(r)
     ## straps t1
-    @test length(straps(bs)) > 1
+    @test length(straps(bs)) == bs.m
     ## data
     @test data(bs) == r
     ## accessors
@@ -44,10 +44,11 @@ function test_ci(bci::BootstrapCI, bs::BootstrapSample, c::Symbol)
     ## accessors
     @test method(bci) == c
     ## default level
-    @test level(bci) == 0.95
+    @test level(bci) == bci.level
+    @test level(bci) >= 0. && level(bci) <= 1.
     ## CI bounds: interval
-    @test interval(bci)[1] < estimate(bci)
-    @test interval(bci)[2] > estimate(bci)
+    @test interval(bci)[1] <= estimate(bci)
+    @test interval(bci)[2] >= estimate(bci)
     @test width(bci) > 0.
     ## show method
     io_tmp = IOBuffer()
