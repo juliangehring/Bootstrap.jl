@@ -45,7 +45,7 @@ especially in the absence of closed-form solutions.
   ## not the most interesting case, but let's start light and simple
 
   ## basic bootstrap
-  bs1 = boot_basic(r, mean, 1000);
+  bs1 = boot_basic(r, median, 1000);
 
   bs1
 
@@ -54,7 +54,7 @@ especially in the absence of closed-form solutions.
   se(bs1)
 
   ## balanced bootstrap
-  bs2 = boot_balanced(r, mean, 1000);
+  bs2 = boot_balanced(r, median, 1000);
 
   bias(bs2)
   se(bs2)
