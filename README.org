@@ -20,17 +20,17 @@ especially in the absence of closed-form solutions.
 * Functionality
 
 - Bootstrapping statistics with different sampling methods:
-  + Random resampling with replacement (the =basic= bootstrap)
-  + Random weighted resampling with replacement (the =weighted= bootstrap)
-  + Balanced random resampling, reducing the bias (the =balanced= bootstrap)
-  + Exact resampling, iterating through all unique samples (the =exact=,
+  + Random resampling with replacement (the =boot_basic= bootstrap)
+  + Random weighted resampling with replacement (the =boot_weight= bootstrap)
+  + Balanced random resampling, reducing the bias (the =boot_balanced= bootstrap)
+  + Exact resampling, iterating through all unique samples (the =boot_exact=,
     deterministic bootstrap, suited only for small samples sizes)
 
 - Confidence intervals:
-  + Basic
-  + Percentile
-  + Normal distribution
-  + Bias-corrected and accelerated (BCA)
+  + Basic (the =ci_basic= method)
+  + Percentile (the =ci_perc= method)
+  + Normal distribution (the =ci_normal= method)
+  + Bias-corrected and accelerated (BCa) (the =ci_bca= method)
 
 
 * Examples
