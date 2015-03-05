@@ -1,3 +1,5 @@
+module Test_sampling
+
 using Bootstrap
 using Base.Test
 
@@ -25,3 +27,5 @@ as = sample(a, 1, size(a, 1))
 @test size(as) == size(a)
 as = sample(a, 2, size(a, 2))
 @test size(as) == size(a)
+
+end
