@@ -35,39 +35,58 @@ especially in the absence of closed-form solutions.
 
 * Examples
 
+This illustrates a bit the basic usage and cornerstone function of the package.
+More elaborate examples are covered in the [[file:doc/index.org][documentation]].
+
 #+BEGIN_SRC julia
   using Bootstrap
+#+END_SRC
 
-  ## sample data, taken from a standard normal distribution
+Our observations are sampled from a standard normal distribution.
+
+#+BEGIN_SRC julia
   r = randn(50);
+#+END_SRC
 
-  ## bootstrap the 'mean'
-  ## not the most interesting case, but let's start light and simple
+Let's bootstrap the standard deviation (=std=) of our data, based on 1000
+resamples and with different bootstrapping approaches.
+
+#+BEGIN_SRC julia
+  n_boot = 1000;
 
   ## basic bootstrap
-  bs1 = boot_basic(r, median, 1000);
+  bs1 = boot_basic(r, std, n_boot);
+  ## balanced bootstrap
+  bs2 = boot_balanced(r, std, n_boot);
+#+END_SRC
 
-  bs1
+We can explore the properties of the bootstrapped samples, for example estimated
+bias and standard error of our statistic.
 
-  ## bias and variance of the bootstrapped estimates
+#+BEGIN_SRC julia
   bias(bs1)
   se(bs1)
+#+END_SRC
 
-  ## balanced bootstrap
-  bs2 = boot_balanced(r, median, 1000);
+Further, we can estimate confidence intervals for our statistic of interest,
+based on the bootstrapped samples.
 
-  bias(bs2)
-  se(bs2)
-
+#+BEGIN_SRC julia
   ## 95% confidence intervals
-  ## basic CIs
-  bci1 = ci_basic(bs1, 0.95);
+  cil = 0.95;
 
-  ## percentile CIs
-  bci2 = ci_perc(bs1, 0.95);
+  ## basic CI
+  bci1 = ci_basic(bs1, cil);
 
+  ## percentile CI
+  bci2 = ci_perc(bs1, cil);
+
+  ## BCa CI
+  bci3 = ci_bca(bs1, cil);
+#+END_SRC
+
+#+BEGIN_SRC julia
   interval(bci1)
-  interval(bci2)
 #+END_SRC
 
 
