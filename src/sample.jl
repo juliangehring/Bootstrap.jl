@@ -2,7 +2,7 @@ function sample_set(c::Array) ## Integer,1
     v = Array(Int, length(c))
     j = 1
     p = 1
-    for k=1:length(c)
+    for k = 1:length(c)
         while !(j in c)
             j += 1
             p += 1
@@ -14,7 +14,7 @@ function sample_set(c::Array) ## Integer,1
 end
 
 function sample_exact(n::Integer)
-    return imap(sample_set, combinations([1:(2n-1)], n))
+    return imap(sample_set, combinations([1:(2n-1);], n))
 end
 
 ### Sampling methods for 'DataFrame'

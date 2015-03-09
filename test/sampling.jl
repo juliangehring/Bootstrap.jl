@@ -8,8 +8,8 @@ using DataFrames
 using StatsBase
 
 m = 5
-df = DataFrame(a = [1:5], b = [5:-1:1])
-wv = WeightVec([1:5])
+df = DataFrame(a = [1:5;], b = [5:-1:1;])
+wv = WeightVec([1:5;])
 
 dfs = sample(df, m)
 @test nrow(dfs) == m

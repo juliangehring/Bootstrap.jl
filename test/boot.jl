@@ -162,7 +162,7 @@ bs = boot(randn(10), mean, 100, method = :basic);
 
 ### check return value
 @test Bootstrap.checkReturn(1) == 1
-@test_throws ErrorException Bootstrap.checkReturn([1:2])
+@test_throws ErrorException Bootstrap.checkReturn([1:2;])
 @test_throws ErrorException Bootstrap.checkReturn(rand(2, 2))
 
 @test_throws ErrorException boot_basic(randn(10), identity, 10)

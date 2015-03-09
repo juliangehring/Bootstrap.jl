@@ -121,7 +121,7 @@ function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
-    index = [1:n]
+    index = [1:n;]
     boot_index = zeros(Int, n)
     for i in 1:m
         sample!(index, boot_index)
@@ -203,7 +203,7 @@ function boot_weight(x::AbstractArray, fun::Function, m::Int, weight::WeightVec,
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
-    index = [1:n]
+    index = [1:n;]
     boot_index = zeros(Int, n)
     for i in 1:m
         sample!(index, weight, boot_index)
@@ -258,7 +258,7 @@ function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
-    idx = repmat([1:n], m)
+    idx = repmat([1:n;], m)
     ridx = zeros(Integer, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
@@ -273,7 +273,7 @@ function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
     n = nrow(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
-    idx = repmat([1:n], m)
+    idx = repmat([1:n;], m)
     ridx = zeros(Integer, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
@@ -288,7 +288,7 @@ function boot_balanced(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
-    idx = repmat([1:n], m)
+    idx = repmat([1:n;], m)
     ridx = zeros(Integer, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
