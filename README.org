@@ -35,14 +35,14 @@ especially in the absence of closed-form solutions.
 
 * Examples
 
-This illustrates a bit the basic usage and cornerstone function of the package.
-More elaborate examples are covered in the [[file:doc/index.org][documentation]].
+This example illustrates the basic usage and cornerstone functions of the package.
+More elaborate cases are covered in the [[file:doc/index.org][documentation notebooks]].
 
 #+BEGIN_SRC julia
   using Bootstrap
 #+END_SRC
 
-Our observations are sampled from a standard normal distribution.
+Our observations =r= are sampled from a standard normal distribution.
 
 #+BEGIN_SRC julia
   r = randn(50);
@@ -93,11 +93,8 @@ based on the bootstrapped samples.
 * References
 
 The [[https://en.wikipedia.org/wiki/Bootstrapping_(statistics)][bootstrapping wikipdia article]] is a comprehensive summary of the topic.  An
-extensive description of the bootstrap is the focus of the book
-
-Davison and Hinkley (1997): [[http://statwww.epfl.ch/davison/BMA/][Bootstrap Methods and Their Application]]. Cambridge
-University Press
-
-Most of the methodology covered in the book is implemented in the [[http://cran.r-project.org/web/packages/boot/index.html][boot]] package
-for the [[http://www.r-project.org/][R programming language]].
+extensive description of the bootstrap is the focus of the book 'Davison and
+Hinkley (1997): [[http://statwww.epfl.ch/davison/BMA/][Bootstrap Methods and Their Application]]. Cambridge University
+Press'. Most of the methodology covered in the book is implemented in the [[http://cran.r-project.org/web/packages/boot/index.html][boot]]
+package for the [[http://www.r-project.org/][R programming language]].
 
