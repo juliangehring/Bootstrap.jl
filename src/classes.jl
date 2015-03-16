@@ -1,3 +1,6 @@
+@doc doc"""
+Class `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
+""" ->
 type BootstrapSample{E,S,D}
     t0::E
     t1::S
@@ -8,34 +11,60 @@ type BootstrapSample{E,S,D}
     method::Symbol
 end
 
-#bs = BootstrapSample(1.0, [1.0, 1.1, 1.2], mean, [1, 2, 3], 3, :basic)
 
+@doc doc"""
+Estimate the bias of a bootstrap sampling.
+""" ->
 function bias(bs::BootstrapSample)
     b = mean(bs.t1) - bs.t0
     return b
 end
 
+
+@doc doc"""
+Estimate the standard error of a bootstrap sampling.
+""" ->
 function se(bs::BootstrapSample)
     v = std(bs.t1)
     return v
 end
 
+
+@doc doc"""
+Return the raw estimate `t0`, calculated by `fun(data)`, from a bootstrap sampling.
+""" ->
 function estimate(bs::BootstrapSample)
     return bs.t0
 end
 
+
+@doc doc"""
+Return the bootstrapped estimates `t1`from a bootstrap sampling.
+""" ->
 function straps(bs::BootstrapSample)
     return bs.t1
 end
 
+
+@doc doc"""
+Return the original data from a bootstrap sampling.
+"""
 function data(bs::BootstrapSample)
     return bs.x
 end
 
+
+@doc doc"""
+Return the sampling method as a symbol from a bootstrap sampling.
+"""
 function method(bs::BootstrapSample)
     return bs.method
 end
 
+
+@doc doc"""
+Class `BootstrapCI` that stores the result of a bootstrap-based confidence interval.  An object of this class is returned by the `ci` functions.
+""" ->
 type BootstrapCI{E}
     t0::E
     lower::FloatingPoint
@@ -44,18 +73,34 @@ type BootstrapCI{E}
     method::Symbol
 end
 
+
+@doc doc"""
+Return the raw estimate `t0`, calculated by `fun(data)`, from a bootstrap confidence interval.
+""" ->
 function estimate(bs::BootstrapCI)
     return bs.t0
 end
 
+
+@doc doc"""
+Return the lower and upper bound of the confidence interval.
+""" ->
 function interval(bs::BootstrapCI)
     return [bs.lower, bs.upper]
 end
 
+
+@doc doc"""
+Return the confidence level [0, 1] of a bootstrap confidence interval.
+""" ->
 function level(bs::BootstrapCI)
     return bs.level
 end
 
+
+@doc doc"""
+Return the confidence interval method as a symbol from a bootstrap confidence interval.
+""" ->
 function method(bs::BootstrapCI)
     return bs.method
 end

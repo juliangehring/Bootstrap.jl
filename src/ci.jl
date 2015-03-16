@@ -1,3 +1,6 @@
+@doc doc"""
+Wrapper function for calculating confidence intervals from a bootstrap sampling.
+""" ->
 function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :basic)
 
     if method == :basic
@@ -15,6 +18,9 @@ function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :b
 end
 
 
+@doc doc"""
+Calculate a basic confidence interval with confidence `level` from a bootstrap sampling.
+""" ->
 function ci_basic(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0
     t1 = x.t1
@@ -26,6 +32,10 @@ function ci_basic(x::BootstrapSample, level::FloatingPoint = 0.95)
     return res
 end
 
+
+@doc doc"""
+Calculate a percentile confidence interval with confidence `level` from a bootstrap sampling.
+""" ->
 function ci_perc(x::BootstrapSample, level::FloatingPoint = 0.95)
     t1 = x.t1
     alpha = ([-level, level] + 1)/2
@@ -34,6 +44,10 @@ function ci_perc(x::BootstrapSample, level::FloatingPoint = 0.95)
     return res
 end
 
+
+@doc doc"""
+Calculate a normal confidence interval with confidence `level` from a bootstrap sampling.
+""" ->
 function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
     ## what are we missing here?
     t0 = estimate(x)
@@ -48,6 +62,9 @@ function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
 end
 
 
+@doc doc"""
+Calculate a bias-corrected and accelerated (BCa) confidence interval with confidence `level` from a bootstrap sampling.
+""" ->
 function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0
     t1 = x.t1
@@ -66,6 +83,9 @@ function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
 end
 
 
+@doc doc"""
+Return the width of a bootstrap confidence interval, given by the difference of the upper and lower bound.
+""" ->
 function width(x::BootstrapCI)
     return x.upper - x.lower
 end
