@@ -23,14 +23,14 @@ export
     method,
     level,
     interval,
+    width,
     bias,
     se,
     ci,
     ci_basic,
     ci_perc,
     ci_normal,
-    ci_bca,
-    width
+    ci_bca
 
 ## documentation
 VERSION < v"0.4-" && using Docile

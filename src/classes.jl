@@ -91,6 +91,14 @@ end
 
 
 @doc doc"""
+Return the width of a bootstrap confidence interval, given by the difference of the upper and lower bound.
+""" ->
+function width(x::BootstrapCI)
+    return x.upper - x.lower
+end
+
+
+@doc doc"""
 Return the confidence level [0, 1] of a bootstrap confidence interval.
 """ ->
 function level(bs::BootstrapCI)
