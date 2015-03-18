@@ -7,6 +7,7 @@ using DataFrames
 
 import StatsBase: sample
 import Distributions: estimate
+import DataArrays: data
 
 export
     ## types
