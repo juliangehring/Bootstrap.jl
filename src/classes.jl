@@ -48,7 +48,7 @@ end
 
 @doc doc"""
 Return the original data from a bootstrap sampling.
-"""
+""" ->
 function data(bs::BootstrapSample)
     return bs.x
 end
@@ -56,7 +56,7 @@ end
 
 @doc doc"""
 Return the sampling method as a symbol from a bootstrap sampling.
-"""
+""" ->
 function method(bs::BootstrapSample)
     return bs.method
 end
