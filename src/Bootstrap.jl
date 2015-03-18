@@ -6,6 +6,7 @@ using Distributions
 using DataFrames
 
 import StatsBase: sample
+import Distributions: estimate
 
 export
     ## types
