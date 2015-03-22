@@ -1,6 +1,7 @@
 tests = ["boot",
          "distributions-dep",
-         "sampling"]
+         "sampling",
+         "doctest"]
 
 println("Running 'Bootstrap' tests:")
 
