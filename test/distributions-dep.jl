@@ -1,6 +1,5 @@
 module Test_distributions_dep
 
-using Bootstrap
 using Base.Test
 
 ### test dependencies ###
