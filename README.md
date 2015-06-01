@@ -2,7 +2,7 @@
 
 ## Package Status
 
-[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=latest)](https://readthedocs.org/projects/bootstrapjl/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=latest)](http://bootstrapjl.readthedocs.org/en/latest/)
 [![Package Status](http://pkg.julialang.org/badges/Bootstrap_release.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=release)
 [![Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
 [![Test Coverage](https://img.shields.io/coveralls/julian-gehring/Bootstrap.jl.svg)](https://coveralls.io/r/julian-gehring/Bootstrap.jl)
