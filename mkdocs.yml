@@ -1,0 +1,19 @@
+site_name: Bootstrap.jl
+
+site_description: Bootstrapping statistic framework for the Julia programming language
+
+theme: cerulean
+
+repo_url: https://github.com/julian-gehring/Bootstrap.jl
+
+pages:
+    - [index.md, Introduction]
+    - [notebooks.md, Notebooks]
+    - [api.md, API]
+    - [LICENSE.md, About, License]
+
+docs_dir: doc
+
+site_favicon: null
+
+markdown_extensions: [codehilite, def_list]

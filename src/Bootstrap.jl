@@ -35,7 +35,8 @@ export
     ci_bca
 
 ## documentation
-VERSION < v"0.4-" && using Docile
+using Docile
+@document
 
 include("classes.jl")
 include("utils.jl")
