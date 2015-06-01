@@ -2,10 +2,10 @@
 
 ## Package Status
 
-[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=master)](http://bootstrapjl.readthedocs.org/en/master/)
+[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=release)](http://bootstrapjl.readthedocs.org/en/release/)
 [![Package Status](http://pkg.julialang.org/badges/Bootstrap_release.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=release)
-[![Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
-[![Test Coverage](https://img.shields.io/coveralls/julian-gehring/Bootstrap.jl.svg)](https://coveralls.io/r/julian-gehring/Bootstrap.jl)
+[![Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=release)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
+[![Coverage Status](https://coveralls.io/repos/julian-gehring/Bootstrap.jl/badge.svg?branch=release)](https://coveralls.io/r/julian-gehring/Bootstrap.jl?branch=release)
 
 
 ## Motivation
