@@ -1,13 +1,11 @@
-# Bootstrap.jl
-
-## Motivation<a id="sec-2" name="sec-2"></a>
+# Motivation
 
 Bootstrapping is a widely applicable technique for statistical estimation,
 especially in the absence of closed-form solutions.
 
 ![img](bootstraps.png)
 
-## Functionality<a id="sec-3" name="sec-3"></a>
+# Functionality
 
 -   Bootstrapping statistics with different sampling methods:
     -   Random resampling with replacement (the `boot_basic` bootstrap)
@@ -22,63 +20,64 @@ especially in the absence of closed-form solutions.
     -   Normal distribution (the `ci_normal` method)
     -   Bias-corrected and accelerated (BCa) (the `ci_bca` method)
 
-## Examples<a id="sec-4" name="sec-4"></a>
+# Examples
 
 This example illustrates the basic usage and cornerstone functions of the package.
 More elaborate cases are covered in the documentation notebooks.
 
 ```julia
-using Bootstrap
+  using Bootstrap
 ```
 
 Our observations `r` are sampled from a standard normal distribution.
 
 ```julia
-r = randn(50);
+  r = randn(50);
 ```
 
 Let's bootstrap the standard deviation (`std`) of our data, based on 1000
 resamples and with different bootstrapping approaches.
 
 ```julia
-n_boot = 1000;
+  n_boot = 1000;
 
-## basic bootstrap
-bs1 = boot_basic(r, std, n_boot);
-## balanced bootstrap
-bs2 = boot_balanced(r, std, n_boot);
+  ## basic bootstrap
+  bs1 = boot_basic(r, std, n_boot);
+
+  ## balanced bootstrap
+  bs2 = boot_balanced(r, std, n_boot);
 ```
 
 We can explore the properties of the bootstrapped samples, for example estimated
 bias and standard error of our statistic.
 
 ```julia
-bias(bs1)
-se(bs1)
+  bias(bs1)
+  se(bs1)
 ```
 
 Further, we can estimate confidence intervals for our statistic of interest,
 based on the bootstrapped samples.
 
 ```julia
-## 95% confidence intervals
-cil = 0.95;
+  ## calculate 95% confidence intervals
+  cil = 0.95;
 
-## basic CI
-bci1 = ci_basic(bs1, cil);
+  ## basic CI
+  bci1 = ci_basic(bs1, cil);
 
-## percentile CI
-bci2 = ci_perc(bs1, cil);
+  ## percentile CI
+  bci2 = ci_perc(bs1, cil);
 
-## BCa CI
-bci3 = ci_bca(bs1, cil);
+  ## BCa CI
+  bci3 = ci_bca(bs1, cil);
 ```
 
 ```julia
-interval(bci1)
+  interval(bci1)
 ```
 
-## References<a id="sec-5" name="sec-5"></a>
+# References
 
 The [bootstrapping wikipedia article](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) is a comprehensive summary of the topic.  An
 extensive description of the bootstrap is the focus of the book *Davison and
