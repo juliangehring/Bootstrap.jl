@@ -17,9 +17,22 @@ function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :b
         
 end
 
-
 """
-Calculate a basic confidence interval with confidence `level` from a bootstrap sampling.
+Calculates a basic confidence interval with confidence `level` from a
+bootstrap sampling, based on the quantiles of the bootstrapped
+statistic.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
 """
 function ci_basic(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0
@@ -34,7 +47,21 @@ end
 
 
 """
-Calculate a percentile confidence interval with confidence `level` from a bootstrap sampling.
+Calculates a percentile confidence interval with confidence `level` from a
+bootstrap sampling, based on the percentiles of the bootstrapped
+statistic.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
 """
 function ci_perc(x::BootstrapSample, level::FloatingPoint = 0.95)
     t1 = x.t1
@@ -44,14 +71,26 @@ function ci_perc(x::BootstrapSample, level::FloatingPoint = 0.95)
     return res
 end
 
-
 """
-Calculate a normal confidence interval with confidence `level` from a bootstrap sampling.
+Calculates a normal confidence interval with confidence `level` from a
+bootstrap sampling, assuming an underlying Gaussian distribution.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
 """
 function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
     ## what are we missing here?
     t0 = estimate(x)
-    b = bias(x) ##bias = mean(t) - t0
+    b = bias(x)
     s = se(x)
     z = quantile(Normal(), (1+level)/2)
     merr = s * z
@@ -61,9 +100,22 @@ function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
     return res
 end
 
-
 """
-Calculate a bias-corrected and accelerated (BCa) confidence interval with confidence `level` from a bootstrap sampling.
+
+Calculate a bias-corrected and accelerated (BCa) confidence interval with
+confidence `level` from a bootstrap sampling, based on the Jack-Knife
+estimation.
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
 """
 function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0

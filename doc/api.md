@@ -1,6 +1,70 @@
 # Bootstrap
 
 
+## Modules [Exported]
+
+---
+
+<a id="module__bootstrap.1" class="lexicon_definition"></a>
+#### Bootstrap
+Module: Bootstrap
+Does not really work.
+
+
+## Functions [Exported]
+
+---
+
+<a id="function__boot_basic.1" class="lexicon_definition"></a>
+#### boot_basic
+Ordinary bootstrapping by resampling with replacement.  This resamples the data `x` `m`-times and compute an estimate through the function `fun` each time. 
+
+**Arguments**
+
+* `x` : AbstractVector, AbstracArray, DataFrame
+* `fun` : Function
+* `m` : Int
+* `dim` : Int
+
+**Returns**
+
+Object of class `BootstrapSample`
+
+**Examples**
+
+```julia
+bs = boot_basic(randn(20), mean, 100)
+```
+
+
+
+---
+
+<a id="function__boot_weight.1" class="lexicon_definition"></a>
+#### boot_weight
+Weighted bootstrapping by weighted resampling with replacement.  This resamples the data `x` `m`-times with weights `w` and compute an estimate through the function `fun` each time. 
+
+**Arguments**
+
+* `x` : AbstractVector, AbstracArray, DataFrame
+* `fun` : Function
+* `m` : Int
+* `weight` : WeightVec from the 'StatsBase' package
+* `dim` : Int
+
+**Returns**
+
+Object of class `BootstrapSample`
+
+**Examples**
+
+```julia
+using StatsBase
+bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
+```
+
+
+
 ## Methods [Exported]
 
 ---
@@ -24,7 +88,7 @@ Estimate the bias of a bootstrap sampling.
 
 * `method` : Symbol (:basic)
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -49,7 +113,7 @@ Balanced bootstrapping resampling with replacement.  This resamples the data `x`
 * `m` : Int
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -64,31 +128,6 @@ bs = boot_balanced(randn(20), mean, 100)
 ---
 
 <a id="method__boot_basic.1" class="lexicon_definition"></a>
-#### boot_basic(x::AbstractArray{T, 1}, fun::Function, m::Int64)
-Ordinary bootstrapping by resampling with replacement.  This resamples the data `x` `m`-times and compute an estimate through the function `fun` each time. 
-
-**Arguments**
-
-* `x` : AbstractVector, AbstracArray, DataFrame
-* `fun` : Function
-* `m` : Int
-* `dim` : Int
-
-**Return value**
-
-Object of class `BootstrapSample`
-
-**Examples**
-
-```julia
-bs = boot_basic(randn(20), mean, 100)
-```
-
-
-
----
-
-<a id="method__boot_basic.2" class="lexicon_definition"></a>
 #### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Int64)
 
 **Examples**
@@ -103,7 +142,7 @@ bs = boot_basic(a, fun, 100)
 
 ---
 
-<a id="method__boot_basic.3" class="lexicon_definition"></a>
+<a id="method__boot_basic.2" class="lexicon_definition"></a>
 #### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Int64, dim::Int64)
 
 **Examples**
@@ -118,7 +157,7 @@ bs = boot_basic(a, fun, 100)
 
 ---
 
-<a id="method__boot_basic.4" class="lexicon_definition"></a>
+<a id="method__boot_basic.3" class="lexicon_definition"></a>
 #### boot_basic(x::DataFrame, fun::Function, m::Int64)
 
 ** Examples**
@@ -136,7 +175,7 @@ bs = boot_basic(df, fun, 100)
 
 <a id="method__boot_exact.1" class="lexicon_definition"></a>
 #### boot_exact(x::AbstractArray{T, 1}, fun::Function)
-This resamples the data `x` such that all possible permutations with replacement are chosen, and compute an estimate through the function `fun` each time. This is only suited for small sample sizes (<= 8) since the number of permutations grows fast.
+The exact bootstrap resamples the data `x` such that all possible permutations with replacement are chosen, and compute an estimate through the function `fun` each time. This is only suited for small sample sizes since the number of permutations grows fast.
 
 **Arguments**
 
@@ -144,7 +183,7 @@ This resamples the data `x` such that all possible permutations with replacement
 * `fun` : Function
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -158,28 +197,174 @@ bs = boot_exact(randn(6), mean)
 
 ---
 
-<a id="method__boot_weight.1" class="lexicon_definition"></a>
-#### boot_weight(x::AbstractArray{T, 1}, fun::Function, m::Int64, weight::WeightVec{W, Vec<:AbstractArray{T<:Real, 1}})
-Weighted bootstrapping by weighted resampling with replacement.  This resamples the data `x` `m`-times with weights `w` and compute an estimate through the function `fun` each time. 
+<a id="method__ci.1" class="lexicon_definition"></a>
+#### ci(x::BootstrapSample{E, S, D})
+Wrapper function for calculating confidence intervals from a bootstrap sampling.
+
+
+---
+
+<a id="method__ci_basic.1" class="lexicon_definition"></a>
+#### ci_basic(x::BootstrapSample{E, S, D})
+Calculates a basic confidence interval with confidence `level` from a
+bootstrap sampling, based on the quantiles of the bootstrapped
+statistic.
+
 
 **Arguments**
 
-* `x` : AbstractVector, AbstracArray, DataFrame
-* `fun` : Function
-* `m` : Int
-* `weight` : WeightVec from the 'StatsBase' package
-* `dim` : Int
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
 
-**Return value**
 
-Object of class `BootstrapSample`
+**Returns**
 
-**Examples**
+`BootstrapCI`
 
-```julia
-using StatsBase
-bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
-```
+
+
+---
+
+<a id="method__ci_basic.2" class="lexicon_definition"></a>
+#### ci_basic(x::BootstrapSample{E, S, D}, level::FloatingPoint)
+Calculates a basic confidence interval with confidence `level` from a
+bootstrap sampling, based on the quantiles of the bootstrapped
+statistic.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_bca.1" class="lexicon_definition"></a>
+#### ci_bca(x::BootstrapSample{E, S, D})
+
+Calculate a bias-corrected and accelerated (BCa) confidence interval with
+confidence `level` from a bootstrap sampling, based on the Jack-Knife
+estimation.
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_bca.2" class="lexicon_definition"></a>
+#### ci_bca(x::BootstrapSample{E, S, D}, level::FloatingPoint)
+
+Calculate a bias-corrected and accelerated (BCa) confidence interval with
+confidence `level` from a bootstrap sampling, based on the Jack-Knife
+estimation.
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_normal.1" class="lexicon_definition"></a>
+#### ci_normal(x::BootstrapSample{E, S, D})
+Calculates a normal confidence interval with confidence `level` from a
+bootstrap sampling, assuming an underlying Gaussian distribution.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_normal.2" class="lexicon_definition"></a>
+#### ci_normal(x::BootstrapSample{E, S, D}, level::FloatingPoint)
+Calculates a normal confidence interval with confidence `level` from a
+bootstrap sampling, assuming an underlying Gaussian distribution.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_perc.1" class="lexicon_definition"></a>
+#### ci_perc(x::BootstrapSample{E, S, D})
+Calculates a percentile confidence interval with confidence `level` from a
+bootstrap sampling, based on the percentiles of the bootstrapped
+statistic.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_perc.2" class="lexicon_definition"></a>
+#### ci_perc(x::BootstrapSample{E, S, D}, level::FloatingPoint)
+Calculates a percentile confidence interval with confidence `level` from a
+bootstrap sampling, based on the percentiles of the bootstrapped
+statistic.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
 
 
 

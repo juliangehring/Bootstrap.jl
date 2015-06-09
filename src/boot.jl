@@ -1,4 +1,4 @@
-@doc doc"""
+"""
 **Arguments**
 
 * `x` : AbstractVector
@@ -9,7 +9,7 @@
 
 * `method` : Symbol (:basic)
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -19,7 +19,7 @@ Object of class `BootstrapSample`
 bs = boot(randn(20), mean, 100, method = :basic)
 ```
 
-""" ->
+"""
 function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 
     if method == :basic
@@ -37,7 +37,7 @@ function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
 end
 
 ### boot_basic ###
-@doc doc"""
+"""
 Ordinary bootstrapping by resampling with replacement.  This resamples the data `x` `m`-times and compute an estimate through the function `fun` each time. 
 
 **Arguments**
@@ -47,7 +47,7 @@ Ordinary bootstrapping by resampling with replacement.  This resamples the data 
 * `m` : Int
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -57,7 +57,9 @@ Object of class `BootstrapSample`
 bs = boot_basic(randn(20), mean, 100)
 ```
 
-""" ->
+"""
+:boot_basic
+
 function boot_basic(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = checkReturn(fun(x))
@@ -71,7 +73,7 @@ function boot_basic(x::AbstractVector, fun::Function, m::Int)
     return res
 end
 
-@doc doc"""
+"""
 
 ** Examples**
 
@@ -82,7 +84,7 @@ fun(x::DataFrame) = median(df[:,:a] - df[:,:b])
 bs = boot_basic(df, fun, 100)
 ```
 
-""" ->
+"""
 function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
     n = nrow(x)
     t0 = checkReturn(fun(x))
@@ -96,7 +98,7 @@ function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
 end
 
 
-@doc doc"""
+"""
 
 **Examples**
 
@@ -106,7 +108,7 @@ fun(x::AbstractArray) = median(x[:,1] - x[:,2])
 bs = boot_basic(a, fun, 100)
 ```
 
-""" ->
+"""
 function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
@@ -124,7 +126,7 @@ end
 
 
 ### boot_weight ###
-@doc doc"""
+"""
 Weighted bootstrapping by weighted resampling with replacement.  This resamples the data `x` `m`-times with weights `w` and compute an estimate through the function `fun` each time. 
 
 **Arguments**
@@ -135,7 +137,7 @@ Weighted bootstrapping by weighted resampling with replacement.  This resamples 
 * `weight` : WeightVec from the 'StatsBase' package
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -146,7 +148,9 @@ using StatsBase
 bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
 ```
 
-""" ->
+"""
+:boot_weight
+
 function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
     n = length(x)
     t0 = checkReturn(fun(x))
@@ -189,7 +193,7 @@ end
 
 
 ### boot_balanced ###
-@doc doc"""
+"""
 Balanced bootstrapping resampling with replacement.  This resamples the data `x` `m`-times, such that the original frequency of observations is retained through over all resamplings, and compute an estimate through the function `fun` each time. Balanced resampling is a good strategy if the observations are correlated.
 
 **Arguments**
@@ -199,7 +203,7 @@ Balanced bootstrapping resampling with replacement.  This resamples the data `x`
 * `m` : Int
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -209,7 +213,7 @@ Object of class `BootstrapSample`
 bs = boot_balanced(randn(20), mean, 100)
 ```
 
-""" ->
+"""
 function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     n = length(x)
     t0 = checkReturn(fun(x))
@@ -257,8 +261,8 @@ end
 
 
 ### boot_exact ###
-@doc doc"""
-This resamples the data `x` such that all possible permutations with replacement are chosen, and compute an estimate through the function `fun` each time. This is only suited for small sample sizes (<= 8) since the number of permutations grows fast.
+"""
+The exact bootstrap resamples the data `x` such that all possible permutations with replacement are chosen, and compute an estimate through the function `fun` each time. This is only suited for small sample sizes since the number of permutations grows fast.
 
 **Arguments**
 
@@ -266,7 +270,7 @@ This resamples the data `x` such that all possible permutations with replacement
 * `fun` : Function
 * `dim` : Int
 
-**Return value**
+**Returns**
 
 Object of class `BootstrapSample`
 
@@ -276,7 +280,7 @@ Object of class `BootstrapSample`
 bs = boot_exact(randn(6), mean)
 ```
 
-""" ->
+"""
 function boot_exact(x::AbstractVector, fun::Function)
     n = length(x)
     t0 = checkReturn(fun(x))

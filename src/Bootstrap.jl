@@ -1,5 +1,11 @@
 module Bootstrap
 
+"""
+Module: Bootstrap
+Does not really work.
+"""
+Bootstrap
+
 using StatsBase
 using Iterators
 using Distributions
@@ -8,6 +14,9 @@ using DataFrames
 import StatsBase: sample
 import Distributions: estimate
 import DataArrays: data
+
+## documentation
+using Lexicon
 
 export
     ## types
@@ -33,10 +42,6 @@ export
     ci_perc,
     ci_normal,
     ci_bca
-
-## documentation
-using Docile
-@document
 
 include("classes.jl")
 include("utils.jl")
