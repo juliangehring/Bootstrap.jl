@@ -1,10 +1,12 @@
 function Base.show(io::IO, x::BootstrapSample)
     r = 12
+    s = 5
     println(io, "Bootstrap Sampling")
     println(io, rpad("  Method:", r), x.method)
     println(io, rpad("  Samples:", r), x.m)
-    println(io, rpad("  t0:", r), x.t0)
-    println(io, rpad("  t1:", r), x.t1)
+    println(io, rpad("  Estimate:", r), x.t0)
+    println(io, rpad("  Bias:", r), signif(bias(x), s))
+    println(io, rpad("  SE:", r), signif(se(x), s))
     println(io, rpad("  Data:", r), data_summary(x.x))
 end
 
