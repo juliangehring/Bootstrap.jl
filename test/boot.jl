@@ -97,6 +97,11 @@ test_boot(bs1, r2, :exact, fun)
 test_boot(bs2, r2, :exact, fun)
 test_all_ci(bs1, ci_funs, ci_methods)
 
+## ci_student
+bs1 = boot_basic(r, fun, nSamples);
+t1sd = sqrt(abs(straps(bs1) - estimate(bs1))) ## fake variance
+ci1 = Bootstrap.ci_student(bs1, t1sd)
+test_ci(ci1, bs1, :student)
 
 ### DataFrames
 

@@ -133,3 +133,34 @@ function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     res = BootstrapCI(t0, lower, upper, level, :bca)
     return res
 end
+
+
+"""
+Calculate a studentized confidence interval with confidence `level` from a
+bootstrap sampling.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `t1sd` : Vector with estimated standard deviation of the bootstrapped estimates.
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+"""
+function ci_student(x::BootstrapSample, t1sd::AbstractVector, level::FloatingPoint = 0.95)
+    t0 = x.t0
+    t1 = x.t1
+    t0se = se(x)
+    z = (t1 - t0) ./ t1sd
+    alpha = ([level, -level] + 1)/2
+    lower, upper = quantile(z, alpha)
+    lower = t0 - t0se * lower
+    upper = t0 - t0se * upper
+    res = BootstrapCI(t0, lower, upper, level, :student)
+    return res
+end

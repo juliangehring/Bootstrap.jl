@@ -41,7 +41,8 @@ export
     ci_basic,
     ci_perc,
     ci_normal,
-    ci_bca
+    ci_bca,
+    ci_student
 
 include("classes.jl")
 include("utils.jl")
