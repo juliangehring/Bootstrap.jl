@@ -10,6 +10,7 @@ pages:
 - Introduction: 'index.md'
 - Notebooks: 'notebooks.md'
 - API: 'api.md'
+- References: 'references.md'
 - About:
   - 'License': 'LICENSE.md'
 
