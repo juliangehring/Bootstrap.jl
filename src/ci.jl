@@ -1,5 +1,19 @@
 """
-Wrapper function for calculating confidence intervals from a bootstrap sampling.
+Wrapper function for calculating confidence intervals from a bootstrap
+sampling. This might be dropped in the future.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+* `method` : Symbol that specifies the CI method
+
+
+**Returns**
+
+`BootstrapCI`
+
 """
 function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :basic)
 
@@ -101,10 +115,10 @@ function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
 end
 
 """
-
 Calculate a bias-corrected and accelerated (BCa) confidence interval with
 confidence `level` from a bootstrap sampling, based on the Jack-Knife
 estimation.
+
 
 **Arguments**
 

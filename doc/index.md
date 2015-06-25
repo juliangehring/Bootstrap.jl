@@ -7,18 +7,20 @@ especially in the absence of closed-form solutions.
 
 # Functionality
 
--   Bootstrapping statistics with different sampling methods:
-    -   Random resampling with replacement (the `boot_basic` bootstrap)
-    -   Random weighted resampling with replacement (the `boot_weight` bootstrap)
-    -   Balanced random resampling, reducing the bias (the `boot_balanced` bootstrap)
-    -   Exact resampling, iterating through all unique samples (the `boot_exact`,
-        deterministic bootstrap, suited only for small samples sizes)
+- Bootstrapping statistics with different sampling methods:
+  - Random resampling with replacement (the `boot_basic` bootstrap)
+  - Random weighted resampling with replacement (the `boot_weight` bootstrap)
+  - Balanced random resampling, reducing the bias (the `boot_balanced` bootstrap)
+  - Exact resampling, iterating through all unique samples (the `boot_exact`,
+    deterministic bootstrap, suited only for small samples sizes)
 
--   Confidence intervals:
-    -   Basic (the `ci_basic` method)
-    -   Percentile (the `ci_perc` method)
-    -   Normal distribution (the `ci_normal` method)
-    -   Bias-corrected and accelerated (BCa) (the `ci_bca` method)
+- Confidence intervals:
+  - Basic (the `ci_basic` method)
+  - Percentile (the `ci_perc` method)
+  - Normal distribution (the `ci_normal` method)
+  - Studendized (the `ci_student` method)
+  - Bias-corrected and accelerated (BCa) (the `ci_bca` method)
+
 
 # Examples
 
