@@ -1,8 +1,10 @@
 module Bootstrap
 
 """
-Module: Bootstrap
-Does not really work.
+Statistical bootstrapping library in julia.
+
+The typical steps of an analysis include generating a bootstrap sampling with
+the `boot_*` and calculating a confidence interval with the `ci_*` functions.
 """
 Bootstrap
 
