@@ -7,8 +7,10 @@
 
 <a id="module__bootstrap.1" class="lexicon_definition"></a>
 #### Bootstrap
-Module: Bootstrap
-Does not really work.
+Statistical bootstrapping library in julia.
+
+The typical steps of an analysis include generating a bootstrap sampling with
+the `boot_*` and calculating a confidence interval with the `ci_*` functions.
 
 
 ## Functions [Exported]
@@ -199,7 +201,21 @@ bs = boot_exact(randn(6), mean)
 
 <a id="method__ci.1" class="lexicon_definition"></a>
 #### ci(x::BootstrapSample{E, S, D})
-Wrapper function for calculating confidence intervals from a bootstrap sampling.
+Wrapper function for calculating confidence intervals from a bootstrap
+sampling. This might be dropped in the future.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+* `method` : Symbol that specifies the CI method
+
+
+**Returns**
+
+`BootstrapCI`
+
 
 
 ---
@@ -248,10 +264,10 @@ statistic.
 
 <a id="method__ci_bca.1" class="lexicon_definition"></a>
 #### ci_bca(x::BootstrapSample{E, S, D})
-
 Calculate a bias-corrected and accelerated (BCa) confidence interval with
 confidence `level` from a bootstrap sampling, based on the Jack-Knife
 estimation.
+
 
 **Arguments**
 
@@ -269,10 +285,10 @@ estimation.
 
 <a id="method__ci_bca.2" class="lexicon_definition"></a>
 #### ci_bca(x::BootstrapSample{E, S, D}, level::FloatingPoint)
-
 Calculate a bias-corrected and accelerated (BCa) confidence interval with
 confidence `level` from a bootstrap sampling, based on the Jack-Knife
 estimation.
+
 
 **Arguments**
 
@@ -370,6 +386,48 @@ statistic.
 
 ---
 
+<a id="method__ci_student.1" class="lexicon_definition"></a>
+#### ci_student(x::BootstrapSample{E, S, D}, t1sd::AbstractArray{T, 1})
+Calculate a studentized confidence interval with confidence `level` from a
+bootstrap sampling.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `t1sd` : Vector with estimated standard deviation of the bootstrapped estimates.
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
+<a id="method__ci_student.2" class="lexicon_definition"></a>
+#### ci_student(x::BootstrapSample{E, S, D}, t1sd::AbstractArray{T, 1}, level::FloatingPoint)
+Calculate a studentized confidence interval with confidence `level` from a
+bootstrap sampling.
+
+
+**Arguments**
+
+* `x` : `BootstrapSample`
+* `t1sd` : Vector with estimated standard deviation of the bootstrapped estimates.
+* `level` : Confidence level in the range [0,1], with a default of 0.95
+
+
+**Returns**
+
+`BootstrapCI`
+
+
+
+---
+
 <a id="method__data.1" class="lexicon_definition"></a>
 #### data(bs::BootstrapSample{E, S, D})
 Return the original data from a bootstrap sampling.
@@ -451,6 +509,11 @@ Class `BootstrapCI` that stores the result of a bootstrap-based confidence inter
 
 <a id="type__bootstrapsample.1" class="lexicon_definition"></a>
 #### BootstrapSample{E, S, D}
-Class `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
+Type `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
+
+**Fields**
+
+* `` : 
+
 
 
