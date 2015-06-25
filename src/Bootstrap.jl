@@ -46,7 +46,7 @@ export
     ci_bca,
     ci_student
 
-include("classes.jl")
+include("types.jl")
 include("utils.jl")
 include("sample.jl")
 include("boot.jl")

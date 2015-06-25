@@ -1,5 +1,10 @@
 """
-Class `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
+Type `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
+
+**Fields**
+
+* `` : 
+
 """
 type BootstrapSample{E,S,D}
     t0::E
@@ -7,7 +12,7 @@ type BootstrapSample{E,S,D}
     fun::Function
     x::D
     m::Integer
-    wv::Union(WeightVec, Integer)
+    wv::Union(WeightVec, Integer) ## Nullable() ?
     method::Symbol
 end
 
