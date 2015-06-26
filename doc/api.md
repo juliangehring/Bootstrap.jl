@@ -511,9 +511,4 @@ Class `BootstrapCI` that stores the result of a bootstrap-based confidence inter
 #### BootstrapSample{E, S, D}
 Type `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
 
-**Fields**
-
-* `` : 
-
-
 

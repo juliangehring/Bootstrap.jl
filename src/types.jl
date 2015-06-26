@@ -1,10 +1,5 @@
 """
 Type `BootstrapSample` that stores the result of a bootstrap sampling.  An object of this class is returned by the `boot` functions.
-
-**Fields**
-
-* `` : 
-
 """
 type BootstrapSample{E,S,D}
     t0::E
