@@ -1,6 +1,5 @@
 environment:
   matrix:
-  - JULIAVERSION: "stable/win32"
   - JULIAVERSION: "stable/win64"
 
 install:
