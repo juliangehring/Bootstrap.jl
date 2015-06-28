@@ -135,7 +135,7 @@ function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
     t0 = x.t0
     t1 = x.t1
     n = length(x.t1)
-    alpha = ([-level, level] + 1)/2 ## optim
+    alpha = ([-level, level] + 1)/2
     z0 = quantile(Normal(), mean(t1 .< t0))
     jkt = jack_knife_estimate(x.x, x.fun)
     resid = (n-1) .* (t0 - jkt)
@@ -151,7 +151,8 @@ end
 
 """
 Calculate a studentized confidence interval with confidence `level` from a
-bootstrap sampling.
+bootstrap sampling.  This requires an estimate for the variance of the bootstrap
+estimates that are passed separately.
 
 
 **Arguments**

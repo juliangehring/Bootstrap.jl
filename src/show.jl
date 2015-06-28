@@ -19,6 +19,9 @@ function Base.show(io::IO, x::BootstrapCI)
     println(io, rpad("  Interval:", r), interval(x))
 end
 
+"""
+Summarizes an object in the form of 'TYPE: { SIZE }'
+"""
 function data_summary(x)
     t = string(typeof(x))
     n = length(size(x)) > 0 ? size(x) : length(x)
