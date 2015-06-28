@@ -15,6 +15,7 @@ especially in the absence of closed-form solutions.
 
 ![img](doc/bootstraps.png)
 
+
 ## Functionality
 
 - Bootstrapping statistics with different sampling methods:
@@ -88,10 +89,32 @@ bci3 = ci_bca(bs1, cil);
 interval(bci1)
 ```
 
+
 ## References
 
-The [bootstrapping wikipedia article](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) is a comprehensive summary of the topic.  An
-extensive description of the bootstrap is the focus of the book *Davison and
-Hinkley (1997): [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.  Most of the
-methodology covered in the book is implemented in the [boot](http://cran.r-project.org/web/packages/boot/index.html) package for the [R
-programming language](http://www.r-project.org/).
+The [bootstrapping wikipedia article](https://en.wikipedia.org/wiki/Bootstrapping_(statistics))
+is a comprehensive summary of the topic.  An extensive description of the
+bootstrap is the focus of the book *Davison and Hinkley (1997):
+[Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.
+Most of the methodology covered in the book is implemented in the
+[boot](http://cran.r-project.org/web/packages/boot/index.html) package for the
+[R programming language](http://www.r-project.org/).
+
+
+## Future
+
+Features and improvements that are in planning/preparation:
+
+- Parametric bootstrap
+
+- Parallel calculations: This will be especially benefitical if each estimation
+  takes long.  For simple and fast functions, the overhead of parallelization
+  can make it slower.
+
+- Performance in general: This is an important goal, and julia is a powerful
+  foundation to make bootstrapping efficient.  However, getting the best
+  performance depends heavily on the estimator function and the data - hence it
+  often hard to find the one-fits-it-all solution.  The current implementation
+  is generally efficient, more optimizations will be added.
+
+- More use cases
