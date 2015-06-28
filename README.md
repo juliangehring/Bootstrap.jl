@@ -1,4 +1,4 @@
-# Bootstrap.jl
+# Bootstrap.jl: Statistical Bootstrapping
 
 ## Package Status
 
