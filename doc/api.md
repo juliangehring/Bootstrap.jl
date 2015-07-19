@@ -25,8 +25,8 @@ Ordinary bootstrapping by resampling with replacement.  This resamples the data 
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
-* `dim` : Int
+* `m` : Integer
+* `dim` : Integer
 
 **Returns**
 
@@ -50,9 +50,9 @@ Weighted bootstrapping by weighted resampling with replacement.  This resamples 
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
+* `m` : Integer
 * `weight` : WeightVec from the 'StatsBase' package
-* `dim` : Int
+* `dim` : Integer
 
 **Returns**
 
@@ -79,12 +79,12 @@ Estimate the bias of a bootstrap sampling.
 ---
 
 <a id="method__boot.1" class="lexicon_definition"></a>
-#### boot(x::AbstractArray{T, 1}, fun::Function, m::Int64)
+#### boot(x::AbstractArray{T, 1}, fun::Function, m::Integer)
 **Arguments**
 
 * `x` : AbstractVector
 * `fun` : Function
-* `m` : Int
+* `m` : Integer
 
 **Keyword Arguments**
 
@@ -105,15 +105,15 @@ bs = boot(randn(20), mean, 100, method = :basic)
 ---
 
 <a id="method__boot_balanced.1" class="lexicon_definition"></a>
-#### boot_balanced(x::AbstractArray{T, 1}, fun::Function, m::Int64)
+#### boot_balanced(x::AbstractArray{T, 1}, fun::Function, m::Integer)
 Balanced bootstrapping resampling with replacement.  This resamples the data `x` `m`-times, such that the original frequency of observations is retained through over all resamplings, and compute an estimate through the function `fun` each time. Balanced resampling is a good strategy if the observations are correlated.
 
 **Arguments**
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
-* `dim` : Int
+* `m` : Integer
+* `dim` : Integer
 
 **Returns**
 
@@ -130,7 +130,7 @@ bs = boot_balanced(randn(20), mean, 100)
 ---
 
 <a id="method__boot_basic.1" class="lexicon_definition"></a>
-#### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Int64)
+#### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Integer)
 
 **Examples**
 
@@ -145,7 +145,7 @@ bs = boot_basic(a, fun, 100)
 ---
 
 <a id="method__boot_basic.2" class="lexicon_definition"></a>
-#### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Int64, dim::Int64)
+#### boot_basic(x::AbstractArray{T, N}, fun::Function, m::Integer, dim::Integer)
 
 **Examples**
 
@@ -160,7 +160,7 @@ bs = boot_basic(a, fun, 100)
 ---
 
 <a id="method__boot_basic.3" class="lexicon_definition"></a>
-#### boot_basic(x::DataFrame, fun::Function, m::Int64)
+#### boot_basic(x::DataFrame, fun::Function, m::Integer)
 
 ** Examples**
 
@@ -183,7 +183,7 @@ The exact bootstrap resamples the data `x` such that all possible permutations w
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `dim` : Int
+* `dim` : Integer
 
 **Returns**
 
@@ -389,7 +389,8 @@ statistic.
 <a id="method__ci_student.1" class="lexicon_definition"></a>
 #### ci_student(x::BootstrapSample{E, S, D}, t1sd::AbstractArray{T, 1})
 Calculate a studentized confidence interval with confidence `level` from a
-bootstrap sampling.
+bootstrap sampling.  This requires an estimate for the variance of the bootstrap
+estimates that are passed separately.
 
 
 **Arguments**
@@ -410,7 +411,8 @@ bootstrap sampling.
 <a id="method__ci_student.2" class="lexicon_definition"></a>
 #### ci_student(x::BootstrapSample{E, S, D}, t1sd::AbstractArray{T, 1}, level::FloatingPoint)
 Calculate a studentized confidence interval with confidence `level` from a
-bootstrap sampling.
+bootstrap sampling.  This requires an estimate for the variance of the bootstrap
+estimates that are passed separately.
 
 
 **Arguments**

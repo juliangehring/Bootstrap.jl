@@ -3,7 +3,7 @@
 
 * `x` : AbstractVector
 * `fun` : Function
-* `m` : Int
+* `m` : Integer
 
 **Keyword Arguments**
 
@@ -20,7 +20,7 @@ bs = boot(randn(20), mean, 100, method = :basic)
 ```
 
 """
-function boot(x::AbstractVector, fun::Function, m::Int; method::Symbol = :basic)
+function boot(x::AbstractVector, fun::Function, m::Integer; method::Symbol = :basic)
 
     if method == :basic
         boot_basic(x, fun, m)
@@ -44,8 +44,8 @@ Ordinary bootstrapping by resampling with replacement.  This resamples the data 
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
-* `dim` : Int
+* `m` : Integer
+* `dim` : Integer
 
 **Returns**
 
@@ -60,7 +60,7 @@ bs = boot_basic(randn(20), mean, 100)
 """
 :boot_basic
 
-function boot_basic(x::AbstractVector, fun::Function, m::Int)
+function boot_basic(x::AbstractVector, fun::Function, m::Integer)
     n = length(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -85,7 +85,7 @@ bs = boot_basic(df, fun, 100)
 ```
 
 """
-function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Int)
+function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Integer)
     n = nrow(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -109,7 +109,7 @@ bs = boot_basic(a, fun, 100)
 ```
 
 """
-function boot_basic(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+function boot_basic(x::AbstractArray, fun::Function, m::Integer, dim::Integer = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -133,9 +133,9 @@ Weighted bootstrapping by weighted resampling with replacement.  This resamples 
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
+* `m` : Integer
 * `weight` : WeightVec from the 'StatsBase' package
-* `dim` : Int
+* `dim` : Integer
 
 **Returns**
 
@@ -151,7 +151,7 @@ bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
 """
 :boot_weight
 
-function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec)
+function boot_weight(x::AbstractVector, fun::Function, m::Integer, weight::WeightVec)
     n = length(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -164,7 +164,7 @@ function boot_weight(x::AbstractVector, fun::Function, m::Int, weight::WeightVec
     return res
 end
 
-function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Int, weight::WeightVec)
+function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Integer, weight::WeightVec)
     n = nrow(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -176,7 +176,7 @@ function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Int, weight::Wei
     return res
 end
 
-function boot_weight(x::AbstractArray, fun::Function, m::Int, weight::WeightVec, dim::Int = 1)
+function boot_weight(x::AbstractArray, fun::Function, m::Integer, weight::WeightVec, dim::Integer = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
@@ -200,8 +200,8 @@ Balanced bootstrapping resampling with replacement.  This resamples the data `x`
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `m` : Int
-* `dim` : Int
+* `m` : Integer
+* `dim` : Integer
 
 **Returns**
 
@@ -214,12 +214,12 @@ bs = boot_balanced(randn(20), mean, 100)
 ```
 
 """
-function boot_balanced(x::AbstractVector, fun::Function, m::Int)
+function boot_balanced(x::AbstractVector, fun::Function, m::Integer)
     n = length(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
-    ridx = zeros(Integer, n, m)
+    ridx = zeros(Int, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
         t1[i]= fun(x[ridx[:,i]])
@@ -229,12 +229,12 @@ function boot_balanced(x::AbstractVector, fun::Function, m::Int)
     return res
 end
 
-function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
+function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Integer)
     n = nrow(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
-    ridx = zeros(Integer, n, m)
+    ridx = zeros(Int, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
         t1[i]= fun(x[ridx[:,i],:])
@@ -244,12 +244,12 @@ function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Int)
     return res
 end
 
-function boot_balanced(x::AbstractArray, fun::Function, m::Int, dim::Int = 1)
+function boot_balanced(x::AbstractArray, fun::Function, m::Integer, dim::Integer = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
-    ridx = zeros(Integer, n, m)
+    ridx = zeros(Int, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
         t1[i]= fun(slicedim(x, dim, ridx[:,i]))
@@ -268,7 +268,7 @@ The exact bootstrap resamples the data `x` such that all possible permutations w
 
 * `x` : AbstractVector, AbstracArray, DataFrame
 * `fun` : Function
-* `dim` : Int
+* `dim` : Integer
 
 **Returns**
 
@@ -307,7 +307,7 @@ function boot_exact(x::DataFrames.DataFrame, fun::Function)
     return res
 end
 
-function boot_exact(x::AbstractArray, fun::Function, dim::Int = 1)
+function boot_exact(x::AbstractArray, fun::Function, dim::Integer = 1)
     n = size(x, dim)
     t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
