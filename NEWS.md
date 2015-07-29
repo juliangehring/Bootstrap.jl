@@ -1,5 +1,16 @@
 # News: Bootstrap
 
+## Bootstrap v0.3.1
+
+* Sample quantiles with Gaussian interpolation
+
+* Generalize integer types
+
+* Windows integration and build service
+
+* Codecov
+
+
 ## Bootstrap v0.3.0
 
 * Improved and more consistent documentation, using simple docstrings
