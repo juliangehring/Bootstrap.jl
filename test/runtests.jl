@@ -1,6 +1,7 @@
 tests = ["boot",
          "distributions-dep",
          "sampling",
+         "stats",
          "show",
          "doctest"]
 
