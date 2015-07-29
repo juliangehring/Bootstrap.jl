@@ -6,7 +6,7 @@
 [![Package Status](http://pkg.julialang.org/badges/Bootstrap_release.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=release)
 [![Linux Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=release)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/859sj436an6ikoey/branch/release?svg=true)](https://ci.appveyor.com/project/julian-gehring/bootstrap-jl/branch/release)
-[![Coverage Status](https://coveralls.io/repos/julian-gehring/Bootstrap.jl/badge.svg?branch=release)](https://coveralls.io/r/julian-gehring/Bootstrap.jl?branch=release)
+[![Coverage Status](http://codecov.io/github/julian-gehring/Bootstrap.jl/coverage.svg?branch=release)](http://codecov.io/github/julian-gehring/Bootstrap.jl?branch=release)
 
 
 ## Motivation
