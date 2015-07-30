@@ -8,6 +8,6 @@ x = 1::Int64
 x = Float32[1., 2., 3.]
 @test Bootstrap.data_summary(x) == "Array{Float32,1}: { 3 }"
 x = rand(Float64, 4, 3)
-@test Bootstrap.data_summary(x) == "Array{Float64,2}: { 4 x 3 }"
+@test Bootstrap.data_summary(x) == "Array{Float64,2}: { 4 \u00D7 3 }"
 
 end
