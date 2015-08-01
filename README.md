@@ -7,6 +7,7 @@
 [![Linux Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=release)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/859sj436an6ikoey/branch/release?svg=true)](https://ci.appveyor.com/project/julian-gehring/bootstrap-jl/branch/release)
 [![Coverage Status](http://codecov.io/github/julian-gehring/Bootstrap.jl/coverage.svg?branch=release)](http://codecov.io/github/julian-gehring/Bootstrap.jl?branch=release&view=all)
+[![DOI](https://zenodo.org/badge/5468/julian-gehring/Bootstrap.jl.svg)](https://zenodo.org/badge/latestdoi/5468/julian-gehring/Bootstrap.jl)
 
 
 ## Motivation
