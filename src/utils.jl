@@ -38,7 +38,7 @@ end
 
 function quantile_interp(x::AbstractVector, alpha::AbstractVector)
     x = sort(x)
-    qn = [quantile_interp(x, a, true) for a in alpha]
+    qn = Float64[quantile_interp(x, a, true) for a in alpha]
     return qn
 end
 
