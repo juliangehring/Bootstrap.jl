@@ -2,16 +2,16 @@
 
 ## Package Status
 
-### Stable Releases
+### Release Version
 
 [![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=release)](http://bootstrapjl.readthedocs.org/en/release/)
+[![DOI](https://zenodo.org/badge/5468/julian-gehring/Bootstrap.jl.svg)](https://zenodo.org/badge/latestdoi/5468/julian-gehring/Bootstrap.jl)
+
 [![Package Status 0.3](http://pkg.julialang.org/badges/Bootstrap_0.3.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=0.3)
 [![Package Status 0.4](http://pkg.julialang.org/badges/Bootstrap_0.4.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=0.4)
 [![Linux Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=release)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/859sj436an6ikoey/branch/release?svg=true)](https://ci.appveyor.com/project/julian-gehring/bootstrap-jl/branch/release)
 [![Coverage Status](http://codecov.io/github/julian-gehring/Bootstrap.jl/coverage.svg?branch=release)](http://codecov.io/github/julian-gehring/Bootstrap.jl?branch=release&view=all)
-[![DOI](https://zenodo.org/badge/5468/julian-gehring/Bootstrap.jl.svg)](https://zenodo.org/badge/latestdoi/5468/julian-gehring/Bootstrap.jl)
-
 
 ### Development Version
 
@@ -114,7 +114,7 @@ Most of the methodology covered in the book is implemented in the
 [R programming language](http://www.r-project.org/).
 
 
-## Future
+## Future Directions
 
 Features and improvements that are in planning/preparation:
 

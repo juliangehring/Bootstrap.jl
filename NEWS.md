@@ -1,5 +1,16 @@
 # News: Bootstrap
 
+## Bootstrap v0.3.2
+
+* Official support for julia 0.4
+
+* Precompilation in julia 0.4
+
+* DOI for release versions, making it possible to properly cite the software
+
+* Improved `show` method for `BootstrapSample` and `BootstrapCI`
+
+
 ## Bootstrap v0.3.1
 
 * Sample quantiles with Gaussian interpolation
