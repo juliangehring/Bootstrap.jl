@@ -43,6 +43,50 @@
 
 ## Bootstrap v0.1.0
 
+Major changes:
+
+* Simplify travis
+
+* Readme: Package status and logo
+
+* Interface: Individual functions for `boot` and `ci`
+
+* Support `Array` and `DataFrame` input
+
+* Require: `DataFrames` and `Docile`
+
+* Doc: Workflows in notebooks
+
+* Doc: Function documentation with Docile
+
+* Extend balanced bootstrap functionality
+
+* BCa CI with jackknife
+
+* Parametric `Bootstrap*` types
+
+* Generalized sampling methods
+
+* IO in `show` methods
+
+* Test: Doctest based on `Docile`
+
+* Test for new functionality
+
+
+## Bootstrap v0.0.3
+
+* Test cases for `Distributions` dependencies
+
+* Modular tests
+
+* Remove unused plotting dependencies
+
+
+## Bootstrap v0.0.2
+
+* Normal CI in `boot_ci`, with test cases
+
 
 ## Bootstrap v0.0.1
 
