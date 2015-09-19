@@ -12,8 +12,4 @@ config = Config(md_permalink = false,
                 mathjax = true)
 save("api.md", Bootstrap, config);
 
-#cd( Pkg.dir("Bootstrap") )
-#run(`mkdocs gh-deploy --clean`)
-#run(`ipython nbconvert --to markdown city.ipynb --quiet --output city --profile julia --NbConvertBase.language_info=julia`)
-
 end
