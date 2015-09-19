@@ -61,7 +61,7 @@ bs = boot_basic(randn(20), mean, 100)
 :boot_basic
 
 function boot_basic(x::AbstractVector, fun::Function, m::Integer)
-    n = length(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
@@ -86,7 +86,7 @@ bs = boot_basic(df, fun, 100)
 
 """
 function boot_basic(x::DataFrames.DataFrame, fun::Function, m::Integer)
-    n = nrow(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     for i in 1:m
@@ -110,7 +110,7 @@ bs = boot_basic(a, fun, 100)
 
 """
 function boot_basic(x::AbstractArray, fun::Function, m::Integer, dim::Integer = 1)
-    n = size(x, dim)
+    n = nobs(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     index = [1:n;]
@@ -152,7 +152,7 @@ bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
 :boot_weight
 
 function boot_weight(x::AbstractVector, fun::Function, m::Integer, weight::WeightVec)
-    n = length(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
@@ -165,7 +165,7 @@ function boot_weight(x::AbstractVector, fun::Function, m::Integer, weight::Weigh
 end
 
 function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Integer, weight::WeightVec)
-    n = nrow(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     for i in 1:m
@@ -177,7 +177,7 @@ function boot_weight(x::DataFrames.DataFrame, fun::Function, m::Integer, weight:
 end
 
 function boot_weight(x::AbstractArray, fun::Function, m::Integer, weight::WeightVec, dim::Integer = 1)
-    n = size(x, dim)
+    n = nobs(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     index = [1:n;]
@@ -215,7 +215,7 @@ bs = boot_balanced(randn(20), mean, 100)
 
 """
 function boot_balanced(x::AbstractVector, fun::Function, m::Integer)
-    n = length(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
@@ -230,7 +230,7 @@ function boot_balanced(x::AbstractVector, fun::Function, m::Integer)
 end
 
 function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Integer)
-    n = nrow(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
@@ -245,7 +245,7 @@ function boot_balanced(x::DataFrames.DataFrame, fun::Function, m::Integer)
 end
 
 function boot_balanced(x::AbstractArray, fun::Function, m::Integer, dim::Integer = 1)
-    n = size(x, dim)
+    n = nobs(x, dim)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     idx = repmat([1:n;], m)
@@ -282,7 +282,7 @@ bs = boot_exact(randn(6), mean)
 
 """
 function boot_exact(x::AbstractVector, fun::Function)
-    n = length(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
     t1 = zeros(typeof(t0), m)
@@ -295,7 +295,7 @@ function boot_exact(x::AbstractVector, fun::Function)
 end
 
 function boot_exact(x::DataFrames.DataFrame, fun::Function)
-    n = nrow(x)
+    n = nobs(x)
     t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
     t1 = zeros(typeof(t0), m)
@@ -308,7 +308,7 @@ function boot_exact(x::DataFrames.DataFrame, fun::Function)
 end
 
 function boot_exact(x::AbstractArray, fun::Function, dim::Integer = 1)
-    n = size(x, dim)
+    n = nobs(x, dim)
     t0 = checkReturn(fun(x))
     m = binomial(2*n-1, n)
     t1 = zeros(typeof(t0), m)

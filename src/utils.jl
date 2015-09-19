@@ -5,7 +5,7 @@ end
 
 
 function jack_knife_estimate(x::AbstractVector, fun::Function, typ::Type = typeof(fun(x)))
-    n = length(x)
+    n = nobs(x)
     y = zeros(typ, n)
     idx = trues(n)
     for i in 1:n
@@ -19,7 +19,7 @@ function jack_knife_estimate(x::AbstractVector, fun::Function, typ::Type = typeo
 end
 
 function jack_knife_estimate(x::DataFrames.DataFrame, fun::Function, typ::Type = typeof(fun(x)))
-    n = nrow(x)
+    n = nobs(x)
     y = zeros(typ, n)
     idx = trues(n)
     for i in 1:n
@@ -59,3 +59,10 @@ function quantile_interp(x::AbstractVector, alpha::AbstractFloat, is_sorted::Boo
     qn = (tx[1] - tx[2])/(tx[3] - tx[2]) * (x[k+1] - x[k]) + x[k]
     return qn
 end
+
+
+### Number of observations ###
+
+nobs(x::AbstractVector) = length(x)
+nobs(x::AbstractArray, dim::Integer = 1) = size(x, dim)
+nobs(x::DataFrames.AbstractDataFrame) = nrow(x)

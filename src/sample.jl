@@ -20,12 +20,12 @@ end
 ### Sampling methods for 'DataFrame'
 
 function StatsBase.sample(df::DataFrames.DataFrame, n::Integer; replace::Bool=true, ordered::Bool=false)
-    index = sample(1:nrow(df), n, replace = replace, ordered = ordered)
+    index = sample(1:nobs(df), n, replace = replace, ordered = ordered)
     df[index,:]
 end
 
 function StatsBase.sample(df::DataFrames.DataFrame, wv::WeightVec, n::Integer; replace::Bool=true, ordered::Bool=false)
-    index = sample(1:nrow(df), wv, n, replace = replace, ordered = ordered)
+    index = sample(1:nobs(df), wv, n, replace = replace, ordered = ordered)
     df[index,:]
 end
 
@@ -33,7 +33,7 @@ end
 ### Sampling methods for 'Array'
 
 function StatsBase.sample{T}(a::AbstractArray{T}, d::Integer, n::Integer; replace::Bool=true, ordered::Bool=false)
-    index = sample(1:size(a, d), n, replace = replace, ordered = ordered)
+    index = sample(1:nobs(a, d), n, replace = replace, ordered = ordered)
     a = slicedim(a, d, index)
     return a
 end
