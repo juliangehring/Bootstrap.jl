@@ -66,3 +66,8 @@ end
 nobs(x::AbstractVector) = length(x)
 nobs(x::AbstractArray, dim::Integer = 1) = size(x, dim)
 nobs(x::DataFrames.AbstractDataFrame) = nrow(x)
+
+
+### Number of exact bootstrap runs
+
+nrun_exact(n::Integer) = binomial(2n-1, n)
