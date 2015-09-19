@@ -43,7 +43,7 @@ function quantile_interp(x::AbstractVector, alpha::AbstractVector)
 end
 
 
-function quantile_interp(x::AbstractVector, alpha::FloatingPoint, is_sorted::Bool = false)
+function quantile_interp(x::AbstractVector, alpha::AbstractFloat, is_sorted::Bool = false)
     if !is_sorted
         x = sort(x)
     end

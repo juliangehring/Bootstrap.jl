@@ -15,7 +15,7 @@ sampling. This might be dropped in the future.
 `BootstrapCI`
 
 """
-function ci(x::BootstrapSample; level::FloatingPoint = 0.95, method::Symbol = :basic)
+function ci(x::BootstrapSample; level::AbstractFloat = 0.95, method::Symbol = :basic)
 
     if method == :basic
         ci_basic(x, level)
@@ -48,7 +48,7 @@ statistic.
 `BootstrapCI`
 
 """
-function ci_basic(x::BootstrapSample, level::FloatingPoint = 0.95)
+function ci_basic(x::BootstrapSample, level::AbstractFloat = 0.95)
     t0 = x.t0
     t1 = x.t1
     alpha = ([level, -level] + 1)/2
@@ -77,7 +77,7 @@ statistic.
 `BootstrapCI`
 
 """
-function ci_perc(x::BootstrapSample, level::FloatingPoint = 0.95)
+function ci_perc(x::BootstrapSample, level::AbstractFloat = 0.95)
     t1 = x.t1
     alpha = ([-level, level] + 1)/2
     lower, upper = quantile(t1, alpha)
@@ -101,7 +101,7 @@ bootstrap sampling, assuming an underlying Gaussian distribution.
 `BootstrapCI`
 
 """
-function ci_normal(x::BootstrapSample, level::FloatingPoint = 0.95)
+function ci_normal(x::BootstrapSample, level::AbstractFloat = 0.95)
     ## what are we missing here?
     t0 = estimate(x)
     b = bias(x)
@@ -131,7 +131,7 @@ estimation.
 `BootstrapCI`
 
 """
-function ci_bca(x::BootstrapSample, level::FloatingPoint = 0.95)
+function ci_bca(x::BootstrapSample, level::AbstractFloat = 0.95)
     t0 = x.t0
     t1 = x.t1
     n = length(x.t1)
@@ -167,7 +167,7 @@ estimates that are passed separately.
 `BootstrapCI`
 
 """
-function ci_student(x::BootstrapSample, t1sd::AbstractVector, level::FloatingPoint = 0.95)
+function ci_student(x::BootstrapSample, t1sd::AbstractVector, level::AbstractFloat = 0.95)
     t0 = x.t0
     t1 = x.t1
     t0se = se(x)

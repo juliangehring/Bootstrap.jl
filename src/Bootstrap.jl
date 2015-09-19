@@ -10,6 +10,7 @@ the `boot_*` and calculating a confidence interval with the `ci_*` functions.
 """
 Bootstrap
 
+using Compat
 using StatsBase
 using Iterators
 using Distributions

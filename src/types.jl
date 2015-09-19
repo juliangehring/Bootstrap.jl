@@ -7,7 +7,7 @@ type BootstrapSample{E,S,D}
     fun::Function
     x::D
     m::Integer
-    wv::Union(WeightVec, Integer) ## Nullable() ?
+    @compat wv::Union{WeightVec, Integer} ## Nullable() ?
     method::Symbol
 end
 
@@ -67,9 +67,9 @@ Class `BootstrapCI` that stores the result of a bootstrap-based confidence inter
 """
 type BootstrapCI{E}
     t0::E
-    lower::FloatingPoint
-    upper::FloatingPoint
-    level::FloatingPoint
+    lower::AbstractFloat
+    upper::AbstractFloat
+    level::AbstractFloat
     method::Symbol
 end
 
