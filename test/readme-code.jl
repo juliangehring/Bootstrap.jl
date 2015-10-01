@@ -3,6 +3,9 @@ module Test_readme_code
 if VERSION >= v"0.4-"
     using Base.Markdown
 else
+    if !haskey(Pkg.installed(), "Markdown")
+        Pkg.add("Markdown")
+    end
     using Markdown
 end
 
