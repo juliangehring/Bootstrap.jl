@@ -61,7 +61,6 @@ bs = boot_basic(randn(20), mean, 100)
 :boot_basic
 
 function boot_basic(x::AbstractVector, fun::Function, m::Integer)
-    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
@@ -152,7 +151,6 @@ bs = boot_weight(randn(20), mean, 100, WeightVec(rand(20)))
 :boot_weight
 
 function boot_weight(x::AbstractVector, fun::Function, m::Integer, weight::WeightVec)
-    n = nobs(x)
     t0 = checkReturn(fun(x))
     t1 = zeros(typeof(t0), m)
     boot_sample = zeros(x)
