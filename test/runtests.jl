@@ -4,6 +4,7 @@ tests = ["boot",
          "stats",
          "show",
          "nobs",
+         "readme-code",
          "doctest"]
 
 println("Running 'Bootstrap' tests:")
