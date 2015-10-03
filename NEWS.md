@@ -1,5 +1,20 @@
 # News: Bootstrap
 
+## Bootstrap v0.3.3
+
+* Type compatibility with julia 0.4
+
+* Test code in readme as part of the unit tests
+
+* Script to rebuild notebook automatically
+
+* Unified number of observations `nobs` interface with tests
+
+* Calculate number of exact bootstrap samples explictly
+
+* Doc notebooks: Cleanup
+
+
 ## Bootstrap v0.3.2
 
 * Official support for julia 0.4
