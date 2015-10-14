@@ -1,26 +1,21 @@
 const _show_pad = 12
 const _show_signif = 5
 
-function Base.show(io::IO, x::BootstrapSample)
+function Base.show(io::IO, bs::BootstrapSample)
     r = _show_pad
     s = _show_signif
+    df = estimate_summary(bs)
+    df = split(string(df), '\n')[2:end]
+    df[1] = replace(df[1], "Row", "Var")
     println(io, "Bootstrap Sampling")
-    println(io, rpad("  Estimate:", r), signif(x.t0, s))
-    println(io, rpad("  Bias:", r), signif(bias(x), s))
-    println(io, rpad("  StdError:", r), signif(se(x), s))
-    println(io, rpad("  Samples:", r), x.m)
-    println(io, rpad("  Method:", r), x.method)
-    println(io, rpad("  Data:", r), data_summary(x.x))
-end
-
-function Base.show(io::IO, x::BootstrapCI)
-    r = _show_pad
-    s = _show_signif
-    println(io, "Bootstrap Confidence Interval")
-    println(io, rpad("  Estimate:", r), signif(x.t0, s))
-    println(io, rpad("  Interval:", r), interval(x))
-    println(io, rpad("  Level:", r), x.level)
-    println(io, rpad("  Method:", r), x.method)
+    println(io, rpad("  Estimates:", r))
+    for i in 1:length(df)
+        println(io, string("    ", df[i]))
+    end
+    println(io, rpad("  Sampling:", r),
+            replace(string(typeof(sampling(bs))), "Bootstrap.", ""))
+    println(io, rpad("  Samples:", r), nrun(bs))
+    println(io, rpad("  Data:", r), data_summary(bs.data))
 end
 
 
@@ -33,4 +28,13 @@ function data_summary(x)
     ns = join(n, " \u00D7 ") # Unicode 'times'
     s = "$t: { $ns }"
     return s
+end
+
+
+function estimate_summary(bs::BootstrapSample)
+    n = nvar(bs)
+    df = DataFrame(Estimate = [original(bs)...],
+                   Bias = bias(bs),
+                   StdError = se(bs))
+    return df
 end

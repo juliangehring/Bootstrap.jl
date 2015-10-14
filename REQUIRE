@@ -1,8 +1,4 @@
-julia 0.3
+julia 0.4
 StatsBase
-Iterators
 Distributions
 DataFrames
-Docile
-Lexicon
-Compat

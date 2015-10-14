@@ -1,4 +1,4 @@
-VERSION >= v"0.4.0-dev+6521" && __precompile__(true)
+VERSION >= v"0.4.0" && __precompile__(true)
 
 module Bootstrap
 
@@ -10,50 +10,51 @@ the `boot_*` and calculating a confidence interval with the `ci_*` functions.
 """
 Bootstrap
 
-using Compat
 using StatsBase
-using Iterators
 using Distributions
 using DataFrames
 
-import StatsBase: sample
-import Distributions: estimate
-import DataArrays: data
-
-## documentation
-using Lexicon
+import Base: start, next, done, eltype, length
 
 export
-    ## types
+    Model,
+    nvar,
+    nrun,
+    draw!,
+    rademacher,
+    mammen,
+    iquantile,
+    bootstrap,
+    BasicSampling,
+    BalancedSampling,
+    ExactSampling,
+    ResidualSampling,
+    WildSampling,
     BootstrapSample,
-    BootstrapCI,
-    ## methods
-    boot,
-    boot_basic,
-    boot_weight,
-    boot_balanced,
-    boot_exact,
-    estimate,
+    NonParametricBootstrapSample,
+    ParametricBootstrapSample,
+    original,
     straps,
     data,
-    method,
-    level,
-    interval,
-    width,
+    model,
+    statistic,
+    sampling,
     bias,
     se,
     ci,
-    ci_basic,
-    ci_perc,
-    ci_normal,
-    ci_bca,
-    ci_student
+    BasicConfInt,
+    PercentileConfInt,
+    NormalConfInt,
+    BCaConfInt,
+    level
 
-include("types.jl")
-include("utils.jl")
-include("sample.jl")
-include("boot.jl")
-include("ci.jl")
+include("stats.jl")
+include("nobs.jl")
+include("draw.jl")
+include("bootsampling.jl")
+include("get.jl")
 include("show.jl")
+include("confint.jl")
+include("datasets/Datasets.jl")
 
-end # module
+end

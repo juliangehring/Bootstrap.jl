@@ -1,9 +1,0 @@
-#+TITLE: Todo: Bootstrap.jl
-
-* Efficient balanced resampling
-
-This will have to be a trade-off between time and space. For some ideas, see
-
-Gleason, J. R. Algorithms for Balanced Bootstrap Simulations. The American
-Statistician 42, 263–266 (1988)
-

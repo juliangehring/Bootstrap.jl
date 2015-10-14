@@ -1,11 +1,6 @@
-tests = ["boot",
-         "distributions-dep",
-         "sampling",
-         "stats",
-         "show",
-         "nobs",
-         "readme-code",
-         "doctest"]
+tests = ["distributions-dep",
+         "bootsample-non-parametric",
+         "bootsample-parametric"]
 
 println("Running 'Bootstrap' tests:")
 

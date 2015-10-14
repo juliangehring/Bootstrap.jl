@@ -1,8 +1,6 @@
-module Test_distributions_dep
+module TestDistributionsDependency
 
 using Base.Test
-
-### test dependencies ###
 
 ## Distributions
 using Distributions
@@ -10,7 +8,7 @@ using Distributions
 ## reference values, taken from qnorm [R]
 qnorm = (
          (0.1, -1.281552),
-         (0.5, 0),
+         (0.5, 0.0),
          (0.9, 1.281552),
          (0.95, 1.644854),
          (0.99, 2.326348)
