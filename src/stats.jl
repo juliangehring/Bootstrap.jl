@@ -34,7 +34,7 @@ end
 
 function iquantile(x::AbstractVector, alpha::AbstractVector)
     x = sort(x)
-    qn = Float64[quantile_interp(x, a, true) for a in alpha]
+    qn = Float64[iquantile(x, a, true) for a in alpha]
     return qn
 end
 
