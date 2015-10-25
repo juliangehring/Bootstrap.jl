@@ -20,6 +20,6 @@ straps(bs::BootstrapSample) = bs.t1
 
 data(bs::BootstrapSample) = bs.data
 
-model(bs::NonParametricBootstrapSample) = bs.model
+model(bs::ParametricBootstrapSample) = bs.model
 
 sampling(bs::BootstrapSample) = bs.sampling

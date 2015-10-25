@@ -14,7 +14,7 @@ citya = convert(DataArray, city)
 
 function test_bootsample(bs, ref, raw_data, n)
 
-    bs
+    show(IOBuffer(), bs)
     @test issubtype(typeof(bs), NonParametricBootstrapSample)
     t0 = original(bs)
     @test length(t0) == length(ref)
@@ -36,6 +36,8 @@ function test_bootsample(bs, ref, raw_data, n)
     @test length(se(bs)) == length(ref)
     [@test s > 0 for s in se(bs)]
 
+    @test_throws MethodError model(bs)
+    
     return Void
 end
 

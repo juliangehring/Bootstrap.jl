@@ -16,7 +16,7 @@ city2 = DataFrame(twenty = log10(city[:,:U]),
 
 function test_bootsample(bs, ref, raw_data, n)
 
-    bs    
+    show(IOBuffer(), bs)
     @test issubtype(typeof(bs), ParametricBootstrapSample)
     t0 = original(bs)
     @test length(t0) == length(ref)
@@ -37,6 +37,9 @@ function test_bootsample(bs, ref, raw_data, n)
     [@test b[1] > -Inf && b[1] < Inf for b in bias(bs)]
     @test length(se(bs)) == length(ref)
     [@test s > 0 for s in se(bs)]
+
+    m = model(bs)
+    @test issubtype(typeof(m), Bootstrap.Model)
 
     return Void
 end
