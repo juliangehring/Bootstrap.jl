@@ -9,9 +9,6 @@ using StatsBase
 
 n = 250
 
-## 'city' dataset
-citya = convert(DataArray, city)
-
 function test_bootsample(bs, ref, raw_data, n)
 
     show(IOBuffer(), bs)
@@ -25,7 +22,7 @@ function test_bootsample(bs, ref, raw_data, n)
     [@test length(t) == n for t in t1]
     [@test minimum(t) <= tr && maximum(t) >= tr for (t, tr) in zip(t1, t0)]
     [@test eltype(t) == eltype(tr) for (t, tr) in zip(t1, t0)]
-
+    
     @test raw_data == Bootstrap.data(bs) ## TODO: define scope
 
     @test nrun(sampling(bs)) == n
@@ -36,6 +33,11 @@ function test_bootsample(bs, ref, raw_data, n)
     @test length(se(bs)) == length(ref)
     [@test s > 0 for s in se(bs)]
 
+    [@test original(bs, i) == original(bs)[i]  for i in 1:nvar(bs)]
+    [@test straps(bs, i) == straps(bs)[i]  for i in 1:nvar(bs)]
+    [@test bias(bs, i) == bias(bs)[i]  for i in 1:nvar(bs)]
+    [@test se(bs, i) == se(bs)[i]  for i in 1:nvar(bs)]
+    
     @test_throws MethodError model(bs)
     
     return Void
@@ -52,6 +54,9 @@ function test_ci(bs)
 
     return Void
 end
+
+## 'city' dataset
+citya = convert(DataArray, city)
 
 city_ratio(df::DataFrames.DataFrame) = mean(df[:,:X]) ./ mean(df[:,:U])
 city_ratio(a::AbstractArray) = mean(a[:,2]) ./ mean(a[:,1])

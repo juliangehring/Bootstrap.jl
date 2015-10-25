@@ -38,6 +38,11 @@ function test_bootsample(bs, ref, raw_data, n)
     @test length(se(bs)) == length(ref)
     [@test s > 0 for s in se(bs)]
 
+    [@test original(bs, i) == original(bs)[i]  for i in 1:nvar(bs)]
+    [@test straps(bs, i) == straps(bs)[i]  for i in 1:nvar(bs)]
+    [@test bias(bs, i) == bias(bs)[i]  for i in 1:nvar(bs)]
+    [@test se(bs, i) == se(bs)[i]  for i in 1:nvar(bs)]
+    
     m = model(bs)
     @test issubtype(typeof(m), Bootstrap.Model)
 
