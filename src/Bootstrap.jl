@@ -1,14 +1,11 @@
 VERSION >= v"0.4.0" && __precompile__(true)
 
+"""
+# Bootstrap package
+
+Statistical bootstrapping for Julia
+"""
 module Bootstrap
-
-"""
-Statistical bootstrapping library in julia.
-
-The typical steps of an analysis include generating a bootstrap sampling with
-the `boot_*` and calculating a confidence interval with the `ci_*` functions.
-"""
-Bootstrap
 
 using StatsBase
 using Distributions

@@ -1,3 +1,16 @@
+"""
+# Datasets module
+
+Selected datasets from the R 'boot' package
+
+## Datasets
+
+* city
+* bigcity
+* survival
+* aircondit
+
+"""
 module Datasets
 
 using DataFrames

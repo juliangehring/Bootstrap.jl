@@ -84,7 +84,15 @@ lhs(f::Formula) = f.lhs
 """
 Basic Bootstrap
 
-bootstrap(data, statistic, sampling)
+## Usage
+
+bootstrap(data, statistic, BasicSampling())
+
+## Examples
+
+```julia
+bootstrap(randn(10), mean, BasicSampling(100))
+```
 """
 function bootstrap(data, statistic::Function, sampling::BasicSampling)
     t0 = tx(statistic(data))
