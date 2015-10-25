@@ -82,13 +82,14 @@ test_ci(bs)
 ## B2) DataArray input
 bs = bootstrap(citya, city_cor, BasicSampling(n))
 test_bootsample(bs, ref, citya, n)
+test_ci(bs)
 
 ## C) Vector input, 2 output variables
 r = randn(25)
 ref = mean_and_std(r)
 bs = bootstrap(r, mean_and_std, BasicSampling(n))
 test_bootsample(bs, ref, r, n)
-#test_ci(bs)
+test_ci(bs)
 
 ### 2) Balanced resampling
 
@@ -115,7 +116,7 @@ r = randn(50)
 ref = mean_and_std(r)
 bs = bootstrap(r, mean_and_std, BalancedSampling(n))
 test_bootsample(bs, ref, r, n)
-#test_ci(bs) ## TODO: support ci with multiple estimates
+test_ci(bs)
 ## mean should be unbiased
 @test_approx_eq_eps bias(bs)[1] 0.0 1e-8
 
