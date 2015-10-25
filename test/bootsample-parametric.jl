@@ -95,8 +95,10 @@ ref = coef(fit(LinearModel, thirty ~ twenty, city2))
 
 bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, rademacher))
 test_bootsample(bs, ref, city2, n)
+@test typeof(noise(sampling(bs))) == Function
 
 bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, mammen))
 test_bootsample(bs, ref, city2, n)
+@test typeof(noise(sampling(bs))) == Function
 
 end

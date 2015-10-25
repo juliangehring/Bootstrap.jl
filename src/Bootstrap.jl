@@ -36,6 +36,7 @@ export
     model,
     statistic,
     sampling,
+    noise,
     bias,
     se,
     ci,
