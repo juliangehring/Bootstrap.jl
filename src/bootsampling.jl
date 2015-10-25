@@ -131,16 +131,16 @@ function bootstrap(data, statistic::Function, sampling::BalancedSampling)
 end
 
 type ExactIterator
-    inneritr::Base.Combinations{Array{Int64, 1}}
+    inner::Base.Combinations{Vector{Int64}}
     n::Int64
 end
 
 exact(n::Int) = ExactIterator(combinations(collect(1:(2n-1)), n), n)
 
-start(itr::ExactIterator) = start(itr.inneritr)
+start(itr::ExactIterator) = start(itr.inner)
 
 function next(itr::ExactIterator, s)
-    c, s = next(itr.inneritr, s)
+    c, s = next(itr.inner, s)
     v = Array(Int, itr.n)
     j = 1
     p = 1
@@ -155,11 +155,11 @@ function next(itr::ExactIterator, s)
     return v, s
 end
 
-done(itr::ExactIterator, s) = done(itr.inneritr, s)
+done(itr::ExactIterator, s) = done(itr.inner, s)
 
-eltype(itr::ExactIterator) = Array{Int64, 1}
+eltype(itr::ExactIterator) = typeof(itr.inner.a)
 
-length(itr::ExactIterator) = length(itr.inneritr)
+length(itr::ExactIterator) = length(itr.inner)
 
 """
 Exact bootstrap
