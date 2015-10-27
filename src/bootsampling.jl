@@ -130,36 +130,36 @@ function bootstrap(data, statistic::Function, sampling::BalancedSampling)
     return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
 end
 
-type ExactIterator
-    inner::Base.Combinations{Vector{Int64}}
-    n::Int64
+type ExactIterator{T}
+    a::T
+    k::Int64
 end
 
-exact(n::Int) = ExactIterator(combinations(collect(1:(2n-1)), n), n)
+exact(n::Int) = ExactIterator(1:n, n)
 
-start(itr::ExactIterator) = start(itr.inner)
+start(itr::ExactIterator) = ones(Int, itr.k)
 
 function next(itr::ExactIterator, s)
-    c, s = next(itr.inner, s)
-    v = Array(Int, itr.n)
-    j = 1
-    p = 1
-    for k = 1:itr.n
-        while !(j in c)
-            j += 1
-            p += 1
+    r = itr.a[s]
+    for i = itr.k:-1:1
+        if s[i] < endof(itr.a)
+            s[i] = nextind(itr.a, s[i])
+            for j = i:itr.k-1
+                s[j+1] = s[j]
+            end
+            return r, s
         end
-        v[k] = p
-        j += 1
     end
-    return v, s
+    return r, [0]
 end
 
-done(itr::ExactIterator, s) = done(itr.inner, s)
+done(itr::ExactIterator, s) = length(s) > 0 && s[1] < 1
 
-eltype(itr::ExactIterator) = typeof(itr.inner.a)
+eltype(itr::ExactIterator) = typeof(itr.a)
+eltype{T}(itr::ExactIterator{UnitRange{T}}) = Array{T, 1}
+eltype{T}(itr::ExactIterator{Range{T}}) = Array{T, 1}
 
-length(itr::ExactIterator) = length(itr.inner)
+length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
 
 """
 Exact bootstrap
