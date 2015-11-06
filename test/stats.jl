@@ -1,7 +1,7 @@
 module TestStats
 
 using Bootstrap
-using Base.Test
+using FactCheck
 
 x = collect(100:-1:0) ## avoid sorting
 
@@ -15,20 +15,35 @@ qr = (
       (0.052,    4.319606)
       )
 
-for (alpha, ref) in qr
-    @test_approx_eq_eps Bootstrap.iquantile(x, alpha) ref 1e-5
-end
+facts("Normal-interpolated quantiles") do
 
-a = Float64[x[1] for x in qr]
-b = Float64[x[2] for x in qr]
-@test_approx_eq_eps Bootstrap.iquantile(x, a) b 1e-5
+    context("Reference values: alpha scalar") do
+        for (alpha, ref) in qr
+            @fact Bootstrap.iquantile(x, alpha) --> roughly(ref, 1e-5)
+        end
+    end
 
-x = collect(0:100)
-## check that quantiles are monotone
-y0 = -Inf
-for alpha in 0:0.001:1
-    y1 = Bootstrap.iquantile(x, alpha)
-    @test y1 >= y0
+    context("Reference values: alpha vector") do
+        a = Float64[x[1] for x in qr]
+        r = Float64[x[2] for x in qr]
+        y = Bootstrap.iquantile(x, a)
+        ## workaround, since roughly cannot handle 'Inf' here
+        y = round(y, 4)
+        r = round(r, 4)
+        @fact y --> r
+    end
+
+    context("Monotone quantiles") do
+        x = collect(0:100)
+        ## check that quantiles are monotone
+        y0 = -Inf
+        for alpha in 0:0.001:1
+            y1 = Bootstrap.iquantile(x, alpha)
+            @fact y1 --> greater_than_or_equal(y0)
+            y0 = y1
+        end
+    end
+
 end
 
 end

@@ -2,14 +2,13 @@ module TestDoctest
 
 ## doctest
 using Bootstrap
-using Base.Test
+using FactCheck
 
-if !haskey(Pkg.installed(), "Lexicon")
-    Pkg.add("Lexicon")
-end
 using Lexicon
 
-dt = doctest(Bootstrap);
-@test length(failed(dt)) == 0
+facts("Doctest") do
+    dt = doctest(Bootstrap)
+    @fact length(failed(dt)) --> 0
+end
 
 end

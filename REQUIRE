@@ -2,4 +2,4 @@ julia 0.4
 StatsBase
 Distributions
 DataFrames
-GLM
+FactCheck

@@ -1,16 +1,18 @@
 module TestUtils
 
 using Bootstrap
-using Base.Test
+using FactCheck
 
-## exact sampling
+facts("Exact sampling") do
 
-mss = collect(Bootstrap.exact(4))
-@test length(mss) == 35
-@test reduce(&, [issorted(c) for c in mss])
+    mss = collect(Bootstrap.exact(4))
+    @fact length(mss) --> 35
+    @fact reduce(&, [issorted(c) for c in mss]) --> true
 
-for n in 1:6
-    @test length(Bootstrap.exact(n)) == Bootstrap.nrun_exact(n)
+    for n in 1:6
+        @fact length(Bootstrap.exact(n)) --> Bootstrap.nrun_exact(n)
+    end
+
 end
 
 end
