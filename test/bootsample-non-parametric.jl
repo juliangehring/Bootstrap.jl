@@ -66,7 +66,7 @@ city_cor(x::AbstractDataFrame) = cor(x[:,:X], x[:,:U])
 
 facts("Basic resampling") do
     
-    context("city_raiton with DataFrame input") do
+    context("city_ratio with DataFrame input") do
         ref = city_ratio(city)
         @fact ref --> roughly(1.5203125)
         bs = bootstrap(city, city_ratio, BasicSampling(n))

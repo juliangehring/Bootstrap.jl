@@ -62,18 +62,18 @@ city2 = DataFrame(twenty = log10(city[:,:U]),
                   thirty = log10(city[:,:X]))
 
 
-facts("Parametric distribution") do
+facts("Parametric distributions") do
 
     r = randn(20)
     ref = mean(r)
 
-    context("Basic resampling") do
+    context("Basic resampling: Normal distribution") do
         bs = bootstrap(r, mean, Model(Normal), BasicSampling(n))
         test_bootsample(bs, ref, r, n)
         test_ci(bs)
     end
 
-    context("Balanced resampling") do
+    context("Balanced resampling: Normal distribution") do
         bs = bootstrap(r, mean, Model(Normal), BalancedSampling(n))
         test_bootsample(bs, ref, r, n)
         test_ci(bs)
@@ -81,13 +81,13 @@ facts("Parametric distribution") do
 
     ref = mean(fit(Exponential, aircondit))
 
-    context("Exponential: basic") do
+    context("Basic resampling: Exponential distribution") do
         bs = bootstrap(aircondit, mean, Model(Exponential), BasicSampling(n))
         test_bootsample(bs, ref, aircondit, n)
         test_ci(bs)
     end
 
-    context("Exponential: balanced") do
+    context("Balanced resampling: Exponential distribution") do
         bs = bootstrap(aircondit, mean, Model(Exponential), BalancedSampling(n))
         test_bootsample(bs, ref, aircondit, n)
         test_ci(bs)
@@ -95,28 +95,51 @@ facts("Parametric distribution") do
 
 end
 
-
-facts("Residual") do
-
-    ref = coef(fit(LinearModel, thirty ~ twenty, city2))
-
-    bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), ResidualSampling(n))
-    test_bootsample(bs, ref, city2, n)
-
-end
-        
-facts("Wild") do
+facts("Linear regression models") do
 
     ref = coef(fit(LinearModel, thirty ~ twenty, city2))
 
-    bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, rademacher))
-    test_bootsample(bs, ref, city2, n)
-    @fact typeof(noise(sampling(bs))) --> Function
+    context("Residual resampling") do
+        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), ResidualSampling(n))
+        test_bootsample(bs, ref, city2, n)
+    end
 
-    bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, mammen))
-    test_bootsample(bs, ref, city2, n)
-    @fact typeof(noise(sampling(bs))) --> Function
+    context("Wild resampling: Rademacher") do
+        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, rademacher))
+        test_bootsample(bs, ref, city2, n)
+    end
+
+    context("Wild resampling: Mammen") do
+        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, mammen))
+        test_bootsample(bs, ref, city2, n)
+    end
 
 end
-    
+
+facts("Generalized linear regression models") do
+
+    ref = coef(fit(GeneralizedLinearModel, thirty ~ twenty, city2, Normal()))
+
+    context("Residual resampling") do
+        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal()), ResidualSampling(n))
+        test_bootsample(bs, ref, city2, n)
+    end
+
+    context("Residual resampling with link function") do
+        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal(), IdentityLink()), ResidualSampling(n))
+        test_bootsample(bs, ref, city2, n)
+    end
+
+    context("Wild resampling: Rademacher") do
+        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal()), WildSampling(n, rademacher))
+        test_bootsample(bs, ref, city2, n)
+    end
+
+    context("Wild resampling with link function: Mammen") do
+        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal(), IdentityLink()), WildSampling(n, mammen))
+        test_bootsample(bs, ref, city2, n)
+    end
+
+end
+
 end
