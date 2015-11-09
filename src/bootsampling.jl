@@ -20,7 +20,6 @@ abstract BootstrapSampling
 abstract ParametricSampling <: BootstrapSampling
 abstract NonParametricSampling <: BootstrapSampling
 
-## TODO: inherit from more specific types?
 type BasicSampling <: BootstrapSampling
     nrun::Int
 end
@@ -42,7 +41,7 @@ type ExactSampling <: BootstrapSampling
     nrun::Int
 end
 
-ExactSampling() = ExactSampling(0) ## TODO: good default value
+ExactSampling() = ExactSampling(0)
 
 
 abstract BootstrapSample
