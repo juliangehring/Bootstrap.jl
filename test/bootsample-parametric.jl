@@ -107,11 +107,13 @@ facts("Linear regression models") do
     context("Wild resampling: Rademacher") do
         bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, rademacher))
         test_bootsample(bs, ref, city2, n)
+        @fact typeof(noise(sampling(bs))) --> Function
     end
 
     context("Wild resampling: Mammen") do
         bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, mammen))
         test_bootsample(bs, ref, city2, n)
+        @fact typeof(noise(sampling(bs))) --> Function
     end
 
 end
@@ -133,11 +135,13 @@ facts("Generalized linear regression models") do
     context("Wild resampling: Rademacher") do
         bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal()), WildSampling(n, rademacher))
         test_bootsample(bs, ref, city2, n)
+        @fact typeof(noise(sampling(bs))) --> Function
     end
 
     context("Wild resampling with link function: Mammen") do
         bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal(), IdentityLink()), WildSampling(n, mammen))
         test_bootsample(bs, ref, city2, n)
+        @fact typeof(noise(sampling(bs))) --> Function
     end
 
 end
