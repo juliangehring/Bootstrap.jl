@@ -48,6 +48,7 @@ function test_ci(bs)
         c = ci(bs, cim)
         [@fact (x[1] >= x[2]  && x[1] <= x[3]) --> true for x in c]
         [@fact x[1] --> roughly(t0) for (x, t0) in zip(c, original(bs))]
+        @fact level(cim) --> 0.95
     end
 
     return Void
@@ -94,6 +95,17 @@ facts("Basic resampling") do
         bs = bootstrap(r, mean_and_std, BasicSampling(n))
         test_bootsample(bs, ref, r, n)
         test_ci(bs)
+    end
+
+    context("mean_and_sd: Student CI") do
+        r = randn(25)
+        bs = bootstrap(r, mean_and_std, BasicSampling(n))
+        ## Student confint
+        cim = StudentConfInt()
+        c = ci(bs, straps(bs, 2), cim, 1)
+        @fact (c[1] >= c[2]  && c[1] <= c[3]) --> true
+        @fact c[1] --> roughly(original(bs, 1))
+        @fact level(cim) --> 0.95
     end
 
 end
@@ -146,7 +158,7 @@ facts("Exact resampling") do
         test_ci(bs)
     end
 
-    context("mean_and_sd: Vector input, 1 output variables") do
+    context("mean: Vector input, 1 output variables") do
         r = randn(10)
         ref = mean(r)
         bs = bootstrap(r, mean, ExactSampling())

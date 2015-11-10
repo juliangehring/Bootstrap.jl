@@ -27,13 +27,17 @@ end
 
 BCaConfInt() = BCaConfInt(_level)
 
-level(cim::ConfIntMethod) = cim.level
+type StudentConfInt <: ConfIntMethod
+    level::AbstractFloat
+end
 
+StudentConfInt() = StudentConfInt(_level)
+
+level(cim::ConfIntMethod) = cim.level
 
 function ci(bs::BootstrapSample, cim::ConfIntMethod)
     tuple([ci(bs, cim, i) for i in 1:nvar(bs)]...)
 end
-
 
 ## basic
 function ci(bs::BootstrapSample, cim::BasicConfInt, i::Int)
@@ -81,5 +85,18 @@ function ci(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     z1 = z0 + qn
     zalpha = cdf(Normal(), z0 + (z1) ./ (1-a*(z1)))
     lower, upper = quantile(t1, zalpha)
+    return t0, lower, upper
+end
+
+
+## student
+function ci(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::StudentConfInt, i::Int)
+    l = level(cim)
+    t0 = original(bs, i)
+    t1 = straps(bs, i)
+    t0se = se(bs, i)
+    z = (t1 - t0) ./ sd1
+    alpha = ([l, -l] + 1.)/2.
+    lower, upper = t0 - t0se .* quantile(z, alpha)
     return t0, lower, upper
 end

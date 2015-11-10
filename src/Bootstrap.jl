@@ -44,6 +44,7 @@ export
     PercentileConfInt,
     NormalConfInt,
     BCaConfInt,
+    StudentConfInt,
     level
 
 include("stats.jl")
