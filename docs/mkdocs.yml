@@ -2,7 +2,7 @@ site_name: Bootstrap.jl
 
 site_description: Bootstrapping statistic framework for the Julia programming language
 
-theme: readthedocs
+theme: material
 
 extra:
   palette:
