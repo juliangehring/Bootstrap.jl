@@ -1,5 +1,11 @@
 """
 Estimate the bias of a bootstrap sampling.
+
+```julia
+bs = bootstrap(randn(20), mean, BasicSampling(100))
+
+bias(bs)
+```
 """
 bias(t0, t1::AbstractVector) = mean(t1) - t0
 
@@ -9,6 +15,12 @@ bias(bs::BootstrapSample, idx::Int) = bias(original(bs, idx), straps(bs, idx))
 
 """
 Estimate the standard error of a bootstrap sampling.
+
+```julia
+bs = bootstrap(randn(20), mean, BasicSampling(100))
+
+bias(bs)
+```
 """
 se(t1::AbstractVector) = std(t1)
 
