@@ -1,7 +1,7 @@
 using Documenter
 using Bootstrap
 
-makedocs(modules = [Bootstrap])
+makedocs()
 
 custom_deps() = run(`pip install --user pygments mkdocs mkdocs-material`)
 
