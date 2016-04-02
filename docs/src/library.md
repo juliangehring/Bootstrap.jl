@@ -1,45 +1,40 @@
+
+    {meta}
+    CurrentModule = Bootstrap
+
 # Library
+
+## Contents
+
+    {contents}
+    Pages = ["library.md"]
+
+## Index
+
+    {index}
+    Pages = ["library.md"]
 
 ## Module
 
-{docs}
-Bootstrap
-
-
-## Functions
+    {docs}
+    Bootstrap
 
 
 ## Sampling Methods
 
-{docs}
-BasicSampling
-
-{docs}
-BalancedSampling
-
-{docs}
-ExactSampling
-
-{docs}
-ResidualSampling
-
-{docs}
-WildSampling
+    {docs}
+    BasicSampling
+    BalancedSampling
+    ExactSampling
+    ResidualSampling
+    WildSampling
 
 
 ## Confidence Interval Methods
 
-{docs}
-BasicConfInt
-
-{docs}
-PercentileConfInt
-
-{docs}
-NormalConfInt
-
-{docs}
-BCaConfInt
-
-{docs}
-StudentConfInt
+    {docs}
+    BasicConfInt
+    PercentileConfInt
+    NormalConfInt
+    BCaConfInt
+    StudentConfInt
