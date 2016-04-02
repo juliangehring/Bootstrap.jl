@@ -1,17 +1,35 @@
 # Bootstrap.jl: Statistical Bootstrapping
 
 
-## Package Status
-
-Reports on package builds for all platforms and test coverage are collected on
-the [package status page](status.md).
-
-
 ## Motivation
 
 Bootstrapping is a widely applicable technique for statistical estimation.
 
-![img](doc/bootstraps.png)
+![img](docs/src/bootstraps.png)
+
+
+# Functionality
+
+- Bootstrapping statistics with different sampling methods:
+  - Random resampling with replacement (`BasicSampling`)
+  - Random weighted resampling with replacement
+  - Balanced random resampling, reducing the bias (`BalancedSampling`)
+  - Exact resampling, iterating through all unique samples (`ExactSampling`):
+    deterministic bootstrap, suited only for small samples sizes
+  - Resampling of residuals in generalized linear models (`ResidualSampling`, `WildSampling`)
+
+- Confidence intervals:
+  - Basic (`BasicConfInt`)
+  - Percentile (`PercentileConfInt`)
+  - Normal distribution (`NormalConfInt`)
+  - Studendized (`StudentConfInt`)
+  - Bias-corrected and accelerated (BCa) (`BCaConfInt`)
+
+
+## Package Status
+
+Reports on package builds for all platforms and test coverage are collected on
+the [package status page](status.md).
 
 
 ## Installation
@@ -26,6 +44,63 @@ Pkg.add("Bootstrap")
 More details on packages and how to manage them can be found in the
 [package section](http://docs.julialang.org/en/stable/manual/packages/#adding-and-removing-packages)
 of the Julia documentation.
+
+
+# Examples
+
+This example illustrates the basic usage and cornerstone functions of the package.
+More elaborate cases are covered in the documentation notebooks.
+
+```julia
+  using Bootstrap
+```
+
+Our observations `r` are sampled from a standard normal distribution.
+
+```julia
+  r = randn(100);
+```
+
+Let's bootstrap the standard deviation (`std`) of our data, based on 1000
+resamples and with different bootstrapping approaches.
+
+```julia
+  n_boot = 1000
+
+  ## basic bootstrap
+  bs1 = bootstrap(r, std, BasicSampling(n_boot))
+
+  ## balanced bootstrap
+  bs2 = bootstrap(r, std, BalancedSampling(n_boot))
+```
+
+We can explore the properties of the bootstrapped samples, for example estimated
+bias and standard error of our statistic.
+
+```julia
+  bias(bs1)
+  se(bs1)
+```
+
+Further, we can estimate confidence intervals for our statistic of interest,
+based on the bootstrapped samples.
+
+```julia
+  ## calculate 95% confidence intervals
+  cil = 0.95;
+
+  ## basic CI
+  bci1 = ci(bs1, BasicConfInt(cil));
+
+  ## percentile CI
+  bci2 = ci(bs1, PercentileConfInt(cil));
+
+  ## BCa CI
+  bci3 = ci(bs1, BCaConfInt(cil));
+
+  ## Normal CI
+  bci4 = ci(bs1, NormalConfInt(cil));
+```
 
 
 ## References
