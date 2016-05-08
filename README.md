@@ -4,7 +4,7 @@
 
 ### Release Version
 
-[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=release)](http://bootstrapjl.readthedocs.org/en/release/)
+[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=release)](http://bootstrapjl.readthedocs.io/en/release/)
 [![DOI](https://zenodo.org/badge/5468/julian-gehring/Bootstrap.jl.svg)](https://zenodo.org/badge/latestdoi/5468/julian-gehring/Bootstrap.jl)
 
 [![Package Status 0.3](http://pkg.julialang.org/badges/Bootstrap_0.3.svg)](http://pkg.julialang.org/?pkg=Bootstrap&ver=0.3)
@@ -12,13 +12,6 @@
 [![Linux Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=release)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
 [![Windows Build status](https://ci.appveyor.com/api/projects/status/859sj436an6ikoey/branch/release?svg=true)](https://ci.appveyor.com/project/julian-gehring/bootstrap-jl/branch/release)
 [![Coverage Status](http://codecov.io/github/julian-gehring/Bootstrap.jl/coverage.svg?branch=release)](http://codecov.io/github/julian-gehring/Bootstrap.jl?branch=release&view=all)
-
-### Development Version
-
-[![Documentation Status](https://readthedocs.org/projects/bootstrapjl/badge/?version=master)](http://bootstrapjl.readthedocs.org/en/master/)
-[![Linux Build Status](https://travis-ci.org/julian-gehring/Bootstrap.jl.svg?branch=master)](https://travis-ci.org/julian-gehring/Bootstrap.jl)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/859sj436an6ikoey/branch/master?svg=true)](https://ci.appveyor.com/project/julian-gehring/bootstrap-jl/branch/master)
-[![Coverage Status](http://codecov.io/github/julian-gehring/Bootstrap.jl/coverage.svg?branch=master)](http://codecov.io/github/julian-gehring/Bootstrap.jl?branch=master&view=all)
 
 
 ## Motivation
