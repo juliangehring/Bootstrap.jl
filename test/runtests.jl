@@ -2,8 +2,7 @@ tests = ["distributions-dep",
          "bootsample-non-parametric",
          "bootsample-parametric",
          "stats",
-         "utils",
-         "doctest"]
+         "utils"]
 
 println("Running 'Bootstrap' tests:")
 
