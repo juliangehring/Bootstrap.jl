@@ -13,9 +13,8 @@ repo_url: https://github.com/juliangehring/Bootstrap.jl
 
 pages:
 - Introduction: 'index.md'
-- Libary: 'library.md'
-- About:
-  - 'License': 'LICENSE.md'
+- Library: 'library.md'
+- License: 'LICENSE.md'
 
 site_favicon: null
 
