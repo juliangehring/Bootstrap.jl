@@ -20,23 +20,60 @@ abstract BootstrapSampling
 abstract ParametricSampling <: BootstrapSampling
 abstract NonParametricSampling <: BootstrapSampling
 
+"""
+Basic Sampling
+
+```julia
+BasicSampling(1000)
+```
+
+"""
 type BasicSampling <: BootstrapSampling
     nrun::Int
 end
 
+"""
+Balanced Sampling
+
+```julia
+BalancedSampling(1000)
+```
+
+"""
 type BalancedSampling <: BootstrapSampling
     nrun::Int
 end
 
+"""
+Balanced Sampling
+
+```julia
+ResidualSampling(1000)
+```
+
+"""
 type ResidualSampling <: BootstrapSampling
     nrun::Int
 end
 
+"""
+Wild Sampling
+
+
+"""
 type WildSampling <: BootstrapSampling
     nrun::Int
     noise::Function
 end
 
+"""
+Exact Sampling
+
+```julia
+ExactSampling()
+```
+
+"""
 type ExactSampling <: BootstrapSampling
     nrun::Int
 end
@@ -63,6 +100,19 @@ type ParametricBootstrapSample{T,M} <: BootstrapSample
     sampling::BootstrapSampling
 end
 
+"""
+Number of samples drawn from a bootstrap sampling
+
+```julia
+bs = BasicSampling(1000)
+nrun(bs)
+
+# output
+
+1000
+```
+
+"""
 nrun(bs::BootstrapSampling) = bs.nrun
 nrun(bs::BootstrapSample) = nrun(sampling(bs))
 

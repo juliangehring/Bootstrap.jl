@@ -2,12 +2,29 @@ abstract ConfIntMethod
 
 const _level = 0.95
 
+"""
+Basic Confidence Interval
+
+```julia
+BasicConfInt(0.95)
+```
+
+"""
 type BasicConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
 BasicConfInt() = BasicConfInt(_level)
 
+
+"""
+Percentile Confidence Interval
+
+```julia
+PercentileConfInt(0.95)
+```
+
+"""
 type PercentileConfInt <: ConfIntMethod
     level::AbstractFloat
 end
@@ -18,6 +35,15 @@ type NormalConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
+
+"""
+Normal Confidence Interval
+
+```julia
+NormalConfInt(0.95)
+```
+
+"""
 NormalConfInt() = NormalConfInt(_level)
 
 type BCaConfInt <: ConfIntMethod
@@ -25,11 +51,21 @@ type BCaConfInt <: ConfIntMethod
     ## quantile method
 end
 
+
+"""
+Bias-Corrected and Accelerated (BCa) Confidence Interval
+
+```julia
+BCaConfInt(0.95)
+```
+
+"""
 BCaConfInt() = BCaConfInt(_level)
 
 type StudentConfInt <: ConfIntMethod
     level::AbstractFloat
 end
+
 
 StudentConfInt() = StudentConfInt(_level)
 

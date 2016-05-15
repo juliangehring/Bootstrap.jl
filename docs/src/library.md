@@ -1,6 +1,12 @@
 
-    {meta}
-    CurrentModule = Bootstrap
+
+```
+{meta}
+CurrentModule = Bootstrap
+DocTestSetup  = quote
+    using Bootstrap
+end	
+```
 
 # Library
 
@@ -22,12 +28,11 @@
 
 ## Sampling Methods
 
-    {docs}
-    BasicSampling
-    BalancedSampling
-    ExactSampling
-    ResidualSampling
-    WildSampling
+```
+{docs}
+BasicSampling
+BalancedSampling
+```
 
 
 ## Confidence Interval Methods
@@ -37,4 +42,10 @@
     PercentileConfInt
     NormalConfInt
     BCaConfInt
-    StudentConfInt
+
+
+## General Methods
+
+    {docs}
+    nrun
+    
