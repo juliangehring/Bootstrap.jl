@@ -20,6 +20,7 @@ abstract BootstrapSampling
 abstract ParametricSampling <: BootstrapSampling
 abstract NonParametricSampling <: BootstrapSampling
 
+
 """
 Basic Sampling
 
@@ -31,6 +32,7 @@ BasicSampling(1000)
 type BasicSampling <: BootstrapSampling
     nrun::Int
 end
+
 
 """
 Balanced Sampling
@@ -44,8 +46,9 @@ type BalancedSampling <: BootstrapSampling
     nrun::Int
 end
 
+
 """
-Balanced Sampling
+Residual Sampling
 
 ```julia
 ResidualSampling(1000)
@@ -56,15 +59,21 @@ type ResidualSampling <: BootstrapSampling
     nrun::Int
 end
 
+
 """
 Wild Sampling
 
+```julia
+WildSampling(1000, rademacher)
+WildSampling(1000, mammen)
+```
 
 """
 type WildSampling <: BootstrapSampling
     nrun::Int
     noise::Function
 end
+
 
 """
 Exact Sampling
@@ -100,6 +109,7 @@ type ParametricBootstrapSample{T,M} <: BootstrapSample
     sampling::BootstrapSampling
 end
 
+
 """
 Number of samples drawn from a bootstrap sampling
 
@@ -116,8 +126,21 @@ nrun(bs)
 nrun(bs::BootstrapSampling) = bs.nrun
 nrun(bs::BootstrapSample) = nrun(sampling(bs))
 
+
+"""
+Return the statistic function of a `BootstrapSample`
+
+```julia
+bs = bootstrap(randn(20), mean, BasicSampling(100))
+statistic(bs)
+```
+
+"""
 statistic(bs::BootstrapSample) = bs.statistic
 
+"""
+Return the noise function of a wild bootstrap sampling
+"""
 noise(bs::WildSampling) = bs.noise
 
 nvar(t::Tuple) = length(t)
@@ -131,17 +154,7 @@ zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 lhs(f::Formula) = f.lhs
 
 """
-Basic Bootstrap
-
-## Usage
-
 bootstrap(data, statistic, BasicSampling())
-
-## Examples
-
-```julia
-bootstrap(randn(10), mean, BasicSampling(100))
-```
 """
 function bootstrap(data, statistic::Function, sampling::BasicSampling)
     t0 = tx(statistic(data))
@@ -159,8 +172,6 @@ end
 
 
 """
-Balanced bootstrap
-
 bootstrap(data, statistic, sampling)
 """
 function bootstrap(data, statistic::Function, sampling::BalancedSampling)
@@ -211,8 +222,6 @@ eltype{T}(itr::ExactIterator{Range{T}}) = Array{T, 1}
 length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
 
 """
-Exact bootstrap
-
 bootstrap(data, statistic, sampling)
 """
 function bootstrap(data, statistic::Function, sampling::ExactSampling)
@@ -230,8 +239,6 @@ function bootstrap(data, statistic::Function, sampling::ExactSampling)
 end
 
 """
-Parametric bootstrap
-
 bootstrap(data, statistic, model, sampling)
 """
 function bootstrap(data, statistic::Function, model::SimpleModel, sampling::BootstrapSampling)
@@ -251,8 +258,6 @@ end
 
 
 """
-Residual parametric bootstrap
-
 bootstrap(data, statistic, model, formula, sampling)
 """
 function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::ResidualSampling)
@@ -281,8 +286,6 @@ end
 
 
 """
-Wild parametric bootstrap
-
 bootstrap(data, statistic, model, formula, Wildsampling(nrun, noise))
 """
 function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::WildSampling)

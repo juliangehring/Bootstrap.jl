@@ -5,8 +5,6 @@
 CurrentModule = Bootstrap
 ```
 
-{contents}
-
 Bootstrapping is a widely applicable technique for statistical estimation.
 
 ![img](bootstraps.png)

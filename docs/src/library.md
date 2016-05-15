@@ -1,12 +1,10 @@
 
+    {meta}
+    CurrentModule = Bootstrap
+    DocTestSetup  = quote
+        using Bootstrap
+    end
 
-```
-{meta}
-CurrentModule = Bootstrap
-DocTestSetup  = quote
-    using Bootstrap
-end	
-```
 
 # Library
 
@@ -15,10 +13,12 @@ end
     {contents}
     Pages = ["library.md"]
 
+
 ## Index
 
     {index}
     Pages = ["library.md"]
+
 
 ## Module
 
@@ -26,16 +26,20 @@ end
     Bootstrap
 
 
-## Sampling Methods
+## Sampling
 
-```
-{docs}
-BasicSampling
-BalancedSampling
-```
+    {docs}
+    BasicSampling
+    BalancedSampling
+    ExactSampling
+    WildSampling
+    ResidualSampling
+    nrun
+    statistic
+    noise
 
 
-## Confidence Interval Methods
+## Confidence Intervals
 
     {docs}
     BasicConfInt
@@ -43,9 +47,3 @@ BalancedSampling
     NormalConfInt
     BCaConfInt
 
-
-## General Methods
-
-    {docs}
-    nrun
-    

@@ -66,7 +66,14 @@ type StudentConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
+"""
+Student's Confidence Interval
 
+```julia
+StudentConfInt(0.95)
+```
+
+"""
 StudentConfInt() = StudentConfInt(_level)
 
 level(cim::ConfIntMethod) = cim.level
@@ -136,3 +143,10 @@ function ci(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::StudentConfI
     lower, upper = t0 - t0se .* quantile(z, alpha)
     return t0, lower, upper
 end
+
+const _conf_int_methods =
+    [BasicConfInt,
+     PercentileConfInt,
+     NormalConfInt,
+     BCaConfInt,
+     StudentConfInt]
