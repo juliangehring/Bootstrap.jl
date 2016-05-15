@@ -9,7 +9,7 @@ extra:
     primary: 'indigo'
     accent:  'blue'
 
-repo_url: https://github.com/julian-gehring/Bootstrap.jl
+repo_url: https://github.com/juliangehring/Bootstrap.jl
 
 pages:
 - Introduction: 'index.md'

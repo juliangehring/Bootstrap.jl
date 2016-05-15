@@ -6,7 +6,7 @@ makedocs()
 custom_deps() = run(`pip install --user pygments mkdocs mkdocs-material`)
 
 deploydocs(
-    repo = "github.com/julian-gehring/Bootstrap.jl.git",
+    repo = "github.com/juliangehring/Bootstrap.jl.git",
     julia  = "0.4",
-    deps = custom_deps
+    deps = Deps.pip("mkdocs", "python-markdown-math", "pygments", "mkdocs-material")
 )
