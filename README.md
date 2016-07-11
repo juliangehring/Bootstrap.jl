@@ -124,6 +124,3 @@ are listed in the documentation for further reading.
   the term _bootstrapping_ is also used in different other contexts. You can check
   wikipedia for a longer list of
   [meanings asscoiated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
-
-
-- Why not just 
