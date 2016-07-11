@@ -10,12 +10,12 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 
 # Functionality
 
-- Bootstrapping statistics with different sampling methods:
+- Bootstrapping statistics with different resampling methods:
   - Random resampling with replacement (`BasicSampling`)
-  - Antithetic sampling (`AntitheticSampling`)
-  - Balanced random resampling, reducing the bias (`BalancedSampling`)
-  - Exact resampling, iterating through all unique samples (`ExactSampling`):
-    deterministic bootstrap, suited only for small samples sizes
+  - Antithetic resampling, introducing negative correlation between samples (`AntitheticSampling`)
+  - Balanced random resampling, reducing bias (`BalancedSampling`)
+  - Exact resampling, iterating through all unique resamples (`ExactSampling`):
+    deterministic bootstrap, suited for small samples sizes
   - Resampling of residuals in generalized linear models (`ResidualSampling`, `WildSampling`)
 
 - Confidence intervals:
@@ -125,3 +125,5 @@ are listed in the documentation for further reading.
   wikipedia for a longer list of
   [meanings asscoiated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
 
+
+- Why not just 
