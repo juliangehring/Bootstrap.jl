@@ -120,7 +120,8 @@ are listed in the documentation for further reading.
 - Does it have anything to do with twitter themes, webpage frameworks,
   compiling, ...?
 
-No, not really. This package is dealing with an interesting topic of statistics,
-but the term bootstrapping is used in many different contexts. You can check
-wikipedia for a longer list of
-[meanings asscoiated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation).
+  No, not really. This package focuses on an interesting area in statistics, but
+  the term _bootstrapping_ is also used in different other contexts. You can check
+  wikipedia for a longer list of
+  [meanings asscoiated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
+
