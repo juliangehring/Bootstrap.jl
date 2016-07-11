@@ -109,6 +109,18 @@ facts("Basic resampling") do
     end
 
 end
+
+facts("Antithetic resampling") do
+
+    context("mean_and_sd: Vector input, 2 output variables") do
+        r = randn(50)
+        ref = mean_and_std(r)
+        bs = bootstrap(r, mean_and_std, AntitheticSampling(n))
+        test_bootsample(bs, ref, r, n)
+        test_ci(bs)
+    end
+
+end
     
 facts("Balanced resampling") do
     

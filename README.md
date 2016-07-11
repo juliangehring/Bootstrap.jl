@@ -12,7 +12,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 
 - Bootstrapping statistics with different sampling methods:
   - Random resampling with replacement (`BasicSampling`)
-  - Random weighted resampling with replacement
+  - Antithetic sampling (`AntitheticSampling`)
   - Balanced random resampling, reducing the bias (`BalancedSampling`)
   - Exact resampling, iterating through all unique samples (`ExactSampling`):
     deterministic bootstrap, suited only for small samples sizes

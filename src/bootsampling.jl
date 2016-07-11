@@ -33,6 +33,18 @@ type BasicSampling <: BootstrapSampling
     nrun::Int
 end
 
+"""
+Antithetic Sampling
+
+```julia
+AntitheticSampling(1000)
+```
+
+"""
+type AntitheticSampling <: BootstrapSampling
+    nrun::Int
+end
+
 
 """
 Balanced Sampling
@@ -169,6 +181,35 @@ function bootstrap(data, statistic::Function, sampling::BasicSampling)
     end
     return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
 end
+
+
+"""
+bootstrap(data, statistic, AntitheticSampling)
+"""
+function bootstrap(data::AbstractVector, statistic::Function, sampling::AntitheticSampling)
+    t0 = tx(statistic(data))
+    m = nrun(sampling)
+    n = nobs(data)
+    t1 = zeros_tuple(t0, m)
+    idx = collect(1:n)
+    idx1 = copy(idx)
+    data1 = copy(data)
+    data0 = copy(data)
+    sort!(data0)
+    for i in 1:m
+        if isodd(i)
+            sample!(idx, idx1)
+        else
+            idx1 = n - idx1 + 1
+        end
+        data1 = pick(data0, idx1)
+        for (j, t) in enumerate(tx(statistic(data1)))
+            t1[j][i] = t
+        end
+    end
+    return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
+end
+
 
 
 """

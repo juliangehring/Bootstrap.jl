@@ -23,6 +23,7 @@ export
     iquantile,
     bootstrap,
     BasicSampling,
+    AntitheticSampling,
     BalancedSampling,
     ExactSampling,
     ResidualSampling,
