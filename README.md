@@ -115,6 +115,12 @@ Most of the methodology covered in the book is implemented in the
 are listed in the documentation for further reading.
 
 
+## Contributions and Feedback
+
+Contributions of any kind are very welcome. Please feel free to open pull
+requests or issues if you have suggestions for changes, ideas or questions.
+
+
 ## Frequently Asked Questions
 
 - Does it have anything to do with twitter themes, webpage frameworks,
