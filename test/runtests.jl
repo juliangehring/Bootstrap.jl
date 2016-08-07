@@ -6,7 +6,7 @@ tests = ["distributions-dep",
 
 println("Running 'Bootstrap' tests:")
 
-test_dir = joinpath(Pkg.dir("Bootstrap"), "test")
+test_dir = dirname(@__FILE__)
 
 for t in tests
     test_file = joinpath(test_dir, string(t, ".jl"))
