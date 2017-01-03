@@ -111,7 +111,7 @@ bootstrap is the focus of the book *Davison and Hinkley (1997):
 [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.
 Most of the methodology covered in the book is implemented in the
 [boot](http://cran.r-project.org/web/packages/boot/index.html) package for the
-[R programming language](http://www.r-project.org/). [More references](https://github.com/juliangehring/Bootstrap.jl/blob/master/docs/src/references.md)
+[R programming language](http://www.r-project.org/). [More references](docs/src/references.md)
 are listed in the documentation for further reading.
 
 
