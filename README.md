@@ -111,7 +111,7 @@ bootstrap is the focus of the book *Davison and Hinkley (1997):
 [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.
 Most of the methodology covered in the book is implemented in the
 [boot](http://cran.r-project.org/web/packages/boot/index.html) package for the
-[R programming language](http://www.r-project.org/). [More references](doc/references.md)
+[R programming language](http://www.r-project.org/). [More references](docs/src/references.md)
 are listed in the documentation for further reading.
 
 
@@ -129,4 +129,4 @@ requests or issues if you have suggestions for changes, ideas or questions.
   No, not really. This package focuses on an interesting area in statistics, but
   the term _bootstrapping_ is also used in different other contexts. You can check
   wikipedia for a longer list of
-  [meanings asscoiated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
+  [meanings associated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
