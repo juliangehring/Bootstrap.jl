@@ -31,11 +31,13 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 Reports on package builds for all platforms and test coverage are collected on
 the [package status page](status.md).
 
+The package is under active development and uses [semantic versioning](http://semver.org/).
+
 
 ## Installation
 
 The `Bootstrap` package is part of the Julia ecosphere and the latest release
-version simply be installed with
+version can be installed with
 
 ```julia
 Pkg.add("Bootstrap")
