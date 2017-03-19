@@ -1,2 +1,30 @@
 codecov:
-   branch: master
+  notify:
+    require_ci_to_pass: true
+
+comment: off
+
+coverage:
+  precision: 2
+  range:
+  - 70.0
+  - 100.0
+  round: down
+  status:
+    changes: false
+    patch: true
+    project: true
+
+flags:
+  julia_0_6:
+    joined: false
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: true
+      loop: true
+      macro: false
+      method: false
+  javascript:
+    enable_partials: false
