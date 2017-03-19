@@ -28,8 +28,8 @@ facts("Normal-interpolated quantiles") do
         r = Float64[x[2] for x in qr]
         y = Bootstrap.iquantile(x, a)
         ## workaround, since roughly cannot handle 'Inf' here
-        y = round(y, 4)
-        r = round(r, 4)
+        y = round.(y, 4)
+        r = round.(r, 4)
         @fact y --> r
     end
 
