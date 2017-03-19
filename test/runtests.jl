@@ -13,6 +13,5 @@ for t in tests
     if !isfile(test_file)
         error(" ! $(test_file) missing")
     end
-    println(" * $(t) ...")
     include(test_file)
 end
