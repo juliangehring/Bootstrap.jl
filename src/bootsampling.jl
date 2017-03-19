@@ -1,4 +1,4 @@
-abstract Model
+@compat abstract type Model end
 
 type SimpleModel{T} <: Model
     class::T
@@ -15,10 +15,10 @@ end
 
 Model(class, formula::Formula, param...) = FormulaModel(class, formula, tuple(param...))
 
-abstract BootstrapSampling
+@compat abstract type BootstrapSampling end
 
-abstract ParametricSampling <: BootstrapSampling
-abstract NonParametricSampling <: BootstrapSampling
+@compat abstract type ParametricSampling <: BootstrapSampling end
+@compat abstract type NonParametricSampling <: BootstrapSampling end
 
 
 """
@@ -102,7 +102,7 @@ end
 ExactSampling() = ExactSampling(0)
 
 
-abstract BootstrapSample
+@compat abstract type BootstrapSample end
 
 type NonParametricBootstrapSample{T} <: BootstrapSample
     t0::Tuple
