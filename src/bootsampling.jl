@@ -1,24 +1,26 @@
-abstract Model
+@compat abstract type Model end
 
 type SimpleModel{T} <: Model
     class::T
-    param::Tuple
+    args::Tuple
+    kwargs::Tuple
 end
 
-Model(class, param...) = SimpleModel(class, tuple(param...))
+Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwargs...))
 
 type FormulaModel{T} <: Model
     class::T
     formula::Formula
-    param::Tuple
+    args::Tuple
+    kwargs::Tuple
 end
 
-Model(class, formula::Formula, param...) = FormulaModel(class, formula, tuple(param...))
+Model(class, formula::Formula, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
 
-abstract BootstrapSampling
+@compat abstract type BootstrapSampling end
 
-abstract ParametricSampling <: BootstrapSampling
-abstract NonParametricSampling <: BootstrapSampling
+@compat abstract type ParametricSampling <: BootstrapSampling end
+@compat abstract type NonParametricSampling <: BootstrapSampling end
 
 
 """
@@ -102,7 +104,7 @@ end
 ExactSampling() = ExactSampling(0)
 
 
-abstract BootstrapSample
+@compat abstract type BootstrapSample end
 
 type NonParametricBootstrapSample{T} <: BootstrapSample
     t0::Tuple
@@ -283,7 +285,7 @@ end
 bootstrap(data, statistic, model, sampling)
 """
 function bootstrap(data, statistic::Function, model::SimpleModel, sampling::BootstrapSampling)
-    f0 = fit(model.class, data, model.param...)
+    f0 = fit(model.class, data, model.args...; model.kwargs...)
     t0 = tx(statistic(data))
     m = nrun(sampling)
     t1 = zeros_tuple(t0, m)
@@ -304,10 +306,11 @@ bootstrap(data, statistic, model, formula, sampling)
 function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::ResidualSampling)
     class = model.class
     formula = model.formula
-    param = model.param
+    args = model.args
+    kwargs = model.kwargs
     yy = lhs(formula)
     y0 = data[:,yy]
-    f0 = fit(class, formula, data, param...)
+    f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0
     m = nrun(sampling)
@@ -317,7 +320,7 @@ function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaM
     for i in 1:m
         sample!(r0, r1)
         data1[:,yy] = y0 + r1
-        f1 = fit(class, formula, data1, param...)
+        f1 = fit(class, formula, data1, args...; kwargs...)
         for (j, t) in enumerate(tx(statistic(f1)))
             t1[j][i] = t
         end
@@ -332,10 +335,11 @@ bootstrap(data, statistic, model, formula, Wildsampling(nrun, noise))
 function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::WildSampling)
     class = model.class
     formula = model.formula
-    param = model.param
+    args = model.args
+    kwargs = model.kwargs
     yy = lhs(formula)
     y0 = data[:,yy]
-    f0 = fit(class, formula, data, param...)
+    f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0
     m = nrun(sampling)
@@ -343,7 +347,7 @@ function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaM
     data1 = deepcopy(data)
     for i in 1:m
         data1[:,yy] = y0 + sampling.noise(r0)
-        f1 = fit(class, formula, data1, param...)
+        f1 = fit(class, formula, data1, args...; kwargs...)
         for (j, t) in enumerate(tx(statistic(f1)))
             t1[j][i] = t
         end

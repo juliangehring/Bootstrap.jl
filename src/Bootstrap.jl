@@ -1,4 +1,4 @@
-VERSION >= v"0.4.0" && __precompile__(true)
+__precompile__()
 
 """
 # Bootstrap package
@@ -6,6 +6,8 @@ VERSION >= v"0.4.0" && __precompile__(true)
 Statistical bootstrapping for Julia
 """
 module Bootstrap
+
+using Compat
 
 using StatsBase
 using Distributions

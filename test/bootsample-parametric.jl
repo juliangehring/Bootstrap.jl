@@ -97,21 +97,21 @@ end
 
 facts("Linear regression models") do
 
-    ref = coef(fit(LinearModel, thirty ~ twenty, city2))
+    ref = coef(fit(LinearModel, @formula(thirty ~ twenty), city2))
 
     context("Residual resampling") do
-        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), ResidualSampling(n))
+        bs = bootstrap(city2, coef, Model(LinearModel, @formula(thirty ~ twenty)), ResidualSampling(n))
         test_bootsample(bs, ref, city2, n)
     end
 
     context("Wild resampling: Rademacher") do
-        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, rademacher))
+        bs = bootstrap(city2, coef, Model(LinearModel, @formula(thirty ~ twenty)), WildSampling(n, rademacher))
         test_bootsample(bs, ref, city2, n)
         #@fact typeof(noise(sampling(bs))) --> Function
     end
 
     context("Wild resampling: Mammen") do
-        bs = bootstrap(city2, coef, Model(LinearModel, thirty ~ twenty), WildSampling(n, mammen))
+        bs = bootstrap(city2, coef, Model(LinearModel, @formula(thirty ~ twenty)), WildSampling(n, mammen))
         test_bootsample(bs, ref, city2, n)
         #@fact typeof(noise(sampling(bs))) --> Function
     end
@@ -120,28 +120,38 @@ end
 
 facts("Generalized linear regression models") do
 
-    ref = coef(fit(GeneralizedLinearModel, thirty ~ twenty, city2, Normal()))
+    ref = coef(fit(GeneralizedLinearModel, @formula(thirty ~ twenty), city2, Normal()))
+    max_iter = 200
+    conv_tol = 1e-3
 
     context("Residual resampling") do
-        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal()), ResidualSampling(n))
+        bs = bootstrap(city2, coef,
+                       Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), maxIter = max_iter, convTol = conv_tol),
+                       ResidualSampling(n))
         test_bootsample(bs, ref, city2, n)
     end
 
     context("Residual resampling with link function") do
-        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal(), IdentityLink()), ResidualSampling(n))
+        bs = bootstrap(city2, coef,
+                       Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+                       ResidualSampling(n))
         test_bootsample(bs, ref, city2, n)
     end
 
     context("Wild resampling: Rademacher") do
-        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal()), WildSampling(n, rademacher))
+        bs = bootstrap(city2, coef,
+                       Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), maxIter = max_iter, convTol = conv_tol),
+                       WildSampling(n, rademacher))
         test_bootsample(bs, ref, city2, n)
-        #@fact typeof(noise(sampling(bs))) --> Function
+        @pending typeof(noise(sampling(bs))) --> Function
     end
 
     context("Wild resampling with link function: Mammen") do
-        bs = bootstrap(city2, coef, Model(GeneralizedLinearModel, thirty ~ twenty, Normal(), IdentityLink()), WildSampling(n, mammen))
+        bs = bootstrap(city2, coef,
+                       Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+                       WildSampling(n, mammen))
         test_bootsample(bs, ref, city2, n)
-        #@fact typeof(noise(sampling(bs))) --> Function
+        @pending typeof(noise(sampling(bs))) --> Function
     end
 
 end
