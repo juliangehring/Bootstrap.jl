@@ -143,7 +143,7 @@ facts("Generalized linear regression models") do
                        Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), maxIter = max_iter, convTol = conv_tol),
                        WildSampling(n, rademacher))
         test_bootsample(bs, ref, city2, n)
-        #@fact typeof(noise(sampling(bs))) --> Function
+        @pending typeof(noise(sampling(bs))) --> Function
     end
 
     context("Wild resampling with link function: Mammen") do
@@ -151,7 +151,7 @@ facts("Generalized linear regression models") do
                        Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
                        WildSampling(n, mammen))
         test_bootsample(bs, ref, city2, n)
-        #@fact typeof(noise(sampling(bs))) --> Function
+        @pending typeof(noise(sampling(bs))) --> Function
     end
 
 end
