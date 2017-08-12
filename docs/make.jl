@@ -7,7 +7,7 @@ makedocs(
 
 deploydocs(
     repo = "github.com/juliangehring/Bootstrap.jl.git",
-    latest = "develop",
+    latest = "docs",
     julia  = "0.6",
     deps = Deps.pip("mkdocs", "python-markdown-math", "pygments", "mkdocs-material")
 )
