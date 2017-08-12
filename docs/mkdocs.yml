@@ -6,8 +6,10 @@ repo_name: 'juliangehring/Bootstrap.jl'
 repo_url: 'https://github.com/juliangehring/Bootstrap.jl'
 
 pages:
-- Introduction: 'index.md'
+- Bootstrap.jl: 'index.md'
 - Library: 'library.md'
+- References: 'references.md'
+- News: 'NEWS.md'
 - License: 'LICENSE.md'
 
 docs_dir: 'build'

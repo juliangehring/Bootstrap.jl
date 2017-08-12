@@ -1,49 +1,61 @@
-
-    {meta}
-    CurrentModule = Bootstrap
-    DocTestSetup  = quote
-        using Bootstrap
-    end
-
-
 # Library
+
+```@meta
+CurrentModule = Bootstrap
+DocTestSetup  = quote
+    using Bootstrap
+end
+```
 
 ## Contents
 
-    {contents}
-    Pages = ["library.md"]
+```@contents
+Pages = ["library.md"]
+```
 
 
 ## Index
 
-    {index}
-    Pages = ["library.md"]
+```@index
+Pages = ["library.md"]
+```
 
 
 ## Module
 
-    {docs}
-    Bootstrap
-
+```@docs
+Bootstrap
+```
 
 ## Sampling
 
-    {docs}
-    BasicSampling
-    BalancedSampling
-    ExactSampling
-    WildSampling
-    ResidualSampling
-    nrun
-    statistic
-    noise
+```@docs
+BasicSampling
+BalancedSampling
+AntitheticSampling
+ExactSampling
+WildSampling
+ResidualSampling
+```
+
+```@docs
+bias
+se
+```
+
+```@docs
+nrun
+statistic
+noise
+```
 
 
 ## Confidence Intervals
 
-    {docs}
-    BasicConfInt
-    PercentileConfInt
-    NormalConfInt
-    BCaConfInt
-
+```@docs
+BasicConfInt
+PercentileConfInt
+NormalConfInt
+StudentConfInt
+BCaConfInt
+```

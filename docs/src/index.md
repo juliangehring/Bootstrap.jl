@@ -1,7 +1,6 @@
 # Motivation
 
-```
-{meta}
+```@meta
 CurrentModule = Bootstrap
 ```
 
