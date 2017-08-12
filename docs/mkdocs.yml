@@ -2,34 +2,40 @@ site_name: Bootstrap.jl
 
 site_description: Bootstrapping statistic framework for the Julia programming language
 
-theme: material
-
-extra:
-  palette:
-    primary: 'indigo'
-    accent:  'blue'
-
-repo_url: https://github.com/juliangehring/Bootstrap.jl
+repo_name: 'juliangehring/Bootstrap.jl'
+repo_url: 'https://github.com/juliangehring/Bootstrap.jl'
 
 pages:
 - Introduction: 'index.md'
 - Library: 'library.md'
 - License: 'LICENSE.md'
 
+docs_dir: 'build'
+
 site_favicon: null
+
+theme: material
+
+extra:
+  palette:
+    primary: 'indigo'
+    accent:  'blue'
+  social:
+    - type: 'github'
+      link: 'https://github.com/juliangehring'
 
 extra_css:
   - assets/Documenter.css
 
 extra_javascript:
-  - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML
   - assets/mathjaxhelper.js
 
 markdown_extensions:
-  - codehilite
-  - def_list  
   - extra
   - tables
   - fenced_code
-
-docs_dir: 'build'
+  - mdx_math
+  - admonition
+  - codehilite(guess_lang=false)
+  - toc(permalink=true)
