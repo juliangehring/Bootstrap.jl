@@ -103,6 +103,24 @@ end
 
 ExactSampling() = ExactSampling(0)
 
+"""
+[Maximum Entropy Sampling](https://cran.r-project.org/web/packages/meboot/vignettes/meboot.pdf)
+
+```julia
+MaximumEntropySampling()
+MaximumEntropySampling(100)
+maximumEntropySampling(100, MaximumEntropyCache())
+```
+
+NOTE: Implementation based off [pymeboot](https://github.com/kirajcg/pymeboot) as the original
+[R package](https://cran.r-project.org/web/packages/meboot/index.html) is GPL licensed.
+"""
+type MaximumEntropySampling <: BootstrapSampling
+    nrun::Int
+    cache::MaximumEntropyCache
+end
+
+MaximumEntropySampling(nrun=0) = MaximumEntropySampling(nrun, MaximumEntropyCache())
 
 @compat abstract type BootstrapSample end
 
@@ -278,6 +296,25 @@ function bootstrap(data, statistic::Function, sampling::ExactSampling)
         end
     end
     sampling.nrun = m
+    return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
+end
+
+"""
+bootstrap(data, statistic, MaximumEntropySampling)
+"""
+function bootstrap(data, statistic::Function, sampling::MaximumEntropySampling)
+    init!(sampling.cache, data)
+
+    t0 = tx(statistic(data))
+    m = nrun(sampling)
+    t1 = zeros_tuple(t0, m)
+    data1 = copy(data)
+    for i in 1:m
+        draw!(sampling.cache, data, data1)
+        for (j, t) in enumerate(tx(statistic(data1)))
+            t1[j][i] = t
+        end
+    end
     return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
 end
 
