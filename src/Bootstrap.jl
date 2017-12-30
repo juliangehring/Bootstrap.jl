@@ -7,8 +7,6 @@ Statistical bootstrapping for Julia
 """
 module Bootstrap
 
-using Compat
-
 using StatsBase
 using Distributions
 using DataFrames

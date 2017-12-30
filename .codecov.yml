@@ -17,7 +17,7 @@ coverage:
 
 flags:
   julia_0_6:
-    joined: false
+    joined: true
 
 parsers:
   gcov:

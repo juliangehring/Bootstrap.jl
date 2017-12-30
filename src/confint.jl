@@ -1,4 +1,4 @@
-@compat abstract type ConfIntMethod end
+abstract type ConfIntMethod end
 
 const _level = 0.95
 
