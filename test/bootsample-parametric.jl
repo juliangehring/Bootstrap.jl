@@ -7,6 +7,7 @@ using FactCheck
 using DataFrames
 using StatsBase
 using GLM
+using Distributions
 
 function test_bootsample(bs, ref, raw_data, n)
 

@@ -1,4 +1,4 @@
-@compat abstract type Model end
+abstract type Model end
 
 type SimpleModel{T} <: Model
     class::T
@@ -17,10 +17,10 @@ end
 
 Model(class, formula::Formula, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
 
-@compat abstract type BootstrapSampling end
+abstract type BootstrapSampling end
 
-@compat abstract type ParametricSampling <: BootstrapSampling end
-@compat abstract type NonParametricSampling <: BootstrapSampling end
+abstract type ParametricSampling <: BootstrapSampling end
+abstract type NonParametricSampling <: BootstrapSampling end
 
 
 """
@@ -122,7 +122,7 @@ end
 
 MaximumEntropySampling(nrun=0) = MaximumEntropySampling(nrun, MaximumEntropyCache())
 
-@compat abstract type BootstrapSample end
+abstract type BootstrapSample end
 
 type NonParametricBootstrapSample{T} <: BootstrapSample
     t0::Tuple
