@@ -1,7 +1,7 @@
-tests = ["bootsample-non-parametric",
-         "bootsample-parametric",
-         "utils",
-         "distributions-dep"]
+tests = ["test-bootsample-non-parametric",
+         "test-bootsample-parametric",
+         "test-utils",
+         "test-dependencies"]
 
 for t in tests
     test_file = "$(t).jl"
