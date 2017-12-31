@@ -57,7 +57,7 @@ end
 n = 250
 
 ## 'city' dataset
-citya = convert(DataArray, city)
+citya = convert(Array, city)
 
 city_ratio(df::DataFrames.DataFrame) = mean(df[:,:X]) ./ mean(df[:,:U])
 city_ratio(a::AbstractArray) = mean(a[:,2]) ./ mean(a[:,1])
