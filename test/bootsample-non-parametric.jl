@@ -14,13 +14,13 @@ function test_bootsample(bs, ref, raw_data, n)
     t0 = original(bs)
     @fact length(t0) --> length(ref)
     [@fact t --> roughly(r) for (t, r) in zip(t0, ref)]
-
+    
     t1 = straps(bs)
     @fact length(t1) --> length(t0)
     [@fact length(t) --> n for t in t1]
     [@fact (minimum(t) <= tr && maximum(t) >= tr) --> true for (t, tr) in zip(t1, t0)]
     [@fact eltype(t) --> eltype(tr) for (t, tr) in zip(t1, t0)]
-
+    
     @fact Bootstrap.data(bs) --> raw_data ## TODO: define scope
 
     @fact nrun(sampling(bs)) --> n
@@ -35,14 +35,14 @@ function test_bootsample(bs, ref, raw_data, n)
     [@fact straps(bs, i) --> straps(bs)[i]  for i in 1:nvar(bs)]
     [@fact bias(bs, i) --> bias(bs)[i]  for i in 1:nvar(bs)]
     [@fact se(bs, i) --> se(bs)[i]  for i in 1:nvar(bs)]
-
+    
     @fact_throws MethodError model(bs)
-
+    
     return Void
 end
 
 function test_ci(bs)
-
+    
     cim_all = (BasicConfInt(), PercentileConfInt(), NormalConfInt(), BCaConfInt())
     for cim in cim_all
         c = ci(bs, cim)
@@ -66,7 +66,7 @@ city_cor(x::AbstractArray) = cor(x[:,1], x[:,2])
 city_cor(x::AbstractDataFrame) = cor(x[:,:X], x[:,:U])
 
 facts("Basic resampling") do
-
+    
     context("city_ratio with DataFrame input") do
         ref = city_ratio(city)
         @fact ref --> roughly(1.5203125)
@@ -121,9 +121,9 @@ facts("Antithetic resampling") do
     end
 
 end
-
+    
 facts("Balanced resampling") do
-
+    
     context("city_ratio with DataFrame input") do
         ref = city_ratio(city)
         @fact ref --> roughly(1.5203125)
@@ -157,7 +157,7 @@ facts("Balanced resampling") do
     end
 
 end
-
+    
 facts("Exact resampling") do
 
     nc = Bootstrap.nrun_exact(nrow(city))

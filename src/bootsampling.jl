@@ -107,7 +107,6 @@ ExactSampling() = ExactSampling(0)
 [Maximum Entropy Sampling](https://cran.r-project.org/web/packages/meboot/vignettes/meboot.pdf)
 
 ```julia
-MaximumEntropySampling()
 MaximumEntropySampling(100)
 maximumEntropySampling(100, MaximumEntropyCache())
 ```
@@ -120,7 +119,7 @@ type MaximumEntropySampling <: BootstrapSampling
     cache::MaximumEntropyCache
 end
 
-MaximumEntropySampling(nrun=0) = MaximumEntropySampling(nrun, MaximumEntropyCache())
+MaximumEntropySampling(nrun) = MaximumEntropySampling(nrun, MaximumEntropyCache())
 
 abstract type BootstrapSample end
 
