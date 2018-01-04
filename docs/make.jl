@@ -1,10 +1,13 @@
 using Documenter
 using Bootstrap
 
-makedocs()
+makedocs(
+    modules = [Bootstrap]
+)
 
 deploydocs(
     repo = "github.com/juliangehring/Bootstrap.jl.git",
-    julia  = "0.4",
+    latest = "docs",
+    julia  = "0.6",
     deps = Deps.pip("mkdocs", "python-markdown-math", "pygments", "mkdocs-material")
 )

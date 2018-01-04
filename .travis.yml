@@ -17,3 +17,5 @@ script:
 
 after_success:
   - julia -e 'cd(Pkg.dir("Bootstrap")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder(), flags="julia_$(VERSION.major)_$(VERSION.minor)")'
+  - julia -e 'Pkg.add("Documenter")'
+  - julia -e 'cd(Pkg.dir("Bootstrap")); include(joinpath("docs", "make.jl"))'
