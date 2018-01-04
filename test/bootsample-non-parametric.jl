@@ -180,4 +180,41 @@ facts("Exact resampling") do
 
 end
 
+facts("Maximum Entropy resampling") do
+    # Simulated AR(1) data copied from
+    # https://github.com/colintbowers/DependentBootstrap.jl/blob/master/test/runtests.jl#L8
+    nobs = 100
+    function test_obs(n, seed=1234)
+        srand(seed)
+        e = randn(n)
+        x = Array{Float64}(n)
+        x[1] = 0.0
+        for i = 2:n
+            x[i] = 0.8 * x[i-1] + e[i]
+        end
+        return sin.(x)
+    end
+
+    r = test_obs(nobs)
+    ref = mean(r)
+    s = MaximumEntropySampling(n)
+    bs = bootstrap(r, mean, s)
+    test_bootsample(bs, ref, r, n)
+    test_ci(bs)
+
+    # Collect the samples
+    samples = zeros(eltype(r), (nobs, n))
+    for i in 1:n
+        # For some reason the samples are only filled in if we have
+        # an explicit assignment back into the matrix.
+        samples[:, i] = draw!(s.cache, r, samples[:, i])
+    end
+
+    # Add some checks to ensure that our within sample variation is greater than our
+    # across sample variation at any given "timestep".
+    @fact all(std(samples, 2) .< std(r)) --> true
+    @fact mean(std(samples, 2)) < 0.1 --> true  # NOTE: This is about 0.09 in julia and 0.08 in the R package
+    @fact std(r) > 0.5 --> true
+end
+
 end

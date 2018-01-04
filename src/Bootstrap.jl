@@ -27,6 +27,7 @@ export
     AntitheticSampling,
     BalancedSampling,
     ExactSampling,
+    MaximumEntropySampling,
     ResidualSampling,
     WildSampling,
     BootstrapSample,
