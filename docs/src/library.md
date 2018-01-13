@@ -32,8 +32,9 @@
     BasicSampling
     BalancedSampling
     ExactSampling
-    WildSampling
     ResidualSampling
+    WildSampling
+    MaximumEntropySampling
     nrun
     statistic
     noise
@@ -45,5 +46,6 @@
     BasicConfInt
     PercentileConfInt
     NormalConfInt
+    StudentConfInt
     BCaConfInt
 
