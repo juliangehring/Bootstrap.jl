@@ -1,11 +1,17 @@
 # Bootstrap.jl News and Changes
 
+## Version 1.2.0
 
-## Unreleased
+### New features
+
+- Maximum Entropy bootstrapping for dependent and non-stationary datasets
+  (`MaximumEntropySampling`), contributed by Rory Finnegan (@rofinn).
 
 ### Changes
 
-- Introduces `StatsModels` as a new dependency: This is now the new home of `Formula`s.
+- Transition tests from ``FactCheck`` to `Base.Test`.
+- Introduces `StatsModels` as a new dependency which is now the new home of `Formula`s.
+- Use vectorized function calls for `Distribution` functions.
 - Removes the dependency on `Compat`.
 
 
