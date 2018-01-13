@@ -17,6 +17,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
   - Exact resampling, iterating through all unique resamples (`ExactSampling`):
     deterministic bootstrap, suited for small samples sizes
   - Resampling of residuals in generalized linear models (`ResidualSampling`, `WildSampling`)
+  - Maximum Entropy bootstrapping for dependent and non-stationary datasets (`MaximumEntropySampling`)
 
 - Confidence intervals:
   - Basic (`BasicConfInt`)
