@@ -1,4 +1,4 @@
-@compat abstract type ConfIntMethod end
+abstract type ConfIntMethod end
 
 const _level = 0.95
 
@@ -124,9 +124,9 @@ function ci(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     jkt = jack_knife_estimate(data(bs), statistic(bs), i)
     resid = (n-1) .* (t0 - jkt)
     a = sum(resid.^3) / (6.*(sum(resid.^2)).^(1.5))
-    qn = quantile(Normal(), alpha)
+    qn = quantile.(Normal(), alpha)
     z1 = z0 + qn
-    zalpha = cdf(Normal(), z0 + (z1) ./ (1-a*(z1)))
+    zalpha = cdf.(Normal(), z0 + (z1) ./ (1-a*(z1)))
     lower, upper = quantile(t1, zalpha)
     return t0, lower, upper
 end

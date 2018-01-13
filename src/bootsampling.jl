@@ -1,4 +1,4 @@
-@compat abstract type Model end
+abstract type Model end
 
 type SimpleModel{T} <: Model
     class::T
@@ -17,10 +17,10 @@ end
 
 Model(class, formula::Formula, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
 
-@compat abstract type BootstrapSampling end
+abstract type BootstrapSampling end
 
-@compat abstract type ParametricSampling <: BootstrapSampling end
-@compat abstract type NonParametricSampling <: BootstrapSampling end
+abstract type ParametricSampling <: BootstrapSampling end
+abstract type NonParametricSampling <: BootstrapSampling end
 
 
 """
@@ -103,8 +103,25 @@ end
 
 ExactSampling() = ExactSampling(0)
 
+"""
+[Maximum Entropy Sampling](https://cran.r-project.org/web/packages/meboot/vignettes/meboot.pdf)
 
-@compat abstract type BootstrapSample end
+```julia
+MaximumEntropySampling(100)
+maximumEntropySampling(100, MaximumEntropyCache())
+```
+
+NOTE: Implementation based off [pymeboot](https://github.com/kirajcg/pymeboot) as the original
+[R package](https://cran.r-project.org/web/packages/meboot/index.html) is GPL licensed.
+"""
+type MaximumEntropySampling <: BootstrapSampling
+    nrun::Int
+    cache::MaximumEntropyCache
+end
+
+MaximumEntropySampling(nrun) = MaximumEntropySampling(nrun, MaximumEntropyCache())
+
+abstract type BootstrapSample end
 
 type NonParametricBootstrapSample{T} <: BootstrapSample
     t0::Tuple
@@ -278,6 +295,25 @@ function bootstrap(data, statistic::Function, sampling::ExactSampling)
         end
     end
     sampling.nrun = m
+    return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
+end
+
+"""
+bootstrap(data, statistic, MaximumEntropySampling)
+"""
+function bootstrap(data, statistic::Function, sampling::MaximumEntropySampling)
+    init!(sampling.cache, data)
+
+    t0 = tx(statistic(data))
+    m = nrun(sampling)
+    t1 = zeros_tuple(t0, m)
+    data1 = copy(data)
+    for i in 1:m
+        draw!(sampling.cache, data, data1)
+        for (j, t) in enumerate(tx(statistic(data1)))
+            t1[j][i] = t
+        end
+    end
     return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
 end
 

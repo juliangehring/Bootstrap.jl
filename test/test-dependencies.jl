@@ -1,10 +1,9 @@
 module TestDistributionsDependency
 
-using FactCheck
-
 using Distributions
+using Base.Test
 
-facts("Distributions") do
+@testset "Distributions" begin
 
     ## reference values, taken from qnorm [R]
     qnorm = (
@@ -14,10 +13,10 @@ facts("Distributions") do
          (0.95, 1.644854),
          (0.99, 2.326348)
          )
-    
+
     for (alpha, ref) in qnorm
         v = quantile(Normal(), alpha)
-        @fact v --> roughly(ref, 1e-6)
+        @test isapprox( v, ref, atol = 1e-6 )
     end
 
 end

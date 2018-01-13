@@ -1,10 +1,35 @@
 # Bootstrap.jl News and Changes
 
+## Version 1.2.0
+
+### New features
+
+- Maximum Entropy bootstrapping for dependent and non-stationary datasets
+  (`MaximumEntropySampling`), contributed by Rory Finnegan (@rofinn).
+
+### Changes
+
+- Transition tests from ``FactCheck`` to `Base.Test`.
+- Introduces `StatsModels` as a new dependency which is now the new home of `Formula`s.
+- Use vectorized function calls for `Distribution` functions.
+- Removes the dependency on `Compat`.
+
+
+### Support
+
+- Requires julia 0.6 or newer
+- Drops support for julia 0.5
+
+
 ## Version 1.1.0
 
 ### Changes
 
-- Adds compatibility with julia 0.6 development versions, including automated tests.
+- Adds compatibility with julia 0.6 development versions, inc- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
+- Fixes convergence errors of GLM models in parametric bootstrap test cases
+- Modernise automated test and coverage setup (also thanks to [Tony Kelman](https://github.com/tkelman) for contributions)
+- Improves the readme (also thanks to [Patrick Kofod Mogensen](https://github.com/pkofod) for contributions)
+luding automated tests.
 - Introduces `Compat` as a new dependency
 - Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
 - Fixes convergence errors of GLM models in parametric bootstrap test cases

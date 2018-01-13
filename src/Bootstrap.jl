@@ -7,11 +7,10 @@ Statistical bootstrapping for Julia
 """
 module Bootstrap
 
-using Compat
-
 using StatsBase
 using Distributions
 using DataFrames
+using StatsModels
 
 import Base: start, next, done, eltype, length
 
@@ -28,6 +27,7 @@ export
     AntitheticSampling,
     BalancedSampling,
     ExactSampling,
+    MaximumEntropySampling,
     ResidualSampling,
     WildSampling,
     BootstrapSample,
