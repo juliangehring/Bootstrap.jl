@@ -58,10 +58,10 @@ More elaborate cases are covered in the documentation notebooks.
   using Bootstrap
 ```
 
-Our observations `r` are sampled from a standard normal distribution.
+Our observations in `some_data` are sampled from a standard normal distribution.
 
 ```julia
-  r = randn(100);
+  some_data = randn(100);
 ```
 
 Let's bootstrap the standard deviation (`std`) of our data, based on 1000
@@ -71,14 +71,14 @@ resamples and with different bootstrapping approaches.
   n_boot = 1000
 
   ## basic bootstrap
-  bs1 = bootstrap(r, std, BasicSampling(n_boot))
+  bs1 = bootstrap(std, some_data, BasicSampling(n_boot))
 
   ## balanced bootstrap
-  bs2 = bootstrap(r, std, BalancedSampling(n_boot))
+  bs2 = bootstrap(std, some_data, BalancedSampling(n_boot))
 ```
 
-We can explore the properties of the bootstrapped samples, for example estimated
-bias and standard error of our statistic.
+We can explore the properties of the bootstrapped samples, for example, the
+estimated bias and standard error of our statistic.
 
 ```julia
   bias(bs1)

@@ -2,7 +2,7 @@
 Estimate the bias of a bootstrap sampling.
 
 ```julia
-bs = bootstrap(randn(20), mean, BasicSampling(100))
+bs = bootstrap(mean, randn(20), BasicSampling(100))
 
 bias(bs)
 ```
@@ -18,7 +18,7 @@ bias(bs::BootstrapSample, idx::Int) = bias(original(bs, idx), straps(bs, idx))
 Estimate the standard error of a bootstrap sampling.
 
 ```julia
-bs = bootstrap(randn(20), mean, BasicSampling(100))
+bs = bootstrap(mean, randn(20), BasicSampling(100))
 
 stderror(bs)
 ```

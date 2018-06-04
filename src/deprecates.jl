@@ -10,3 +10,7 @@ import Base.depwarn
 @deprecate se(x::AbstractVector) stderror(x)
 @deprecate se(bs::BootstrapSample) stderror(bs)
 @deprecate se(bs::BootstrapSample, idx::Int) stderror(bs, idx)
+
+# functions before data
+@deprecate bootstrap(data, statistic::Function, sampling::Sampling) where Sampling<:BootstrapSampling bootstrap(statistic, data, sampling)
+@deprecate bootstrap(data, statistic::Function, model, sampling::Sampling) where Sampling<:BootstrapSampling bootstrap(statistic, data, model, sampling)

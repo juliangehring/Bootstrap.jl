@@ -185,9 +185,9 @@ zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 lhs(f::Formula) = f.lhs
 
 """
-bootstrap(data, statistic, BasicSampling())
+bootstrap(statistic, data, BasicSampling())
 """
-function bootstrap(data, statistic::Function, sampling::BasicSampling)
+function bootstrap(statistic::Function, data, sampling::BasicSampling)
     t0 = tx(statistic(data))
     m = nrun(sampling)
     t1 = zeros_tuple(t0, m)
@@ -203,9 +203,9 @@ end
 
 
 """
-bootstrap(data, statistic, AntitheticSampling)
+bootstrap(statistic, data, AntitheticSampling)
 """
-function bootstrap(data::AbstractVector, statistic::Function, sampling::AntitheticSampling)
+function bootstrap(statistic::Function, data::AbstractVector, sampling::AntitheticSampling)
     t0 = tx(statistic(data))
     m = nrun(sampling)
     n = nobs(data)
@@ -232,9 +232,9 @@ end
 
 
 """
-bootstrap(data, statistic, sampling)
+bootstrap(statistic, data, sampling)
 """
-function bootstrap(data, statistic::Function, sampling::BalancedSampling)
+function bootstrap(statistic::Function, data, sampling::BalancedSampling)
     n = nobs(data)
     m = nrun(sampling)
     t0 = tx(statistic(data))
@@ -282,9 +282,9 @@ eltype{T}(itr::ExactIterator{Range{T}}) = Array{T, 1}
 length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
 
 """
-bootstrap(data, statistic, sampling)
+bootstrap(statistic, data, sampling)
 """
-function bootstrap(data, statistic::Function, sampling::ExactSampling)
+function bootstrap(statistic::Function, data, sampling::ExactSampling)
     n = nobs(data)
     m = nrun_exact(n)
     t0 = tx(statistic(data))
@@ -299,9 +299,9 @@ function bootstrap(data, statistic::Function, sampling::ExactSampling)
 end
 
 """
-bootstrap(data, statistic, MaximumEntropySampling)
+bootstrap(statistic, data, MaximumEntropySampling)
 """
-function bootstrap(data, statistic::Function, sampling::MaximumEntropySampling)
+function bootstrap(statistic::Function, data, sampling::MaximumEntropySampling)
     init!(sampling.cache, data)
 
     t0 = tx(statistic(data))
@@ -318,9 +318,9 @@ function bootstrap(data, statistic::Function, sampling::MaximumEntropySampling)
 end
 
 """
-bootstrap(data, statistic, model, sampling)
+bootstrap(statistic, data, model, sampling)
 """
-function bootstrap(data, statistic::Function, model::SimpleModel, sampling::BootstrapSampling)
+function bootstrap(statistic::Function, data, model::SimpleModel, sampling::BootstrapSampling)
     f0 = fit(model.class, data, model.args...; model.kwargs...)
     t0 = tx(statistic(data))
     m = nrun(sampling)
@@ -337,9 +337,9 @@ end
 
 
 """
-bootstrap(data, statistic, model, formula, sampling)
+bootstrap(statistic, data, model, formula, sampling)
 """
-function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::ResidualSampling)
+function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::ResidualSampling)
     class = model.class
     formula = model.formula
     args = model.args
@@ -366,9 +366,9 @@ end
 
 
 """
-bootstrap(data, statistic, model, formula, Wildsampling(nrun, noise))
+bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
-function bootstrap(data::AbstractDataFrame, statistic::Function, model::FormulaModel, sampling::WildSampling)
+function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::WildSampling)
     class = model.class
     formula = model.formula
     args = model.args
