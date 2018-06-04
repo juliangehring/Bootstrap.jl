@@ -33,13 +33,13 @@ using Distributions
 
         @test length(bias(bs)) == length(ref)
         [@test (b[1] > -Inf && b[1] < Inf) for b in bias(bs)]
-        @test length(se(bs)) == length(ref)
-        [@test s >= 0 for s in se(bs)]
+        @test length(stderror(bs)) == length(ref)
+        [@test s >= 0 for s in stderror(bs)]
 
         [@test original(bs, i) == original(bs)[i]  for i in 1:nvar(bs)]
         [@test straps(bs, i) == straps(bs)[i]  for i in 1:nvar(bs)]
         [@test bias(bs, i) == bias(bs)[i]  for i in 1:nvar(bs)]
-        [@test se(bs, i) == se(bs)[i]  for i in 1:nvar(bs)]
+        [@test stderror(bs, i) == stderror(bs)[i]  for i in 1:nvar(bs)]
 
         m = model(bs)
         @test issubtype(typeof(m), Bootstrap.Model)
@@ -47,11 +47,11 @@ using Distributions
         return Void
     end
 
-    function test_ci(bs)
+    function test_confint(bs)
 
         cim_all = (BasicConfInt(), PercentileConfInt(), NormalConfInt(), BCaConfInt())
         for cim in cim_all
-            c = ci(bs, cim)
+            c = confint(bs, cim)
             [@test (x[1] >= x[2]  && x[1] <= x[3]) for x in c]
             [@test x[1] ≈ t0 for (x, t0) in zip(c, original(bs))]
         end
@@ -74,13 +74,13 @@ using Distributions
         @testset "Basic resampling: Normal distribution" begin
             bs = bootstrap(r, mean, Model(Normal), BasicSampling(n))
             test_bootsample(bs, ref, r, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "Balanced resampling: Normal distribution" begin
             bs = bootstrap(r, mean, Model(Normal), BalancedSampling(n))
             test_bootsample(bs, ref, r, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         ref = mean(fit(Exponential, aircondit))
@@ -88,13 +88,13 @@ using Distributions
         @testset "Basic resampling: Exponential distribution" begin
             bs = bootstrap(aircondit, mean, Model(Exponential), BasicSampling(n))
             test_bootsample(bs, ref, aircondit, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "Balanced resampling: Exponential distribution" begin
             bs = bootstrap(aircondit, mean, Model(Exponential), BalancedSampling(n))
             test_bootsample(bs, ref, aircondit, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
     end

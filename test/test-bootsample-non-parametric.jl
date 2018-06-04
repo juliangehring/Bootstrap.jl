@@ -31,24 +31,24 @@ using StatsBase
 
         @test length(bias(bs)) == length(ref)
         [@test (b[1] > -Inf && b[1] < Inf) for b in bias(bs)]
-        @test length(se(bs)) == length(ref)
-        [@test s >= 0 for s in se(bs)]
+        @test length(stderror(bs)) == length(ref)
+        [@test s >= 0 for s in stderror(bs)]
 
         [@test original(bs, i) == original(bs)[i]  for i in 1:nvar(bs)]
         [@test straps(bs, i) == straps(bs)[i]  for i in 1:nvar(bs)]
         [@test bias(bs, i) == bias(bs)[i]  for i in 1:nvar(bs)]
-        [@test se(bs, i) == se(bs)[i]  for i in 1:nvar(bs)]
+        [@test stderror(bs, i) == stderror(bs)[i]  for i in 1:nvar(bs)]
 
         @test_throws MethodError model(bs)
 
         return Void
     end
 
-    function test_ci(bs)
+    function test_confint(bs)
 
         cim_all = (BasicConfInt(), PercentileConfInt(), NormalConfInt(), BCaConfInt())
         for cim in cim_all
-            c = ci(bs, cim)
+            c = confint(bs, cim)
             [@test (x[1] >= x[2]  && x[1] <= x[3]) for x in c]
             [@test x[1] ≈ t0 for (x, t0) in zip(c, original(bs))]
             @test level(cim) == 0.95
@@ -76,21 +76,21 @@ using StatsBase
             @test ref  ≈ 1.5203125
             bs = bootstrap(city, city_ratio, BasicSampling(n))
             test_bootsample(bs, ref, city, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "city_cor with DataFrame input" begin
             ref = city_cor(city)
             bs = bootstrap(city, city_cor, BasicSampling(n))
             test_bootsample(bs, ref, city, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "city_cor with DataArray input" begin
             ref = city_cor(citya)
             bs = bootstrap(citya, city_cor, BasicSampling(n))
             test_bootsample(bs, ref, citya, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "mean_and_sd: Vector input, 2 output variables" begin
@@ -98,7 +98,7 @@ using StatsBase
             ref = mean_and_std(r)
             bs = bootstrap(r, mean_and_std, BasicSampling(n))
             test_bootsample(bs, ref, r, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "mean_and_sd: Student CI" begin
@@ -106,7 +106,7 @@ using StatsBase
             bs = bootstrap(r, mean_and_std, BasicSampling(n))
             ## Student confint
             cim = StudentConfInt()
-            c = ci(bs, straps(bs, 2), cim, 1)
+            c = confint(bs, straps(bs, 2), cim, 1)
             @test c[1] >= c[2]  && c[1] <= c[3]
             @test c[1] ≈ original(bs, 1)
             @test level(cim) == 0.95
@@ -121,7 +121,7 @@ using StatsBase
             ref = mean_and_std(r)
             bs = bootstrap(r, mean_and_std, AntitheticSampling(n))
             test_bootsample(bs, ref, r, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
     end
@@ -133,21 +133,21 @@ using StatsBase
             @test ref ≈ 1.5203125
             bs = bootstrap(city, city_ratio, BalancedSampling(n))
             test_bootsample(bs, ref, city, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "city_cor with DataFrame input" begin
             ref = city_cor(city)
             bs = bootstrap(city, city_cor, BalancedSampling(n))
             test_bootsample(bs, ref, city, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "city_cor with DataArray input" begin
             ref = city_cor(citya)
             bs = bootstrap(citya, city_cor, BalancedSampling(n))
             test_bootsample(bs, ref, citya, n)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "mean_and_sd: Vector input, 2 output variables" begin
@@ -155,7 +155,7 @@ using StatsBase
             ref = mean_and_std(r)
             bs = bootstrap(r, mean_and_std, BalancedSampling(n))
             test_bootsample(bs, ref, r, n)
-            test_ci(bs)
+            test_confint(bs)
             ## mean should be unbiased
             @test isapprox( bias(bs)[1], 0.0, atol = 1e-8 )
         end
@@ -171,7 +171,7 @@ using StatsBase
             @test ref ≈ 1.5203125
             bs = bootstrap(city, city_ratio, ExactSampling())
             test_bootsample(bs, ref, city, nc)
-            test_ci(bs)
+            test_confint(bs)
         end
 
         @testset "mean: Vector input, 1 output variables" begin
@@ -179,7 +179,7 @@ using StatsBase
             ref = mean(r)
             bs = bootstrap(r, mean, ExactSampling())
             test_bootsample(bs, ref, r, nc)
-            test_ci(bs)
+            test_confint(bs)
         end
 
     end
@@ -207,7 +207,7 @@ using StatsBase
         s = MaximumEntropySampling(n)
         bs = bootstrap(r, mean, s)
         test_bootsample(bs, ref, r, n)
-        test_ci(bs)
+        test_confint(bs)
 
         # Collect the samples
         samples = zeros(eltype(r), (nobs, n))

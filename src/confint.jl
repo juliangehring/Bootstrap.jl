@@ -78,12 +78,12 @@ StudentConfInt() = StudentConfInt(_level)
 
 level(cim::ConfIntMethod) = cim.level
 
-function ci(bs::BootstrapSample, cim::ConfIntMethod)
-    tuple([ci(bs, cim, i) for i in 1:nvar(bs)]...)
+function confint(bs::BootstrapSample, cim::ConfIntMethod)
+    tuple([confint(bs, cim, i) for i in 1:nvar(bs)]...)
 end
 
 ## basic
-function ci(bs::BootstrapSample, cim::BasicConfInt, i::Int)
+function confint(bs::BootstrapSample, cim::BasicConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
@@ -93,7 +93,7 @@ function ci(bs::BootstrapSample, cim::BasicConfInt, i::Int)
 end
 
 ## percentile
-function ci(bs::BootstrapSample, cim::PercentileConfInt, i::Int)
+function confint(bs::BootstrapSample, cim::PercentileConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
@@ -103,18 +103,18 @@ function ci(bs::BootstrapSample, cim::PercentileConfInt, i::Int)
 end
 
 ## normal
-function ci(bs::BootstrapSample, cim::NormalConfInt, i::Int)
+function confint(bs::BootstrapSample, cim::NormalConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t0b = t0 - bias(bs, i)
-    merr = se(bs, i) * quantile(Normal(), (1+l)/2)
+    merr = stderror(bs, i) * quantile(Normal(), (1+l)/2)
     lower = t0b - merr
     upper = t0b + merr
     return t0, lower, upper
 end
 
 ## BCa
-function ci(bs::BootstrapSample, cim::BCaConfInt, i::Int)
+function confint(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
@@ -133,11 +133,11 @@ end
 
 
 ## student
-function ci(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::StudentConfInt, i::Int)
+function confint(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::StudentConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
-    t0se = se(bs, i)
+    t0se = stderror(bs, i)
     z = (t1 - t0) ./ sd1
     alpha = ([l, -l] + 1.)/2.
     lower, upper = t0 - t0se .* quantile(z, alpha)

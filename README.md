@@ -82,27 +82,27 @@ bias and standard error of our statistic.
 
 ```julia
   bias(bs1)
-  se(bs1)
+  stderror(bs1)
 ```
 
-Further, we can estimate confidence intervals for our statistic of interest,
-based on the bootstrapped samples.
+Furthermore, we can estimate confidence intervals (CIs) for our statistic of
+interest, based on the bootstrapped samples.
 
 ```julia
   ## calculate 95% confidence intervals
   cil = 0.95;
 
   ## basic CI
-  bci1 = ci(bs1, BasicConfInt(cil));
+  bci1 = confint(bs1, BasicConfInt(cil));
 
   ## percentile CI
-  bci2 = ci(bs1, PercentileConfInt(cil));
+  bci2 = confint(bs1, PercentileConfInt(cil));
 
   ## BCa CI
-  bci3 = ci(bs1, BCaConfInt(cil));
+  bci3 = confint(bs1, BCaConfInt(cil));
 
   ## Normal CI
-  bci4 = ci(bs1, NormalConfInt(cil));
+  bci4 = confint(bs1, NormalConfInt(cil));
 ```
 
 
