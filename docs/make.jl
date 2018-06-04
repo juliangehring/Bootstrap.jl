@@ -1,10 +1,28 @@
 using Documenter
 using Bootstrap
 
-makedocs()
+makedocs(
+    modules = [Bootstrap],
+    format = :html,
+    sitename = "Bootstrap.jl",
+    doctest = true,
+    checkdocs = :exports,
+    linkcheck = true,
+    html_disable_git = true, # disable source and edit links to github
+    html_canonical = "https://juliangehring.github.io/Bootstrap.jl/stable/",
+    pages = [
+        "Home" => "index.md",
+        "Library" => "library.md",
+        "Changes" => "NEWS.md",
+        "License" => "LICENSE.md"
+    ]
+)
 
 deploydocs(
     repo = "github.com/juliangehring/Bootstrap.jl.git",
-    julia  = "0.4",
-    deps = Deps.pip("mkdocs", "python-markdown-math", "pygments", "mkdocs-material")
+    julia = "0.6",
+    target = "build",
+    latest = "documenter",
+    deps   = nothing,
+    make   = nothing
 )

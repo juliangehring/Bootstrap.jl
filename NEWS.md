@@ -9,7 +9,7 @@
 
 ### Changes
 
-- Transition tests from ``FactCheck`` to `Base.Test`.
+- Transition tests from `FactCheck` to `Base.Test`.
 - Introduces `StatsModels` as a new dependency which is now the new home of `Formula`s.
 - Use vectorized function calls for `Distribution` functions.
 - Removes the dependency on `Compat`.
@@ -25,13 +25,13 @@
 
 ### Changes
 
-- Adds compatibility with julia 0.6 development versions, inc- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
+- Adds compatibility with julia 0.6 development versions, inc- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaData/DataFrames.jl/pull/1170) v0.9.0 or newer)
 - Fixes convergence errors of GLM models in parametric bootstrap test cases
 - Modernise automated test and coverage setup (also thanks to [Tony Kelman](https://github.com/tkelman) for contributions)
 - Improves the readme (also thanks to [Patrick Kofod Mogensen](https://github.com/pkofod) for contributions)
 luding automated tests.
 - Introduces `Compat` as a new dependency
-- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
+- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaData/DataFrames.jl/pull/1170) v0.9.0 or newer)
 - Fixes convergence errors of GLM models in parametric bootstrap test cases
 - Modernise automated test and coverage setup (also thanks to [Tony Kelman](https://github.com/tkelman) for contributions)
 - Improves the readme (also thanks to [Patrick Kofod Mogensen](https://github.com/pkofod) for contributions)

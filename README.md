@@ -5,7 +5,7 @@
 
 Bootstrapping is a widely applicable technique for statistical estimation.
 
-![img](docs/src/bootstraps.png)
+![img](docs/src/assets/logo.png)
 
 
 # Functionality
@@ -32,7 +32,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 Reports on package builds for all platforms and test coverage are collected on
 the [package status page](status.md).
 
-The package is under active development and uses [semantic versioning](http://semver.org/).
+The package is under active development and uses [semantic versioning](https://semver.org/).
 
 
 ## Installation
@@ -45,7 +45,7 @@ Pkg.add("Bootstrap")
 ```
 
 More details on packages and how to manage them can be found in the
-[package section](http://docs.julialang.org/en/stable/manual/packages/#adding-and-removing-packages)
+[package section](https://docs.julialang.org/en/stable/manual/packages/#adding-and-removing-packages)
 of the Julia documentation.
 
 
@@ -113,8 +113,8 @@ is a comprehensive introduction into the topic.  An extensive description of the
 bootstrap is the focus of the book *Davison and Hinkley (1997):
 [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.
 Most of the methodology covered in the book is implemented in the
-[boot](http://cran.r-project.org/web/packages/boot/index.html) package for the
-[R programming language](http://www.r-project.org/). [More references](docs/src/references.md)
+[boot](https://cran.r-project.org/web/packages/boot/index.html) package for the
+[R programming language](https://www.r-project.org/). [More references](docs/src/references.md)
 are listed in the documentation for further reading.
 
 
