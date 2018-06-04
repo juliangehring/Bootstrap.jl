@@ -74,21 +74,21 @@ using StatsBase
         @testset "city_ratio with DataFrame input" begin
             ref = city_ratio(city)
             @test ref  ≈ 1.5203125
-            bs = bootstrap(city, city_ratio, BasicSampling(n))
+            bs = bootstrap(city_ratio, city, BasicSampling(n))
             test_bootsample(bs, ref, city, n)
             test_confint(bs)
         end
 
         @testset "city_cor with DataFrame input" begin
             ref = city_cor(city)
-            bs = bootstrap(city, city_cor, BasicSampling(n))
+            bs = bootstrap(city_cor, city, BasicSampling(n))
             test_bootsample(bs, ref, city, n)
             test_confint(bs)
         end
 
         @testset "city_cor with DataArray input" begin
             ref = city_cor(citya)
-            bs = bootstrap(citya, city_cor, BasicSampling(n))
+            bs = bootstrap(city_cor, citya, BasicSampling(n))
             test_bootsample(bs, ref, citya, n)
             test_confint(bs)
         end
@@ -96,14 +96,14 @@ using StatsBase
         @testset "mean_and_sd: Vector input, 2 output variables" begin
             r = randn(25)
             ref = mean_and_std(r)
-            bs = bootstrap(r, mean_and_std, BasicSampling(n))
+            bs = bootstrap(mean_and_std, r, BasicSampling(n))
             test_bootsample(bs, ref, r, n)
             test_confint(bs)
         end
 
         @testset "mean_and_sd: Student CI" begin
             r = randn(25)
-            bs = bootstrap(r, mean_and_std, BasicSampling(n))
+            bs = bootstrap(mean_and_std, r, BasicSampling(n))
             ## Student confint
             cim = StudentConfInt()
             c = confint(bs, straps(bs, 2), cim, 1)
@@ -119,7 +119,7 @@ using StatsBase
         @testset "mean_and_sd: Vector input, 2 output variables" begin
             r = randn(50)
             ref = mean_and_std(r)
-            bs = bootstrap(r, mean_and_std, AntitheticSampling(n))
+            bs = bootstrap(mean_and_std, r, AntitheticSampling(n))
             test_bootsample(bs, ref, r, n)
             test_confint(bs)
         end
@@ -131,21 +131,21 @@ using StatsBase
         @testset "city_ratio with DataFrame input" begin
             ref = city_ratio(city)
             @test ref ≈ 1.5203125
-            bs = bootstrap(city, city_ratio, BalancedSampling(n))
+            bs = bootstrap(city_ratio, city, BalancedSampling(n))
             test_bootsample(bs, ref, city, n)
             test_confint(bs)
         end
 
         @testset "city_cor with DataFrame input" begin
             ref = city_cor(city)
-            bs = bootstrap(city, city_cor, BalancedSampling(n))
+            bs = bootstrap(city_cor, city, BalancedSampling(n))
             test_bootsample(bs, ref, city, n)
             test_confint(bs)
         end
 
         @testset "city_cor with DataArray input" begin
             ref = city_cor(citya)
-            bs = bootstrap(citya, city_cor, BalancedSampling(n))
+            bs = bootstrap(city_cor, citya, BalancedSampling(n))
             test_bootsample(bs, ref, citya, n)
             test_confint(bs)
         end
@@ -153,7 +153,7 @@ using StatsBase
         @testset "mean_and_sd: Vector input, 2 output variables" begin
             r = randn(50)
             ref = mean_and_std(r)
-            bs = bootstrap(r, mean_and_std, BalancedSampling(n))
+            bs = bootstrap(mean_and_std, r, BalancedSampling(n))
             test_bootsample(bs, ref, r, n)
             test_confint(bs)
             ## mean should be unbiased
@@ -169,7 +169,7 @@ using StatsBase
         @testset "city_ratio with DataFrame input" begin
             ref = city_ratio(city)
             @test ref ≈ 1.5203125
-            bs = bootstrap(city, city_ratio, ExactSampling())
+            bs = bootstrap(city_ratio, city, ExactSampling())
             test_bootsample(bs, ref, city, nc)
             test_confint(bs)
         end
@@ -177,7 +177,7 @@ using StatsBase
         @testset "mean: Vector input, 1 output variables" begin
             r = randn(10)
             ref = mean(r)
-            bs = bootstrap(r, mean, ExactSampling())
+            bs = bootstrap(mean, r, ExactSampling())
             test_bootsample(bs, ref, r, nc)
             test_confint(bs)
         end
@@ -205,7 +205,7 @@ using StatsBase
         r = test_obs(nobs)
         ref = mean(r)
         s = MaximumEntropySampling(n)
-        bs = bootstrap(r, mean, s)
+        bs = bootstrap(mean, r, s)
         test_bootsample(bs, ref, r, n)
         test_confint(bs)
 
