@@ -35,6 +35,6 @@ function estimate_summary(bs::BootstrapSample)
     n = nvar(bs)
     df = DataFrame(Estimate = [original(bs)...],
                    Bias = bias(bs),
-                   StdError = se(bs))
+                   StdError = stderror(bs))
     return df
 end

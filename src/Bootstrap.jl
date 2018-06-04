@@ -13,6 +13,7 @@ using DataFrames
 using StatsModels
 
 import Base: start, next, done, eltype, length
+import StatsBase: confint, stderror
 
 export
     Model,
@@ -41,8 +42,8 @@ export
     sampling,
     noise,
     bias,
-    se,
-    ci,
+    stderror,
+    confint,
     BasicConfInt,
     PercentileConfInt,
     NormalConfInt,
@@ -58,5 +59,6 @@ include("get.jl")
 include("show.jl")
 include("confint.jl")
 include("datasets/Datasets.jl")
+include("deprecates.jl")
 
 end

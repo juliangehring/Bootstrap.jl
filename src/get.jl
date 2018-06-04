@@ -20,15 +20,15 @@ Estimate the standard error of a bootstrap sampling.
 ```julia
 bs = bootstrap(randn(20), mean, BasicSampling(100))
 
-se(bs)
+stderror(bs)
 ```
 
 """
-se(t1::AbstractVector) = std(t1)
+stderror(t1::AbstractVector) = std(t1)
 
-se(bs::BootstrapSample) = [se(t1) for t1 in straps(bs)]
+stderror(bs::BootstrapSample) = [stderror(t1) for t1 in straps(bs)]
 
-se(bs::BootstrapSample, idx::Int) = se(straps(bs, idx))
+stderror(bs::BootstrapSample, idx::Int) = stderror(straps(bs, idx))
 
 
 original(bs::BootstrapSample) = bs.t0
