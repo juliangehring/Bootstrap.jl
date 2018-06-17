@@ -7,7 +7,7 @@
 
 * Davison, A. C.: [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/). Cambridge University Press, 1997
 
-* Efron, B.: [Bootstrap Methods: Another Look at the Jackknife](http://projecteuclid.org/euclid.aos/1176344552). The Annals of Statistics 7, no. 1 (January 1979): 1–26. [doi:10.1214/aos/1176344552](http://dx.doi.org/10.1214/aos/1176344552)
+* Efron, B.: [Bootstrap Methods: Another Look at the Jackknife](https://projecteuclid.org/euclid.aos/1176344552). The Annals of Statistics 7, no. 1 (January 1979): 1–26. [doi:10.1214/aos/1176344552](http://dx.doi.org/10.1214/aos/1176344552)
 
 
 # Algorithms
@@ -17,4 +17,4 @@
 
 # Software
 
-* Canty, Angelo, and Brian Ripley. [Boot: Bootstrap Functions](http://cran.r-project.org/web/packages/boot/index.html). [R](http://r-project.org) package
+* Canty, Angelo, and Brian Ripley. [Boot: Bootstrap Functions](https://cran.r-project.org/web/packages/boot/index.html). [R](https://www.r-project.org) package
