@@ -13,7 +13,7 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "Library" => "library.md",
-        "Changes" => "NEWS.md",
+        "Changelog" => "NEWS.md",
         "License" => "LICENSE.md"
     ]
 )
@@ -22,7 +22,7 @@ deploydocs(
     repo = "github.com/juliangehring/Bootstrap.jl.git",
     julia = "0.6",
     target = "build",
-    latest = "documenter",
+    latest = "develop",
     deps   = nothing,
     make   = nothing
 )

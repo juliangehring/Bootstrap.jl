@@ -10,16 +10,24 @@ end
 
 ## Sampling
 
-### Sampling Types
+### Non-Parametric Sampling
 
 ```@docs
 BasicSampling
 BalancedSampling
 ExactSampling
-ResidualSampling
-WildSampling
+AntitheticSampling
 MaximumEntropySampling
 ```
+
+
+### Parametric Sampling
+
+```@docs
+ResidualSampling
+WildSampling
+```
+
 
 ### Accessors
 
@@ -28,6 +36,7 @@ nrun
 statistic
 noise
 ```
+
 
 ## Confidence Intervals
 
