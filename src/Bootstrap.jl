@@ -7,6 +7,8 @@ Statistical bootstrapping for Julia
 """
 module Bootstrap
 
+using Statistics
+using Random
 using StatsBase
 using Distributions
 using DataFrames

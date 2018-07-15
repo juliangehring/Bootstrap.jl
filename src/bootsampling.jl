@@ -219,7 +219,7 @@ function bootstrap(statistic::Function, data::AbstractVector, sampling::Antithet
         if isodd(i)
             sample!(idx, idx1)
         else
-            idx1 = n - idx1 + 1
+            idx1 = n .- idx1 .+ 1
         end
         data1 = pick(data0, idx1)
         for (j, t) in enumerate(tx(statistic(data1)))
@@ -239,7 +239,7 @@ function bootstrap(statistic::Function, data, sampling::BalancedSampling)
     m = nrun(sampling)
     t0 = tx(statistic(data))
     t1 = zeros_tuple(t0, m)
-    idx = repmat([1:n;], m)
+    idx = repeat([1:n;], m)
     ridx = zeros(Int, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
@@ -262,7 +262,7 @@ start(itr::ExactIterator) = ones(Int, itr.k)
 function next(itr::ExactIterator, s)
     r = itr.a[s]
     for i = itr.k:-1:1
-        if s[i] < endof(itr.a)
+        if s[i] < lastindex(itr.a)
             s[i] = nextind(itr.a, s[i])
             for j = i:itr.k-1
                 s[j+1] = s[j]

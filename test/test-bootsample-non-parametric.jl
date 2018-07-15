@@ -2,7 +2,10 @@ module TestBootsampleNonParametric
 
 using Bootstrap
 using Bootstrap.Datasets
-using Base.Test
+using Test
+
+using Statistics
+using Random
 
 using DataFrames
 using StatsBase
@@ -13,7 +16,7 @@ using StatsBase
     function test_bootsample(bs, ref, raw_data, n)
 
         show(IOBuffer(), bs)
-        @test issubtype(typeof(bs), NonParametricBootstrapSample)
+        @test typeof(bs) <: NonParametricBootstrapSample
         t0 = original(bs)
         @test length(t0) == length(ref)
         [@test t ≈ r for (t, r) in zip(t0, ref)]
@@ -41,7 +44,7 @@ using StatsBase
 
         @test_throws MethodError model(bs)
 
-        return Void
+        return Nothing
     end
 
     function test_confint(bs)
@@ -54,7 +57,7 @@ using StatsBase
             @test level(cim) == 0.95
         end
 
-        return Void
+        return Nothing
     end
 
     n = 250
@@ -194,8 +197,7 @@ using StatsBase
         function test_obs(n, seed=1234)
             srand(seed)
             e = randn(n)
-            x = Array{Float64}(n)
-            x[1] = 0.0
+            x = zeros(Float64, n)
             for i = 2:n
                 x[i] = 0.8 * x[i-1] + e[i]
             end

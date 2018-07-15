@@ -22,7 +22,7 @@ end
 
 pick(x::AbstractVector, i::AbstractVector) = x[i]
 
-pick(x::AbstractArray, i::AbstractVector) = slicedim(x, 1, i)
+pick(x::AbstractArray, i::AbstractVector) = copy(selectdim(x, 1, i))
 
 pick(x::AbstractDataFrame, i::AbstractVector) = x[i,:]
 
@@ -143,7 +143,7 @@ function draw!(cache::MaximumEntropyCache, x::T, o::T) where T<:AbstractArray
 
     # Compute sample quantiles of the ME density at those points and sort them.
     for k in 1:cache.n
-        ind = indmin(abs.(cache.v - cache.U[k]))
+        ind = argmin(abs.(cache.v .- cache.U[k]))
 
         if cache.v[ind] > cache.U[k]
             ind -= 1
