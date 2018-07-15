@@ -10,7 +10,7 @@ BasicConfInt(0.95)
 ```
 
 """
-type BasicConfInt <: ConfIntMethod
+struct BasicConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
@@ -25,13 +25,13 @@ PercentileConfInt(0.95)
 ```
 
 """
-type PercentileConfInt <: ConfIntMethod
+struct PercentileConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
 PercentileConfInt() = PercentileConfInt(_level)
 
-type NormalConfInt <: ConfIntMethod
+struct NormalConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
@@ -46,7 +46,7 @@ NormalConfInt(0.95)
 """
 NormalConfInt() = NormalConfInt(_level)
 
-type BCaConfInt <: ConfIntMethod
+struct BCaConfInt <: ConfIntMethod
     level::AbstractFloat
     ## quantile method
 end
@@ -62,7 +62,7 @@ BCaConfInt(0.95)
 """
 BCaConfInt() = BCaConfInt(_level)
 
-type StudentConfInt <: ConfIntMethod
+struct StudentConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 

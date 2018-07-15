@@ -1,10 +1,10 @@
 ## draw: unify rand, sample
 
-draw!{T<:Distribution}(x::T, o) = rand!(x, o)
+draw!(x::T, o) where {T<:Distribution} = rand!(x, o)
 
-draw!{T<:AbstractVector}(x::T, o::T) = sample!(x, o)
+draw!(x::T, o::T) where {T<:AbstractVector} = sample!(x, o)
 
-function draw!{T<:AbstractArray}(x::T, o::T)
+function draw!(x::T, o::T) where {T<:AbstractArray}
     idx = sample(1:nobs(x), nobs(o))
     for (to, from) in enumerate(idx)
         o[to,:] = x[from,:]
@@ -12,7 +12,7 @@ function draw!{T<:AbstractArray}(x::T, o::T)
     return o
 end
 
-function draw!{T<:AbstractDataFrame}(x::T, o::T)
+function draw!(x::T, o::T) where {T<:AbstractDataFrame}
     idx = sample(1:nobs(x), nobs(o))
     for column in names(x)
         o[:,column] = x[idx,column]
@@ -44,7 +44,7 @@ This is intended to minimize memory allocations and time when drawing random sam
 - `quantiles::Vector{T}`: Preallocated array for sample quantiles.
 - `v::Vector{T}`
 """
-type MaximumEntropyCache{T<:Real}
+mutable struct MaximumEntropyCache{T<:Real}
     n::Int
     t::Type{T}
     inds::Vector{Int}
