@@ -143,10 +143,3 @@ function confint(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::Student
     lower, upper = t0 - t0se .* quantile(z, alpha)
     return t0, lower, upper
 end
-
-const _conf_int_methods =
-    [BasicConfInt,
-     PercentileConfInt,
-     NormalConfInt,
-     BCaConfInt,
-     StudentConfInt]
