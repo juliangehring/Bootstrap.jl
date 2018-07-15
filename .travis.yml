@@ -4,13 +4,10 @@ os:
   - linux
 
 julia:
-  - 0.6
   - 0.7
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - julia: 0.7
 
 notifications:
   email:
@@ -23,5 +20,4 @@ script:
 
 after_success:
   - julia -e 'cd(Pkg.dir("Bootstrap")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder(), flags="julia_$(VERSION.major)_$(VERSION.minor)")'
-  - julia -e 'Pkg.add("Documenter")'
-  - julia -e 'cd(Pkg.dir("Bootstrap")); include(joinpath("docs", "make.jl"))'
+  - julia -e 'cd(Pkg.dir("Bootstrap")); Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'

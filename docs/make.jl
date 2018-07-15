@@ -20,7 +20,7 @@ makedocs(
 
 deploydocs(
     repo = "github.com/juliangehring/Bootstrap.jl.git",
-    julia = "0.6",
+    julia = "0.7",
     target = "build",
     latest = "develop",
     deps   = nothing,
