@@ -257,9 +257,10 @@ end
 
 exact(n::Int) = ExactIterator(1:n, n)
 
-start(itr::ExactIterator) = ones(Int, itr.k)
-
-function next(itr::ExactIterator, s)
+function iterate(itr::ExactIterator, s=ones(Int, itr.k))
+    if length(s) > 0 && s[1] < 1
+        return nothing
+    end
     r = itr.a[s]
     for i = itr.k:-1:1
         if s[i] < lastindex(itr.a)
@@ -267,19 +268,20 @@ function next(itr::ExactIterator, s)
             for j = i:itr.k-1
                 s[j+1] = s[j]
             end
-            return r, s
+            return (r, s)
         end
     end
-    return r, [0]
+    s[1] = 0
+    return (r, s)
 end
-
-done(itr::ExactIterator, s) = length(s) > 0 && s[1] < 1
 
 eltype(itr::ExactIterator) = typeof(itr.a)
 eltype(itr::ExactIterator{UnitRange{T}}) where {T} = Array{T, 1}
 eltype(itr::ExactIterator{AbstractRange{T}}) where {T} = Array{T, 1}
 
 length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
+size(itr::ExactIterator) = (itr.k, )
+
 
 """
 bootstrap(statistic, data, sampling)
