@@ -14,7 +14,7 @@ using Distributions
 using DataFrames
 using StatsModels
 
-import Base: start, next, done, eltype, length
+import Base: iterate, eltype, length, size
 import StatsBase: confint, stderror
 
 export
