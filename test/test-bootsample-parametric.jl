@@ -26,7 +26,7 @@ using Distributions
         [@test (minimum(t) <= tr && maximum(t) >= tr) for (t, tr) in zip(t1, t0)]
         [@test eltype(t) == eltype(tr) for (t, tr) in zip(t1, t0)]
 
-        @test Bootstrap.data(bs) == raw_data ## TODO: define scope
+        @test Bootstrap.data(bs) == raw_data
 
         @test nrun(sampling(bs)) == n
         @test nrun(bs) == n
