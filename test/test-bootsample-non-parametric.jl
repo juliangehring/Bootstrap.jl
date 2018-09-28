@@ -195,7 +195,7 @@ using StatsBase
         nobs = 100
 
         function test_obs(n, seed=1234)
-            srand(seed)
+            Random.seed!(seed)
             e = randn(n)
             x = zeros(Float64, n)
             for i = 2:n
@@ -221,8 +221,8 @@ using StatsBase
 
         # Add some checks to ensure that our within sample variation is greater than our
         # across sample variation at any given "timestep".
-        @test all(std(samples, 2) .< std(r))
-        @test mean(std(samples, 2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
+        @test all(std(samples, dims=2) .< std(r))
+        @test mean(std(samples, dims=2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
         @test std(r) > 0.5
 
     end
