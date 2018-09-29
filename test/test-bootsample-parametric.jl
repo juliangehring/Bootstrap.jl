@@ -2,7 +2,7 @@ module TestBootsampleParametric
 
 using Bootstrap
 using Bootstrap.Datasets
-using Base.Test
+using Test
 
 using DataFrames
 using StatsBase
@@ -15,7 +15,7 @@ using Distributions
     function test_bootsample(bs, ref, raw_data, n)
 
         show(IOBuffer(), bs)
-        @test issubtype(typeof(bs), ParametricBootstrapSample)
+        @test typeof(bs) <: ParametricBootstrapSample
         t0 = original(bs)
         @test length(t0) == length(ref)
         [@test t ≈ r for (t, r) in zip(t0, ref)]
@@ -26,7 +26,7 @@ using Distributions
         [@test (minimum(t) <= tr && maximum(t) >= tr) for (t, tr) in zip(t1, t0)]
         [@test eltype(t) == eltype(tr) for (t, tr) in zip(t1, t0)]
 
-        @test Bootstrap.data(bs) == raw_data ## TODO: define scope
+        @test Bootstrap.data(bs) == raw_data
 
         @test nrun(sampling(bs)) == n
         @test nrun(bs) == n
@@ -42,9 +42,9 @@ using Distributions
         [@test stderror(bs, i) == stderror(bs)[i]  for i in 1:nvar(bs)]
 
         m = model(bs)
-        @test issubtype(typeof(m), Bootstrap.Model)
+        @test typeof(m) <: Bootstrap.Model
 
-        return Void
+        return Nothing
     end
 
     function test_confint(bs)
@@ -56,7 +56,7 @@ using Distributions
             [@test x[1] ≈ t0 for (x, t0) in zip(c, original(bs))]
         end
 
-        return Void
+        return Nothing
     end
 
     n = 100

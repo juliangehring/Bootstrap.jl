@@ -32,7 +32,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 Reports on package builds for all platforms and test coverage are collected on
 the [package status page](status.md).
 
-The package is under active development and uses [semantic versioning](https://semver.org/).
+The package uses [semantic versioning](https://semver.org/).
 
 
 ## Installation
@@ -41,12 +41,13 @@ The `Bootstrap` package is part of the Julia ecosphere and the latest release
 version can be installed with
 
 ```julia
+using Pkg
 Pkg.add("Bootstrap")
 ```
 
-More details on packages and how to manage them can be found in the
-[package section](https://docs.julialang.org/en/stable/manual/packages/#adding-and-removing-packages)
-of the Julia documentation.
+More details on packages and how to manage them can be found in the [package
+section](https://docs.julialang.org/en/v1/stdlib/Pkg/) of the Julia
+documentation.
 
 
 # Examples
@@ -68,6 +69,8 @@ Let's bootstrap the standard deviation (`std`) of our data, based on 1000
 resamples and with different bootstrapping approaches.
 
 ```julia
+  using Statistics  # the `std` methods live here
+  
   n_boot = 1000
 
   ## basic bootstrap

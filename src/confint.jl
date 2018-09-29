@@ -10,7 +10,7 @@ BasicConfInt(0.95)
 ```
 
 """
-type BasicConfInt <: ConfIntMethod
+struct BasicConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
@@ -25,13 +25,13 @@ PercentileConfInt(0.95)
 ```
 
 """
-type PercentileConfInt <: ConfIntMethod
+struct PercentileConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
 PercentileConfInt() = PercentileConfInt(_level)
 
-type NormalConfInt <: ConfIntMethod
+struct NormalConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
@@ -46,7 +46,7 @@ NormalConfInt(0.95)
 """
 NormalConfInt() = NormalConfInt(_level)
 
-type BCaConfInt <: ConfIntMethod
+struct BCaConfInt <: ConfIntMethod
     level::AbstractFloat
     ## quantile method
 end
@@ -62,7 +62,7 @@ BCaConfInt(0.95)
 """
 BCaConfInt() = BCaConfInt(_level)
 
-type StudentConfInt <: ConfIntMethod
+struct StudentConfInt <: ConfIntMethod
     level::AbstractFloat
 end
 
@@ -87,8 +87,8 @@ function confint(bs::BootstrapSample, cim::BasicConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
-    alpha = ([l, -l] + 1)/2
-    lower, upper = 2 * t0 - quantile(t1, alpha)
+    alpha = ([l, -l] .+ 1) ./ 2
+    lower, upper = 2 .* t0 .- quantile(t1, alpha)
     return t0, lower, upper
 end
 
@@ -97,7 +97,7 @@ function confint(bs::BootstrapSample, cim::PercentileConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t1 = straps(bs, i)
-    alpha = ([-l, l] + 1)/2
+    alpha = ([-l, l] .+ 1) ./ 2
     lower, upper = quantile(t1, alpha)
     return t0, lower, upper
 end
@@ -107,7 +107,7 @@ function confint(bs::BootstrapSample, cim::NormalConfInt, i::Int)
     l = level(cim)
     t0 = original(bs, i)
     t0b = t0 - bias(bs, i)
-    merr = stderror(bs, i) * quantile(Normal(), (1+l)/2)
+    merr = stderror(bs, i) * quantile(Normal(), (1 + l) / 2)
     lower = t0b - merr
     upper = t0b + merr
     return t0, lower, upper
@@ -119,14 +119,14 @@ function confint(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     t0 = original(bs, i)
     t1 = straps(bs, i)
     n = length(t1)
-    alpha = ([-l, l] + 1)/2
+    alpha = ([-l, l] .+ 1) ./ 2
     z0 = quantile(Normal(), mean(t1 .< t0))
     jkt = jack_knife_estimate(data(bs), statistic(bs), i)
-    resid = (n-1) .* (t0 - jkt)
-    a = sum(resid.^3) / (6.*(sum(resid.^2)).^(1.5))
-    qn = quantile.(Normal(), alpha)
-    z1 = z0 + qn
-    zalpha = cdf.(Normal(), z0 + (z1) ./ (1-a*(z1)))
+    resid = (t0 .- jkt) .* (n - 1)
+    a = sum(resid .^ 3) / (6 .* (sum(resid.^2)) .^ (1.5)) # TODO
+    qn = quantile.(Ref(Normal()), alpha)
+    z1 = z0 .+ qn
+    zalpha = cdf.(Ref(Normal()), z0 .+ z1 ./ (1 .- a .* z1)) # TODO
     lower, upper = quantile(t1, zalpha)
     return t0, lower, upper
 end
@@ -138,15 +138,8 @@ function confint(bs::BootstrapSample, sd1::AbstractVector{Float64}, cim::Student
     t0 = original(bs, i)
     t1 = straps(bs, i)
     t0se = stderror(bs, i)
-    z = (t1 - t0) ./ sd1
-    alpha = ([l, -l] + 1.)/2.
-    lower, upper = t0 - t0se .* quantile(z, alpha)
+    z = (t1 .- t0) ./ sd1
+    alpha = ([l, -l] .+ 1) ./ 2
+    lower, upper = t0 .- t0se .* quantile(z, alpha)
     return t0, lower, upper
 end
-
-const _conf_int_methods =
-    [BasicConfInt,
-     PercentileConfInt,
-     NormalConfInt,
-     BCaConfInt,
-     StudentConfInt]
