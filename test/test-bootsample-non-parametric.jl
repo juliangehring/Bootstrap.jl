@@ -221,7 +221,7 @@ using StatsBase
         # Add some checks to ensure that our within sample variation is greater than our
         # across sample variation at any given "timestep".
         @test all(std(samples, dims=2) .< std(r))
-        @test mean(std(samples, dims=2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
+        @test mean(std(samples, dims=2)) < 0.15  # NOTE: This is about 0.09 in julia and 0.08 in the R package
         @test std(r) > 0.5
 
     end
