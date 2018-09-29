@@ -1,7 +1,7 @@
 module TestUtils
 
 using Bootstrap
-using Base.Test
+using Test
 
 
 @testset "Statistic functions" begin

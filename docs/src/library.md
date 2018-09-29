@@ -1,51 +1,49 @@
-
-    {meta}
-    CurrentModule = Bootstrap
-    DocTestSetup  = quote
-        using Bootstrap
-    end
-
-
 # Library
 
-## Contents
-
-    {contents}
-    Pages = ["library.md"]
-
-
-## Index
-
-    {index}
-    Pages = ["library.md"]
-
-
-## Module
-
-    {docs}
-    Bootstrap
+```@meta
+CurrentModule = Bootstrap
+DocTestSetup = quote
+    using Bootstrap
+end
+```
 
 
 ## Sampling
 
-    {docs}
-    BasicSampling
-    BalancedSampling
-    ExactSampling
-    ResidualSampling
-    WildSampling
-    MaximumEntropySampling
-    nrun
-    statistic
-    noise
+### Non-Parametric Sampling
+
+```@docs
+BasicSampling
+BalancedSampling
+ExactSampling
+AntitheticSampling
+MaximumEntropySampling
+```
+
+
+### Parametric Sampling
+
+```@docs
+ResidualSampling
+WildSampling
+```
+
+
+### Accessors
+
+```@docs
+nrun
+statistic
+noise
+```
 
 
 ## Confidence Intervals
 
-    {docs}
-    BasicConfInt
-    PercentileConfInt
-    NormalConfInt
-    StudentConfInt
-    BCaConfInt
-
+```@docs
+BasicConfInt
+PercentileConfInt
+NormalConfInt
+StudentConfInt
+BCaConfInt
+```

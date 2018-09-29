@@ -1,5 +1,22 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.0.0
+
+### Interface changes
+
+- Put the function argument first in the signatures (#26): Changes the bootstrap signature to have the function argument come first: `bootstrap(statistic::Function, data, sampling)`. The old syntax has been deprecated and will be removed in a future version.
+- Integrate better with StatsBase function names #24: Integrates with the naming of the equivalent functions in StatsBase.jl: Renames ci to confint and se to stderror. The old function names have been deprecated, and will be supported until the next major release. The motivation for these change is outlined in #23.
+
+### Changes
+
+- Build the html documentation directly with Documenter (#28, #25)
+- Support julia v0.7 and v1.0, drop support for julia v0.6 (#30)
+
+### Support
+
+- Requires julia 0.7 or v1.0
+
+
 ## Version 1.2.0
 
 ### New features
@@ -9,7 +26,7 @@
 
 ### Changes
 
-- Transition tests from ``FactCheck`` to `Base.Test`.
+- Transition tests from `FactCheck` to `Base.Test`.
 - Introduces `StatsModels` as a new dependency which is now the new home of `Formula`s.
 - Use vectorized function calls for `Distribution` functions.
 - Removes the dependency on `Compat`.
@@ -25,13 +42,13 @@
 
 ### Changes
 
-- Adds compatibility with julia 0.6 development versions, inc- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
+- Adds compatibility with julia 0.6 development versions, inc- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaData/DataFrames.jl/pull/1170) v0.9.0 or newer)
 - Fixes convergence errors of GLM models in parametric bootstrap test cases
 - Modernise automated test and coverage setup (also thanks to [Tony Kelman](https://github.com/tkelman) for contributions)
 - Improves the readme (also thanks to [Patrick Kofod Mogensen](https://github.com/pkofod) for contributions)
 luding automated tests.
 - Introduces `Compat` as a new dependency
-- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaStats/DataFrames.jl/pull/1170) v0.9.0 or newer)
+- Supports formula macros for DataFrame formulas (required for using [`DataFrames`](https://github.com/JuliaData/DataFrames.jl/pull/1170) v0.9.0 or newer)
 - Fixes convergence errors of GLM models in parametric bootstrap test cases
 - Modernise automated test and coverage setup (also thanks to [Tony Kelman](https://github.com/tkelman) for contributions)
 - Improves the readme (also thanks to [Patrick Kofod Mogensen](https://github.com/pkofod) for contributions)

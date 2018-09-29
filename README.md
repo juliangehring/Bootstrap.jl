@@ -5,10 +5,10 @@
 
 Bootstrapping is a widely applicable technique for statistical estimation.
 
-![img](docs/src/bootstraps.png)
+![img](docs/src/assets/logo.png)
 
 
-# Functionality
+## Functionality
 
 - Bootstrapping statistics with different resampling methods:
   - Random resampling with replacement (`BasicSampling`)
@@ -32,7 +32,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 Reports on package builds for all platforms and test coverage are collected on
 the [package status page](status.md).
 
-The package is under active development and uses [semantic versioning](http://semver.org/).
+The package uses [semantic versioning](https://semver.org/).
 
 
 ## Installation
@@ -41,15 +41,16 @@ The `Bootstrap` package is part of the Julia ecosphere and the latest release
 version can be installed with
 
 ```julia
+using Pkg
 Pkg.add("Bootstrap")
 ```
 
-More details on packages and how to manage them can be found in the
-[package section](http://docs.julialang.org/en/stable/manual/packages/#adding-and-removing-packages)
-of the Julia documentation.
+More details on packages and how to manage them can be found in the [package
+section](https://docs.julialang.org/en/v1/stdlib/Pkg/) of the Julia
+documentation.
 
 
-# Examples
+## Examples
 
 This example illustrates the basic usage and cornerstone functions of the package.
 More elaborate cases are covered in the documentation notebooks.
@@ -58,51 +59,53 @@ More elaborate cases are covered in the documentation notebooks.
   using Bootstrap
 ```
 
-Our observations `r` are sampled from a standard normal distribution.
+Our observations in `some_data` are sampled from a standard normal distribution.
 
 ```julia
-  r = randn(100);
+  some_data = randn(100);
 ```
 
 Let's bootstrap the standard deviation (`std`) of our data, based on 1000
 resamples and with different bootstrapping approaches.
 
 ```julia
+  using Statistics  # the `std` methods live here
+  
   n_boot = 1000
 
   ## basic bootstrap
-  bs1 = bootstrap(r, std, BasicSampling(n_boot))
+  bs1 = bootstrap(std, some_data, BasicSampling(n_boot))
 
   ## balanced bootstrap
-  bs2 = bootstrap(r, std, BalancedSampling(n_boot))
+  bs2 = bootstrap(std, some_data, BalancedSampling(n_boot))
 ```
 
-We can explore the properties of the bootstrapped samples, for example estimated
-bias and standard error of our statistic.
+We can explore the properties of the bootstrapped samples, for example, the
+estimated bias and standard error of our statistic.
 
 ```julia
   bias(bs1)
-  se(bs1)
+  stderror(bs1)
 ```
 
-Further, we can estimate confidence intervals for our statistic of interest,
-based on the bootstrapped samples.
+Furthermore, we can estimate confidence intervals (CIs) for our statistic of
+interest, based on the bootstrapped samples.
 
 ```julia
   ## calculate 95% confidence intervals
   cil = 0.95;
 
   ## basic CI
-  bci1 = ci(bs1, BasicConfInt(cil));
+  bci1 = confint(bs1, BasicConfInt(cil));
 
   ## percentile CI
-  bci2 = ci(bs1, PercentileConfInt(cil));
+  bci2 = confint(bs1, PercentileConfInt(cil));
 
   ## BCa CI
-  bci3 = ci(bs1, BCaConfInt(cil));
+  bci3 = confint(bs1, BCaConfInt(cil));
 
   ## Normal CI
-  bci4 = ci(bs1, NormalConfInt(cil));
+  bci4 = confint(bs1, NormalConfInt(cil));
 ```
 
 
@@ -113,8 +116,8 @@ is a comprehensive introduction into the topic.  An extensive description of the
 bootstrap is the focus of the book *Davison and Hinkley (1997):
 [Bootstrap Methods and Their Application](http://statwww.epfl.ch/davison/BMA/)*.
 Most of the methodology covered in the book is implemented in the
-[boot](http://cran.r-project.org/web/packages/boot/index.html) package for the
-[R programming language](http://www.r-project.org/). [More references](docs/src/references.md)
+[boot](https://cran.r-project.org/web/packages/boot/index.html) package for the
+[R programming language](https://www.r-project.org/). [More references](docs/src/references.md)
 are listed in the documentation for further reading.
 
 
