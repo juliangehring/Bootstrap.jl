@@ -1,6 +1,6 @@
 abstract type Model end
 
-type SimpleModel{T} <: Model
+struct SimpleModel{T} <: Model
     class::T
     args::Tuple
     kwargs::Tuple
@@ -8,7 +8,7 @@ end
 
 Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwargs...))
 
-type FormulaModel{T} <: Model
+struct FormulaModel{T} <: Model
     class::T
     formula::Formula
     args::Tuple
@@ -31,7 +31,7 @@ BasicSampling(1000)
 ```
 
 """
-type BasicSampling <: BootstrapSampling
+struct BasicSampling <: BootstrapSampling
     nrun::Int
 end
 
@@ -43,7 +43,7 @@ AntitheticSampling(1000)
 ```
 
 """
-type AntitheticSampling <: BootstrapSampling
+struct AntitheticSampling <: BootstrapSampling
     nrun::Int
 end
 
@@ -56,7 +56,7 @@ BalancedSampling(1000)
 ```
 
 """
-type BalancedSampling <: BootstrapSampling
+struct BalancedSampling <: BootstrapSampling
     nrun::Int
 end
 
@@ -69,7 +69,7 @@ ResidualSampling(1000)
 ```
 
 """
-type ResidualSampling <: BootstrapSampling
+struct ResidualSampling <: BootstrapSampling
     nrun::Int
 end
 
@@ -83,7 +83,7 @@ WildSampling(1000, mammen)
 ```
 
 """
-type WildSampling <: BootstrapSampling
+struct WildSampling <: BootstrapSampling
     nrun::Int
     noise::Function
 end
@@ -97,7 +97,7 @@ ExactSampling()
 ```
 
 """
-type ExactSampling <: BootstrapSampling
+mutable struct ExactSampling <: BootstrapSampling
     nrun::Int
 end
 
@@ -114,7 +114,7 @@ maximumEntropySampling(100, MaximumEntropyCache())
 NOTE: Implementation based off [pymeboot](https://github.com/kirajcg/pymeboot) as the original
 [R package](https://cran.r-project.org/web/packages/meboot/index.html) is GPL licensed.
 """
-type MaximumEntropySampling <: BootstrapSampling
+struct MaximumEntropySampling <: BootstrapSampling
     nrun::Int
     cache::MaximumEntropyCache
 end
@@ -123,7 +123,7 @@ MaximumEntropySampling(nrun) = MaximumEntropySampling(nrun, MaximumEntropyCache(
 
 abstract type BootstrapSample end
 
-type NonParametricBootstrapSample{T} <: BootstrapSample
+struct NonParametricBootstrapSample{T} <: BootstrapSample
     t0::Tuple
     t1::Tuple
     statistic::Function
@@ -131,7 +131,7 @@ type NonParametricBootstrapSample{T} <: BootstrapSample
     sampling::BootstrapSampling
 end
 
-type ParametricBootstrapSample{T,M} <: BootstrapSample
+struct ParametricBootstrapSample{T,M} <: BootstrapSample
     t0::Tuple
     t1::Tuple
     statistic::Function
@@ -219,7 +219,7 @@ function bootstrap(statistic::Function, data::AbstractVector, sampling::Antithet
         if isodd(i)
             sample!(idx, idx1)
         else
-            idx1 = n - idx1 + 1
+            idx1 = n .- idx1 .+ 1
         end
         data1 = pick(data0, idx1)
         for (j, t) in enumerate(tx(statistic(data1)))
@@ -239,7 +239,7 @@ function bootstrap(statistic::Function, data, sampling::BalancedSampling)
     m = nrun(sampling)
     t0 = tx(statistic(data))
     t1 = zeros_tuple(t0, m)
-    idx = repmat([1:n;], m)
+    idx = repeat([1:n;], m)
     ridx = zeros(Int, n, m)
     sample!(idx, ridx, replace = false)
     for i in 1:m
@@ -250,36 +250,38 @@ function bootstrap(statistic::Function, data, sampling::BalancedSampling)
     return NonParametricBootstrapSample(t0, t1, statistic, data, sampling)
 end
 
-type ExactIterator{T}
+struct ExactIterator{T}
     a::T
     k::Int64
 end
 
 exact(n::Int) = ExactIterator(1:n, n)
 
-start(itr::ExactIterator) = ones(Int, itr.k)
-
-function next(itr::ExactIterator, s)
+function iterate(itr::ExactIterator, s=ones(Int, itr.k))
+    if length(s) > 0 && s[1] < 1
+        return nothing
+    end
     r = itr.a[s]
     for i = itr.k:-1:1
-        if s[i] < endof(itr.a)
+        if s[i] < lastindex(itr.a)
             s[i] = nextind(itr.a, s[i])
             for j = i:itr.k-1
                 s[j+1] = s[j]
             end
-            return r, s
+            return (r, s)
         end
     end
-    return r, [0]
+    s[1] = 0
+    return (r, s)
 end
 
-done(itr::ExactIterator, s) = length(s) > 0 && s[1] < 1
-
 eltype(itr::ExactIterator) = typeof(itr.a)
-eltype{T}(itr::ExactIterator{UnitRange{T}}) = Array{T, 1}
-eltype{T}(itr::ExactIterator{Range{T}}) = Array{T, 1}
+eltype(itr::ExactIterator{UnitRange{T}}) where {T} = Array{T, 1}
+eltype(itr::ExactIterator{AbstractRange{T}}) where {T} = Array{T, 1}
 
 length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
+size(itr::ExactIterator) = (itr.k, )
+
 
 """
 bootstrap(statistic, data, sampling)
@@ -345,7 +347,7 @@ function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaM
     args = model.args
     kwargs = model.kwargs
     yy = lhs(formula)
-    y0 = data[:,yy]
+    y0 = data[yy]
     f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0
@@ -374,7 +376,7 @@ function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaM
     args = model.args
     kwargs = model.kwargs
     yy = lhs(formula)
-    y0 = data[:,yy]
+    y0 = data[yy]
     f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0

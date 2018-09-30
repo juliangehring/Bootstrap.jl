@@ -2,7 +2,10 @@ module TestBootsampleNonParametric
 
 using Bootstrap
 using Bootstrap.Datasets
-using Base.Test
+using Test
+
+using Statistics
+using Random
 
 using DataFrames
 using StatsBase
@@ -13,7 +16,7 @@ using StatsBase
     function test_bootsample(bs, ref, raw_data, n)
 
         show(IOBuffer(), bs)
-        @test issubtype(typeof(bs), NonParametricBootstrapSample)
+        @test typeof(bs) <: NonParametricBootstrapSample
         t0 = original(bs)
         @test length(t0) == length(ref)
         [@test t ≈ r for (t, r) in zip(t0, ref)]
@@ -41,7 +44,7 @@ using StatsBase
 
         @test_throws MethodError model(bs)
 
-        return Void
+        return Nothing
     end
 
     function test_confint(bs)
@@ -54,7 +57,7 @@ using StatsBase
             @test level(cim) == 0.95
         end
 
-        return Void
+        return Nothing
     end
 
     n = 250
@@ -62,11 +65,11 @@ using StatsBase
     ## 'city' dataset
     citya = convert(Array, city)
 
-    city_ratio(df::DataFrames.DataFrame) = mean(df[:,:X]) ./ mean(df[:,:U])
-    city_ratio(a::AbstractArray) = mean(a[:,2]) ./ mean(a[:,1])
+    city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
+    city_ratio(x::AbstractDataFrame) = mean(x[:X]) ./ mean(x[:U])
 
     city_cor(x::AbstractArray) = cor(x[:,1], x[:,2])
-    city_cor(x::AbstractDataFrame) = cor(x[:,:X], x[:,:U])
+    city_cor(x::AbstractDataFrame) = cor(x[:X], x[:U])
 
 
     @testset "Basic resampling" begin
@@ -192,10 +195,9 @@ using StatsBase
         nobs = 100
 
         function test_obs(n, seed=1234)
-            srand(seed)
+            Random.seed!(seed)
             e = randn(n)
-            x = Array{Float64}(n)
-            x[1] = 0.0
+            x = zeros(Float64, n)
             for i = 2:n
                 x[i] = 0.8 * x[i-1] + e[i]
             end
@@ -219,8 +221,8 @@ using StatsBase
 
         # Add some checks to ensure that our within sample variation is greater than our
         # across sample variation at any given "timestep".
-        @test all(std(samples, 2) .< std(r))
-        @test mean(std(samples, 2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
+        @test all(std(samples, dims=2) .< std(r))
+        @test mean(std(samples, dims=2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
         @test std(r) > 0.5
 
     end

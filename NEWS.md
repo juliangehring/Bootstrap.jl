@@ -1,5 +1,22 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.0.0
+
+### Interface changes
+
+- Put the function argument first in the signatures (#26): Changes the bootstrap signature to have the function argument come first: `bootstrap(statistic::Function, data, sampling)`. The old syntax has been deprecated and will be removed in a future version.
+- Integrate better with StatsBase function names (#24): Integrates with the naming of the equivalent functions in StatsBase.jl: Renames ci to confint and se to stderror. The old function names have been deprecated, and will be supported until the next major release. The motivation for these change is outlined in #23.
+
+### Changes
+
+- Build the html documentation directly with Documenter (#28, #25)
+- Support julia v0.7 and v1.0, drop support for julia v0.6 (#33)
+
+### Support
+
+- Requires julia 0.7 or v1.0
+
+
 ## Version 1.2.0
 
 ### New features

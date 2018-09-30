@@ -6,14 +6,14 @@ function Base.show(io::IO, bs::BootstrapSample)
     s = _show_signif
     df = estimate_summary(bs)
     df = split(string(df), '\n')[2:end]
-    df[1] = replace(df[1], "Row", "Var")
+    df[1] = replace(df[1], "Row" => "Var")
     println(io, "Bootstrap Sampling")
     println(io, rpad("  Estimates:", r))
     for i in 1:length(df)
         println(io, string("    ", df[i]))
     end
     println(io, rpad("  Sampling:", r),
-            replace(string(typeof(sampling(bs))), "Bootstrap.", ""))
+            replace(string(typeof(sampling(bs))), "Bootstrap." => ""))
     println(io, rpad("  Samples:", r), nrun(bs))
     println(io, rpad("  Data:", r), data_summary(bs.data))
 end
