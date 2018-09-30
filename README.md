@@ -8,7 +8,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
 ![img](docs/src/assets/logo.png)
 
 
-# Functionality
+## Functionality
 
 - Bootstrapping statistics with different resampling methods:
   - Random resampling with replacement (`BasicSampling`)
@@ -50,7 +50,7 @@ section](https://docs.julialang.org/en/v1/stdlib/Pkg/) of the Julia
 documentation.
 
 
-# Examples
+## Examples
 
 This example illustrates the basic usage and cornerstone functions of the package.
 More elaborate cases are covered in the documentation notebooks.
