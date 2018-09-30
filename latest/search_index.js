@@ -53,7 +53,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.BasicSampling",
     "category": "type",
-    "text": "Basic Sampling\n\nBasicSampling(1000)\n\n\n\n"
+    "text": "Basic Sampling\n\nBasicSampling(1000)\n\n\n\n\n\n"
 },
 
 {
@@ -61,7 +61,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.BalancedSampling",
     "category": "type",
-    "text": "Balanced Sampling\n\nBalancedSampling(1000)\n\n\n\n"
+    "text": "Balanced Sampling\n\nBalancedSampling(1000)\n\n\n\n\n\n"
 },
 
 {
@@ -69,7 +69,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.ExactSampling",
     "category": "type",
-    "text": "Exact Sampling\n\nExactSampling()\n\n\n\n"
+    "text": "Exact Sampling\n\nExactSampling()\n\n\n\n\n\n"
 },
 
 {
@@ -77,7 +77,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.AntitheticSampling",
     "category": "type",
-    "text": "Antithetic Sampling\n\nAntitheticSampling(1000)\n\n\n\n"
+    "text": "Antithetic Sampling\n\nAntitheticSampling(1000)\n\n\n\n\n\n"
 },
 
 {
@@ -85,7 +85,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.MaximumEntropySampling",
     "category": "type",
-    "text": "Maximum Entropy Sampling\n\nMaximumEntropySampling(100)\nmaximumEntropySampling(100, MaximumEntropyCache())\n\nNOTE: Implementation based off pymeboot as the original R package is GPL licensed.\n\n\n\n"
+    "text": "Maximum Entropy Sampling\n\nMaximumEntropySampling(100)\nmaximumEntropySampling(100, MaximumEntropyCache())\n\nNOTE: Implementation based off pymeboot as the original R package is GPL licensed.\n\n\n\n\n\n"
 },
 
 {
@@ -101,7 +101,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.ResidualSampling",
     "category": "type",
-    "text": "Residual Sampling\n\nResidualSampling(1000)\n\n\n\n"
+    "text": "Residual Sampling\n\nResidualSampling(1000)\n\n\n\n\n\n"
 },
 
 {
@@ -109,7 +109,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.WildSampling",
     "category": "type",
-    "text": "Wild Sampling\n\nWildSampling(1000, rademacher)\nWildSampling(1000, mammen)\n\n\n\n"
+    "text": "Wild Sampling\n\nWildSampling(1000, rademacher)\nWildSampling(1000, mammen)\n\n\n\n\n\n"
 },
 
 {
@@ -125,7 +125,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.nrun",
     "category": "function",
-    "text": "Number of samples drawn from a bootstrap sampling\n\nbs = BasicSampling(1000)\nnrun(bs)\n\n# output\n\n1000\n\n\n\n"
+    "text": "Number of samples drawn from a bootstrap sampling\n\nbs = BasicSampling(1000)\nnrun(bs)\n\n# output\n\n1000\n\n\n\n\n\n"
 },
 
 {
@@ -133,7 +133,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.statistic",
     "category": "function",
-    "text": "Return the statistic function of a BootstrapSample\n\nbs = bootstrap(randn(20), mean, BasicSampling(100))\nstatistic(bs)\n\n\n\n"
+    "text": "Return the statistic function of a BootstrapSample\n\nbs = bootstrap(randn(20), mean, BasicSampling(100))\nstatistic(bs)\n\n\n\n\n\n"
 },
 
 {
@@ -141,7 +141,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.noise",
     "category": "function",
-    "text": "Return the noise function of a wild bootstrap sampling\n\n\n\n"
+    "text": "Return the noise function of a wild bootstrap sampling\n\n\n\n\n\n"
 },
 
 {
@@ -157,7 +157,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.BasicConfInt",
     "category": "type",
-    "text": "Basic Confidence Interval\n\nBasicConfInt(0.95)\n\n\n\n"
+    "text": "Basic Confidence Interval\n\nBasicConfInt(0.95)\n\n\n\n\n\n"
 },
 
 {
@@ -165,7 +165,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.PercentileConfInt",
     "category": "type",
-    "text": "Percentile Confidence Interval\n\nPercentileConfInt(0.95)\n\n\n\n"
+    "text": "Percentile Confidence Interval\n\nPercentileConfInt(0.95)\n\n\n\n\n\n"
 },
 
 {
@@ -173,7 +173,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.NormalConfInt",
     "category": "type",
-    "text": "Normal Confidence Interval\n\nNormalConfInt(0.95)\n\n\n\n"
+    "text": "Normal Confidence Interval\n\nNormalConfInt(0.95)\n\n\n\n\n\n"
 },
 
 {
@@ -181,7 +181,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.StudentConfInt",
     "category": "type",
-    "text": "Student\'s Confidence Interval\n\nStudentConfInt(0.95)\n\n\n\n"
+    "text": "Student\'s Confidence Interval\n\nStudentConfInt(0.95)\n\n\n\n\n\n"
 },
 
 {
@@ -189,7 +189,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Bootstrap.BCaConfInt",
     "category": "type",
-    "text": "Bias-Corrected and Accelerated (BCa) Confidence Interval\n\nBCaConfInt(0.95)\n\n\n\n"
+    "text": "Bias-Corrected and Accelerated (BCa) Confidence Interval\n\nBCaConfInt(0.95)\n\n\n\n\n\n"
 },
 
 {
@@ -217,6 +217,38 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "NEWS.html#Version-2.0.0-1",
+    "page": "Changelog",
+    "title": "Version 2.0.0",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS.html#Interface-changes-1",
+    "page": "Changelog",
+    "title": "Interface changes",
+    "category": "section",
+    "text": "Put the function argument first in the signatures (#26): Changes the bootstrap signature to have the function argument come first: bootstrap(statistic::Function, data, sampling). The old syntax has been deprecated and will be removed in a future version.\nIntegrate better with StatsBase function names (#24): Integrates with the naming of the equivalent functions in StatsBase.jl: Renames ci to confint and se to stderror. The old function names have been deprecated, and will be supported until the next major release. The motivation for these change is outlined in #23."
+},
+
+{
+    "location": "NEWS.html#Changes-1",
+    "page": "Changelog",
+    "title": "Changes",
+    "category": "section",
+    "text": "Build the html documentation directly with Documenter (#28, #25)\nSupport julia v0.7 and v1.0, drop support for julia v0.6 (#33)"
+},
+
+{
+    "location": "NEWS.html#Support-1",
+    "page": "Changelog",
+    "title": "Support",
+    "category": "section",
+    "text": "Requires julia 0.7 or v1.0"
+},
+
+{
     "location": "NEWS.html#Version-1.2.0-1",
     "page": "Changelog",
     "title": "Version 1.2.0",
@@ -233,7 +265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-1",
+    "location": "NEWS.html#Changes-2",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -241,7 +273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Support-1",
+    "location": "NEWS.html#Support-2",
     "page": "Changelog",
     "title": "Support",
     "category": "section",
@@ -257,7 +289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-2",
+    "location": "NEWS.html#Changes-3",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -265,7 +297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Support-2",
+    "location": "NEWS.html#Support-3",
     "page": "Changelog",
     "title": "Support",
     "category": "section",
