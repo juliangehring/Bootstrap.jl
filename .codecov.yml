@@ -16,7 +16,7 @@ coverage:
     project: true
 
 flags:
-  julia_0_6:
+  julia_1_0:
     joined: true
 
 parsers:

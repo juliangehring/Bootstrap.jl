@@ -2,18 +2,20 @@ language: julia
 
 os:
   - linux
+  - osx
 
 julia:
-  - 0.6
+  - 0.7
+  - 1.0
+
+matrix:
+  fast_finish: true
 
 notifications:
   email:
     on_success: never
     on_failure: change
 
-script:
-  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia --check-bounds=yes -e 'Pkg.clone(pwd()); Pkg.build("Bootstrap"); Pkg.test("Bootstrap"; coverage=true)'
-
 after_success:
-  - julia -e 'cd(Pkg.dir("Bootstrap")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder(), flags="julia_$(VERSION.major)_$(VERSION.minor)")'
+  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder(), flags="julia_$(VERSION.major)_$(VERSION.minor)")'
+  - julia -e 'using Pkg; Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'

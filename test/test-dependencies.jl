@@ -1,7 +1,7 @@
 module TestDistributionsDependency
 
 using Distributions
-using Base.Test
+using Test
 
 @testset "Distributions" begin
 
