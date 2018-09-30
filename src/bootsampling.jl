@@ -347,7 +347,7 @@ function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaM
     args = model.args
     kwargs = model.kwargs
     yy = lhs(formula)
-    y0 = data[:,yy]
+    y0 = data[yy]
     f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0
@@ -376,7 +376,7 @@ function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaM
     args = model.args
     kwargs = model.kwargs
     yy = lhs(formula)
-    y0 = data[:,yy]
+    y0 = data[yy]
     f0 = fit(class, formula, data, args...; kwargs...)
     t0 = tx(statistic(f0))
     r0 = predict(f0) - y0

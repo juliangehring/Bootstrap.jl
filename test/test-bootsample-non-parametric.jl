@@ -65,11 +65,11 @@ using StatsBase
     ## 'city' dataset
     citya = convert(Array, city)
 
-    city_ratio(df::DataFrames.DataFrame) = mean(df[:,:X]) ./ mean(df[:,:U])
-    city_ratio(a::AbstractArray) = mean(a[:,2]) ./ mean(a[:,1])
+    city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
+    city_ratio(x::AbstractDataFrame) = mean(x[:X]) ./ mean(x[:U])
 
     city_cor(x::AbstractArray) = cor(x[:,1], x[:,2])
-    city_cor(x::AbstractDataFrame) = cor(x[:,:X], x[:,:U])
+    city_cor(x::AbstractDataFrame) = cor(x[:X], x[:U])
 
 
     @testset "Basic resampling" begin

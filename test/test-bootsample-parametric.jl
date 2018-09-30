@@ -62,8 +62,8 @@ using Distributions
     n = 100
 
     ## log cannot be specified in formula, see GLM issues
-    city2 = DataFrame(twenty = log10.(city[:,:U]),
-                      thirty = log10.(city[:,:X]))
+    city2 = DataFrame(twenty = log10.(city[:U]),
+                      thirty = log10.(city[:X]))
 
 
     @testset "Parametric distributions" begin
