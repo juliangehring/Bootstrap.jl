@@ -1,5 +1,13 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.0.1
+
+### Changes
+
+- Fix `Documenter` version to v0.19 for building the documentation (#35)
+- Fix `convert` deprecation in `DataFrames`, bump required version to v0.16.0
+
+
 ## Version 2.0.0
 
 ### Interface changes
