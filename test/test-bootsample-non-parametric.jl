@@ -63,7 +63,7 @@ using StatsBase
     n = 250
 
     ## 'city' dataset
-    citya = convert(Array, city)
+    citya = convert(Matrix, city)
 
     city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
     city_ratio(x::AbstractDataFrame) = mean(x[:X]) ./ mean(x[:U])

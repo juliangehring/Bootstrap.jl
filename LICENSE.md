@@ -1,6 +1,8 @@
 The Bootstrap.jl package is licensed under the MIT "Expat" License:
 
-> Copyright (c) 2014-2018: Julian Gehring, Nikolaos Ignatiadis.
+> Copyright (c) 2014-2019: Julian Gehring.
+>
+> Copyright (c) 2014-2016: Nikolaos Ignatiadis.
 >
 > Copyright (c) 2014: Jarno Leppänen.
 >
