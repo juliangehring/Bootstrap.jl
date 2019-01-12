@@ -217,6 +217,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "NEWS.html#Version-2.0.1-1",
+    "page": "Changelog",
+    "title": "Version 2.0.1",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS.html#Changes-1",
+    "page": "Changelog",
+    "title": "Changes",
+    "category": "section",
+    "text": "Fix Documenter version to v0.19 for building the documentation (#35)\nFix convert deprecation in DataFrames, bump required version to v0.16.0"
+},
+
+{
     "location": "NEWS.html#Version-2.0.0-1",
     "page": "Changelog",
     "title": "Version 2.0.0",
@@ -233,7 +249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-1",
+    "location": "NEWS.html#Changes-2",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -265,7 +281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-2",
+    "location": "NEWS.html#Changes-3",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -289,7 +305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-3",
+    "location": "NEWS.html#Changes-4",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -397,7 +413,7 @@ var documenterSearchIndex = {"docs": [
     "page": "License",
     "title": "License",
     "category": "page",
-    "text": "The Bootstrap.jl package is licensed under the MIT \"Expat\" License:Copyright (c) 2014-2018: Julian Gehring, Nikolaos Ignatiadis.Copyright (c) 2014: Jarno Leppänen.Copyright (c) 2017: Kira Huselius GyllingPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+    "text": "The Bootstrap.jl package is licensed under the MIT \"Expat\" License:Copyright (c) 2014-2019: Julian Gehring.Copyright (c) 2014-2016: Nikolaos Ignatiadis.Copyright (c) 2014: Jarno Leppänen.Copyright (c) 2017: Kira Huselius GyllingPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
 },
 
 ]}
