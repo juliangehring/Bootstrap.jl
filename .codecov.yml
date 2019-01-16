@@ -5,19 +5,15 @@ codecov:
 comment: off
 
 coverage:
-  precision: 2
+  precision: 0
   range:
-  - 70.0
+  - 50.0
   - 100.0
   round: down
   status:
     changes: false
-    patch: true
-    project: true
-
-flags:
-  julia_1_0:
-    joined: true
+    patch: false
+    project: false
 
 parsers:
   gcov:
@@ -26,5 +22,3 @@ parsers:
       loop: true
       macro: false
       method: false
-  javascript:
-    enable_partials: false
