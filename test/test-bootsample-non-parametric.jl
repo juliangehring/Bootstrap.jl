@@ -114,7 +114,6 @@ using StatsBase
             @test c[1] ≈ original(bs, 1)
             @test level(cim) == 0.95
         end
-
     end
 
     @testset "Antithetic resampling" begin
@@ -227,6 +226,14 @@ using StatsBase
 
     end
 
+    @testset "ConfInt" begin
+        @testset "All equal" begin
+            r = rand(10)
+            # In this case our count will always be the same because all values are positive
+            bs = bootstrap(x -> count(x .> 0.0), r, BasicSampling(n))
+            test_confint(bs)
+        end
+    end
 end
 
 end
