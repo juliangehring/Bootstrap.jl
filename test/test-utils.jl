@@ -2,6 +2,7 @@ module TestUtils
 
 using Bootstrap
 using Test
+using Random
 
 
 @testset "Statistic functions" begin
@@ -63,6 +64,22 @@ end
 
     end
 
+end
+
+@testset "draw! for views" begin
+
+    x = rand(100)
+    xv = view(x, 1:2:100)
+    xvc = collect(xv)
+
+    Random.seed!(1)
+    d1 = draw!(xv, copy(xv))
+    @test d1 isa Vector{Float64}
+
+    Random.seed!(1)
+    d2 = draw!(xvc, copy(xvc))
+    @test d2 == d1
+    
 end
 
 end
