@@ -19,8 +19,6 @@ notifications:
     on_success: never
     on_failure: change
 
-codecov: true
-
 jobs:
   include:
     - stage: "Documentation"
