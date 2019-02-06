@@ -5,18 +5,26 @@ os:
   - osx
 
 julia:
-  - 0.7
   - 1.0
+  - 1.1
+  - nightly
 
 matrix:
   fast_finish: true
+  allow_failures:
+  - julia: nightly
 
 notifications:
   email:
     on_success: never
     on_failure: change
 
-after_success:
-  - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder(), flags="julia_$(VERSION.major)_$(VERSION.minor)")'
-  - julia -e 'using Pkg; ps=Pkg.PackageSpec(name="Documenter", version="0.19"); Pkg.add(ps); Pkg.pin(ps); include(joinpath("docs", "make.jl"))'
-
+jobs:
+  include:
+    - stage: "Documentation"
+      julia: 1.1
+      os: linux
+      script:
+        - julia --project=docs/ -e 'using Pkg; Pkg.develop(PackageSpec(path=pwd())); Pkg.instantiate()'
+        - julia --project=docs/ docs/make.jl
+      after_success: skip
