@@ -60,6 +60,20 @@ using StatsBase
         return Nothing
     end
 
+    function test_confint_width0(bs)
+
+        cim_all = (BasicConfInt(), PercentileConfInt(), NormalConfInt(), BCaConfInt())
+        for cim in cim_all
+            c = confint(bs, cim)
+            # We expect a confidence interval of width 0
+            [@test x[2] == x[1] == x[3] for x in c]
+            [@test x[1] ≈ t0 for (x, t0) in zip(c, original(bs))]
+            @test level(cim) == 0.95
+        end
+
+        return Nothing
+    end
+
     n = 250
 
     ## 'city' dataset
@@ -231,7 +245,7 @@ using StatsBase
             r = rand(10)
             # In this case our count will always be the same because all values are positive
             bs = bootstrap(x -> count(x .> 0.0), r, BasicSampling(n))
-            test_confint(bs)
+            test_confint_width0(bs)
         end
     end
 end

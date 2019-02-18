@@ -119,8 +119,7 @@ function confint(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     t0 = original(bs, i)
     t1 = straps(bs, i)
 
-    # Early exit if each element of t1 == t0
-    all(==(t0), t1) && return (t0, t0, t0)
+    var(t1) == 0.0 && return (t0, t0, t0)
 
     n = length(t1)
     alpha = ([-l, l] .+ 1) ./ 2
