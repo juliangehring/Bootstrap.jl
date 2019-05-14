@@ -191,7 +191,7 @@ lhs(f::Formula) = f.lhs
 """
 bootstrap(statistic, data, BasicSampling())
 """
-function bootstrap(statistic::Function, data, sampling::BasicSampling)
+function bootstrap(statistic, data, sampling::BasicSampling)
     t0 = tx(statistic(data))
     m = nrun(sampling)
     t1 = zeros_tuple(t0, m)
@@ -209,7 +209,7 @@ end
 """
 bootstrap(statistic, data, AntitheticSampling)
 """
-function bootstrap(statistic::Function, data::AbstractVector, sampling::AntitheticSampling)
+function bootstrap(statistic, data::AbstractVector, sampling::AntitheticSampling)
     t0 = tx(statistic(data))
     m = nrun(sampling)
     n = nobs(data)
@@ -238,7 +238,7 @@ end
 """
 bootstrap(statistic, data, sampling)
 """
-function bootstrap(statistic::Function, data, sampling::BalancedSampling)
+function bootstrap(statistic, data, sampling::BalancedSampling)
     n = nobs(data)
     m = nrun(sampling)
     t0 = tx(statistic(data))
@@ -290,7 +290,7 @@ size(itr::ExactIterator) = (itr.k, )
 """
 bootstrap(statistic, data, sampling)
 """
-function bootstrap(statistic::Function, data, sampling::ExactSampling)
+function bootstrap(statistic, data, sampling::ExactSampling)
     n = nobs(data)
     m = nrun_exact(n)
     t0 = tx(statistic(data))
@@ -307,7 +307,7 @@ end
 """
 bootstrap(statistic, data, MaximumEntropySampling)
 """
-function bootstrap(statistic::Function, data, sampling::MaximumEntropySampling)
+function bootstrap(statistic, data, sampling::MaximumEntropySampling)
     init!(sampling.cache, data)
 
     t0 = tx(statistic(data))
@@ -326,7 +326,7 @@ end
 """
 bootstrap(statistic, data, model, sampling)
 """
-function bootstrap(statistic::Function, data, model::SimpleModel, sampling::BootstrapSampling)
+function bootstrap(statistic, data, model::SimpleModel, sampling::BootstrapSampling)
     f0 = fit(model.class, data, model.args...; model.kwargs...)
     t0 = tx(statistic(data))
     m = nrun(sampling)
@@ -345,7 +345,7 @@ end
 """
 bootstrap(statistic, data, model, formula, sampling)
 """
-function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::ResidualSampling)
+function bootstrap(statistic, data::AbstractDataFrame, model::FormulaModel, sampling::ResidualSampling)
     class = model.class
     formula = model.formula
     args = model.args
@@ -374,7 +374,7 @@ end
 """
 bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
-function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::WildSampling)
+function bootstrap(statistic, data::AbstractDataFrame, model::FormulaModel, sampling::WildSampling)
     class = model.class
     formula = model.formula
     args = model.args
