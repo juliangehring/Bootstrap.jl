@@ -79,7 +79,7 @@ StudentConfInt() = StudentConfInt(_level)
 level(cim::ConfIntMethod) = cim.level
 
 function confint(bs::BootstrapSample, cim::ConfIntMethod)
-    tuple([confint(bs, cim, i) for i in 1:nvar(bs)]...)
+    ntuple(i -> confint(bs, cim, i), nvar(bs))
 end
 
 ## basic
