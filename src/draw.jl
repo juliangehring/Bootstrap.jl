@@ -1,6 +1,6 @@
 ## draw: unify rand, sample
 
-draw!(x::T, o) where {T<:Distribution} = rand!(x, o)
+draw!(x::Distribution, o) = rand!(x, o)
 
 draw!(x::T, o::T) where {T<:AbstractVector} = sample!(x, o)
 
