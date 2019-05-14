@@ -1,0 +1,22 @@
+name = "Bootstrap"
+uuid = "e28b5b4c-05e8-5b66-bc03-6f0c0a0a06e0"
+authors = ["Julian Gehring"]
+version = "2.0.1"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
+StatsModels = "3eaba693-59b7-5ba5-a881-562e759f1c8d"
+
+[compat]
+julia = ">= 0.7"
+
+[extras]
+GLM = "38e38edf-8417-5370-95a0-9cbb8c7f171a"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["GLM", "Test"]
