@@ -8,11 +8,11 @@ end
 
 Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwargs...))
 
-struct FormulaModel{T} <: Model
+struct FormulaModel{T,A<:Tuple,K<:Tuple} <: Model
     class::T
     formula::Formula
-    args::Tuple
-    kwargs::Tuple
+    args::A
+    kwargs::K
 end
 
 Model(class, formula::Formula, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
@@ -83,9 +83,9 @@ WildSampling(1000, mammen)
 ```
 
 """
-struct WildSampling <: BootstrapSampling
+struct WildSampling{N} <: BootstrapSampling
     nrun::Int
-    noise::Function
+    noise::N
 end
 
 
@@ -114,30 +114,30 @@ maximumEntropySampling(100, MaximumEntropyCache())
 NOTE: Implementation based off [pymeboot](https://github.com/kirajcg/pymeboot) as the original
 [R package](https://cran.r-project.org/web/packages/meboot/index.html) is GPL licensed.
 """
-struct MaximumEntropySampling <: BootstrapSampling
+struct MaximumEntropySampling{C<:MaximumEntropyCache} <: BootstrapSampling
     nrun::Int
-    cache::MaximumEntropyCache
+    cache::C
 end
 
 MaximumEntropySampling(nrun) = MaximumEntropySampling(nrun, MaximumEntropyCache())
 
 abstract type BootstrapSample end
 
-struct NonParametricBootstrapSample{T} <: BootstrapSample
-    t0::Tuple
-    t1::Tuple
-    statistic::Function
+struct NonParametricBootstrapSample{T,T0<:Tuple,T1<:Tuple,S,B<:BootstrapSampling} <: BootstrapSample
+    t0::T0
+    t1::T1
+    statistic::S
     data::T
-    sampling::BootstrapSampling
+    sampling::B
 end
 
-struct ParametricBootstrapSample{T,M} <: BootstrapSample
-    t0::Tuple
-    t1::Tuple
-    statistic::Function
+struct ParametricBootstrapSample{T,M,T0<:Tuple,T1<:Tuple,S,B<:BootstrapSampling} <: BootstrapSample
+    t0::T0
+    t1::T1
+    statistic::S
     data::T
     model::M
-    sampling::BootstrapSampling
+    sampling::B
 end
 
 
