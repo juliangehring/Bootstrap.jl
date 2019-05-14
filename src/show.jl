@@ -12,8 +12,7 @@ function Base.show(io::IO, bs::BootstrapSample)
     for i in 1:length(df)
         println(io, string("    ", df[i]))
     end
-    println(io, rpad("  Sampling:", r),
-            replace(string(typeof(sampling(bs))), "Bootstrap." => ""))
+    println(io, rpad("  Sampling:", r), nameof(typeof(sampling(bs))))
     println(io, rpad("  Samples:", r), nrun(bs))
     println(io, rpad("  Data:", r), data_summary(bs.data))
 end
