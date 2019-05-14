@@ -1,9 +1,9 @@
 abstract type Model end
 
-struct SimpleModel{T} <: Model
+struct SimpleModel{T,A<:Tuple,K<:Tuple} <: Model
     class::T
-    args::Tuple
-    kwargs::Tuple
+    args::A
+    kwargs::K
 end
 
 Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwargs...))
@@ -177,10 +177,14 @@ noise(bs::WildSampling) = bs.noise
 nvar(t::Tuple) = length(t)
 nvar(bs::BootstrapSample) = nvar(original(bs))
 
+tx(x::Tuple) = x
+tx(x::Number) = (x,)
 tx(x) = tuple(x...)
 
-## TODO: see Unroll.jl for a more efficient version, worth it?
-zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
+zeros_tuple(t::Tuple, m::Int) = _zeros_tuple(typeof(t), m)
+_zeros_tuple(::Type{Tuple{}}, m::Int) = ()
+_zeros_tuple(::Type{T}, m::Int) where T <: Tuple =
+    (zeros(Base.tuple_type_head(T), m), _zeros_tuple(Base.tuple_type_tail(T), m)...)
 
 lhs(f::Formula) = f.lhs
 
