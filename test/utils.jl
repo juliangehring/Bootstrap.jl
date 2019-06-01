@@ -1,5 +1,3 @@
-module TestUtils
-
 using Bootstrap
 using Test
 using Random
@@ -77,10 +75,7 @@ end
         Random.seed!(1)
         d2 = draw!(xvc, copy(xvc))
         @test d2 == d1
-        
+
     end
-
-end
-
 
 end

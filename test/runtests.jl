@@ -1,9 +1,6 @@
-tests = ["test-bootsample-non-parametric",
-         "test-bootsample-parametric",
-         "test-utils",
-         "test-dependencies"]
+using SafeTestsets
 
-for t in tests
-    test_file = "$(t).jl"
-    include(test_file)
-end
+@safetestset "Non-parametric bootstrap" begin include("nonparametric.jl") end
+@safetestset "Parametric bootstrap" begin include("parametric.jl") end
+@safetestset "Utilities" begin include("utils.jl") end
+@safetestset "Dependencies" begin include("dependencies.jl") end
