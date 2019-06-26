@@ -2,9 +2,9 @@
 
 draw!(x::T, o) where {T<:Distribution} = rand!(x, o)
 
-draw!(x::T, o::T) where {T<:AbstractVector} = sample!(x, o)
+draw!(x::T, o::S) where {T<:AbstractVector, S<:AbstractVector} = sample!(x, o)
 
-function draw!(x::T, o::T) where {T<:AbstractArray}
+function draw!(x::T, o::S) where {T<:AbstractMatrix, S<:AbstractMatrix}
     idx = sample(1:nobs(x), nobs(o))
     for (to, from) in enumerate(idx)
         o[to,:] = x[from,:]
