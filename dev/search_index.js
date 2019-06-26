@@ -1,7 +1,7 @@
 var documenterSearchIndex = {"docs": [
 
 {
-    "location": "index.html#",
+    "location": "#",
     "page": "Home",
     "title": "Home",
     "category": "page",
@@ -9,7 +9,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Motivation-1",
+    "location": "#Motivation-1",
     "page": "Home",
     "title": "Motivation",
     "category": "section",
@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#References-1",
+    "location": "#References-1",
     "page": "Home",
     "title": "References",
     "category": "section",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#",
+    "location": "library/#",
     "page": "Library",
     "title": "Library",
     "category": "page",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Library-1",
+    "location": "library/#Library-1",
     "page": "Library",
     "title": "Library",
     "category": "section",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Sampling-1",
+    "location": "library/#Sampling-1",
     "page": "Library",
     "title": "Sampling",
     "category": "section",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.BasicSampling",
+    "location": "library/#Bootstrap.BasicSampling",
     "page": "Library",
     "title": "Bootstrap.BasicSampling",
     "category": "type",
@@ -57,7 +57,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.BalancedSampling",
+    "location": "library/#Bootstrap.BalancedSampling",
     "page": "Library",
     "title": "Bootstrap.BalancedSampling",
     "category": "type",
@@ -65,7 +65,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.ExactSampling",
+    "location": "library/#Bootstrap.ExactSampling",
     "page": "Library",
     "title": "Bootstrap.ExactSampling",
     "category": "type",
@@ -73,7 +73,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.AntitheticSampling",
+    "location": "library/#Bootstrap.AntitheticSampling",
     "page": "Library",
     "title": "Bootstrap.AntitheticSampling",
     "category": "type",
@@ -81,7 +81,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.MaximumEntropySampling",
+    "location": "library/#Bootstrap.MaximumEntropySampling",
     "page": "Library",
     "title": "Bootstrap.MaximumEntropySampling",
     "category": "type",
@@ -89,7 +89,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Non-Parametric-Sampling-1",
+    "location": "library/#Non-Parametric-Sampling-1",
     "page": "Library",
     "title": "Non-Parametric Sampling",
     "category": "section",
@@ -97,7 +97,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.ResidualSampling",
+    "location": "library/#Bootstrap.ResidualSampling",
     "page": "Library",
     "title": "Bootstrap.ResidualSampling",
     "category": "type",
@@ -105,7 +105,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.WildSampling",
+    "location": "library/#Bootstrap.WildSampling",
     "page": "Library",
     "title": "Bootstrap.WildSampling",
     "category": "type",
@@ -113,7 +113,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Parametric-Sampling-1",
+    "location": "library/#Parametric-Sampling-1",
     "page": "Library",
     "title": "Parametric Sampling",
     "category": "section",
@@ -121,7 +121,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.nrun",
+    "location": "library/#Bootstrap.nrun",
     "page": "Library",
     "title": "Bootstrap.nrun",
     "category": "function",
@@ -129,7 +129,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.statistic",
+    "location": "library/#Bootstrap.statistic",
     "page": "Library",
     "title": "Bootstrap.statistic",
     "category": "function",
@@ -137,7 +137,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.noise",
+    "location": "library/#Bootstrap.noise",
     "page": "Library",
     "title": "Bootstrap.noise",
     "category": "function",
@@ -145,7 +145,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Accessors-1",
+    "location": "library/#Accessors-1",
     "page": "Library",
     "title": "Accessors",
     "category": "section",
@@ -153,7 +153,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.BasicConfInt",
+    "location": "library/#Bootstrap.BasicConfInt",
     "page": "Library",
     "title": "Bootstrap.BasicConfInt",
     "category": "type",
@@ -161,7 +161,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.PercentileConfInt",
+    "location": "library/#Bootstrap.PercentileConfInt",
     "page": "Library",
     "title": "Bootstrap.PercentileConfInt",
     "category": "type",
@@ -169,7 +169,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.NormalConfInt",
+    "location": "library/#Bootstrap.NormalConfInt",
     "page": "Library",
     "title": "Bootstrap.NormalConfInt",
     "category": "type",
@@ -177,7 +177,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.StudentConfInt",
+    "location": "library/#Bootstrap.StudentConfInt",
     "page": "Library",
     "title": "Bootstrap.StudentConfInt",
     "category": "type",
@@ -185,7 +185,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Bootstrap.BCaConfInt",
+    "location": "library/#Bootstrap.BCaConfInt",
     "page": "Library",
     "title": "Bootstrap.BCaConfInt",
     "category": "type",
@@ -193,7 +193,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Confidence-Intervals-1",
+    "location": "library/#Confidence-Intervals-1",
     "page": "Library",
     "title": "Confidence Intervals",
     "category": "section",
@@ -201,7 +201,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#",
+    "location": "NEWS/#",
     "page": "Changelog",
     "title": "Changelog",
     "category": "page",
@@ -209,7 +209,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Bootstrap.jl-News-and-Changes-1",
+    "location": "NEWS/#Bootstrap.jl-News-and-Changes-1",
     "page": "Changelog",
     "title": "Bootstrap.jl News and Changes",
     "category": "section",
@@ -217,7 +217,23 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-2.0.1-1",
+    "location": "NEWS/#Version-2.1.0-1",
+    "page": "Changelog",
+    "title": "Version 2.1.0",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS/#Changes-1",
+    "page": "Changelog",
+    "title": "Changes",
+    "category": "section",
+    "text": "Update continuous integration configuration (#39)\nWiden the signature for draw!:  No longer restrict source and destination AbstractVectors to be of the same type, and switch to the more general AbstractMatrix type. Contributed by Dave Kleinschmidt (@kleinschmidt) (#43).\nImprove error handling of BCaConfInt if all the input data has the same value. Contributed by Rory Finnegan (@rofinn) (#40).\nAdd Project.toml and Manifest.toml. Contributed by Colin Bowers (@colintbowers) (#48).\nRestrict compatible versions of the StatsModels dependency. Contributed by Mike Molignano (@mmolignano) (#53)."
+},
+
+{
+    "location": "NEWS/#Version-2.0.1-1",
     "page": "Changelog",
     "title": "Version 2.0.1",
     "category": "section",
@@ -225,7 +241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-1",
+    "location": "NEWS/#Changes-2",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -233,7 +249,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-2.0.0-1",
+    "location": "NEWS/#Version-2.0.0-1",
     "page": "Changelog",
     "title": "Version 2.0.0",
     "category": "section",
@@ -241,7 +257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Interface-changes-1",
+    "location": "NEWS/#Interface-changes-1",
     "page": "Changelog",
     "title": "Interface changes",
     "category": "section",
@@ -249,7 +265,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-2",
+    "location": "NEWS/#Changes-3",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -257,7 +273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Support-1",
+    "location": "NEWS/#Support-1",
     "page": "Changelog",
     "title": "Support",
     "category": "section",
@@ -265,7 +281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-1.2.0-1",
+    "location": "NEWS/#Version-1.2.0-1",
     "page": "Changelog",
     "title": "Version 1.2.0",
     "category": "section",
@@ -273,7 +289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#New-features-1",
+    "location": "NEWS/#New-features-1",
     "page": "Changelog",
     "title": "New features",
     "category": "section",
@@ -281,7 +297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-3",
+    "location": "NEWS/#Changes-4",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -289,7 +305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Support-2",
+    "location": "NEWS/#Support-2",
     "page": "Changelog",
     "title": "Support",
     "category": "section",
@@ -297,7 +313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-1.1.0-1",
+    "location": "NEWS/#Version-1.1.0-1",
     "page": "Changelog",
     "title": "Version 1.1.0",
     "category": "section",
@@ -305,7 +321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Changes-4",
+    "location": "NEWS/#Changes-5",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -313,7 +329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Support-3",
+    "location": "NEWS/#Support-3",
     "page": "Changelog",
     "title": "Support",
     "category": "section",
@@ -321,7 +337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-1.0.0-1",
+    "location": "NEWS/#Version-1.0.0-1",
     "page": "Changelog",
     "title": "Version 1.0.0",
     "category": "section",
@@ -329,7 +345,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.3.3-1",
+    "location": "NEWS/#Version-0.3.3-1",
     "page": "Changelog",
     "title": "Version 0.3.3",
     "category": "section",
@@ -337,7 +353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.3.2-1",
+    "location": "NEWS/#Version-0.3.2-1",
     "page": "Changelog",
     "title": "Version 0.3.2",
     "category": "section",
@@ -345,7 +361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.3.1-1",
+    "location": "NEWS/#Version-0.3.1-1",
     "page": "Changelog",
     "title": "Version 0.3.1",
     "category": "section",
@@ -353,7 +369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.3.0-1",
+    "location": "NEWS/#Version-0.3.0-1",
     "page": "Changelog",
     "title": "Version 0.3.0",
     "category": "section",
@@ -361,7 +377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.2.0-1",
+    "location": "NEWS/#Version-0.2.0-1",
     "page": "Changelog",
     "title": "Version 0.2.0",
     "category": "section",
@@ -369,7 +385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.1.1-1",
+    "location": "NEWS/#Version-0.1.1-1",
     "page": "Changelog",
     "title": "Version 0.1.1",
     "category": "section",
@@ -377,7 +393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.1.0-1",
+    "location": "NEWS/#Version-0.1.0-1",
     "page": "Changelog",
     "title": "Version 0.1.0",
     "category": "section",
@@ -385,7 +401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.0.3-1",
+    "location": "NEWS/#Version-0.0.3-1",
     "page": "Changelog",
     "title": "Version 0.0.3",
     "category": "section",
@@ -393,7 +409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.0.2-1",
+    "location": "NEWS/#Version-0.0.2-1",
     "page": "Changelog",
     "title": "Version 0.0.2",
     "category": "section",
@@ -401,7 +417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS.html#Version-0.0.1-1",
+    "location": "NEWS/#Version-0.0.1-1",
     "page": "Changelog",
     "title": "Version 0.0.1",
     "category": "section",
@@ -409,7 +425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "LICENSE.html#",
+    "location": "LICENSE/#",
     "page": "License",
     "title": "License",
     "category": "page",
