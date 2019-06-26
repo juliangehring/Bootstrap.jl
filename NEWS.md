@@ -1,5 +1,16 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.1.0
+
+### Changes
+
+- Update continuous integration configuration (#39)
+- Widen the signature for `draw!`:  No longer restrict source and destination `AbstractVectors` to be of the same type, and switch to the more general `AbstractMatrix` type. Contributed by Dave Kleinschmidt (@kleinschmidt) (#43).
+- Improve error handling of `BCaConfInt` if all the input data has the same value. Contributed by Rory Finnegan (@rofinn) (#40).
+- Add Project.toml and Manifest.toml. Contributed by Colin Bowers (@colintbowers) (#48).
+- Restrict compatible versions of the `StatsModels` dependency. Contributed by Mike Molignano (@mmolignano) (#53).
+
+
 ## Version 2.0.1
 
 ### Changes
