@@ -10,12 +10,12 @@ Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwar
 
 struct FormulaModel{T} <: Model
     class::T
-    formula::Formula
+    formula::FormulaTerm
     args::Tuple
     kwargs::Tuple
 end
 
-Model(class, formula::Formula, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
+Model(class, formula::FormulaTerm, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
 
 abstract type BootstrapSampling end
 
@@ -182,7 +182,7 @@ tx(x) = tuple(x...)
 ## TODO: see Unroll.jl for a more efficient version, worth it?
 zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 
-lhs(f::Formula) = f.lhs
+lhs(f::FormulaTerm) = f.lhs.sym
 
 """
 bootstrap(statistic, data, BasicSampling())
