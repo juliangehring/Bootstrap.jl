@@ -182,7 +182,12 @@ tx(x) = tuple(x...)
 ## TODO: see Unroll.jl for a more efficient version, worth it?
 zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 
-lhs(f::FormulaTerm) = f.lhs.sym
+function lhs(f::FormulaTerm)
+    term = f.lhs
+    term isa FunctionTerm &&
+        throw(ArgumentError("Transformations are not supported on formula LHS by Bootstrap"))
+    term.sym
+end
 
 """
 bootstrap(statistic, data, BasicSampling())
