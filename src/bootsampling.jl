@@ -182,13 +182,6 @@ tx(x) = tuple(x...)
 ## TODO: see Unroll.jl for a more efficient version, worth it?
 zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 
-function lhs(f::FormulaTerm)
-    term = f.lhs
-    term isa FunctionTerm &&
-        throw(ArgumentError("Transformations are not supported on formula LHS by Bootstrap"))
-    term.sym
-end
-
 """
 bootstrap(statistic, data, BasicSampling())
 """
@@ -342,55 +335,50 @@ function bootstrap(statistic::Function, data, model::SimpleModel, sampling::Boot
     return ParametricBootstrapSample(t0, t1, statistic, data, model, sampling)
 end
 
-
-"""
-bootstrap(statistic, data, model, formula, sampling)
-"""
-function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::ResidualSampling)
-    class = model.class
-    formula = model.formula
-    args = model.args
-    kwargs = model.kwargs
-    yy = lhs(formula)
-    y0 = data[yy]
-    f0 = fit(class, formula, data, args...; kwargs...)
-    t0 = tx(statistic(f0))
-    r0 = predict(f0) - y0
-    m = nrun(sampling)
-    t1 = zeros_tuple(t0, m)
-    r1 = copy(r0)
-    data1 = deepcopy(data)
-    for i in 1:m
-        sample!(r0, r1)
-        data1[:,yy] = y0 + r1
-        f1 = fit(class, formula, data1, args...; kwargs...)
-        for (j, t) in enumerate(tx(statistic(f1)))
-            t1[j][i] = t
-        end
-    end
-    return ParametricBootstrapSample(t0, t1, statistic, data, model, sampling)
+struct ResidualTerm{S,T,R} <: StatsModels.AbstractTerm
+    sampling::S
+    t::T
+    r0::R
+    r1::R
+    ResidualTerm(s::S, t::T, r::R) where {S,T,R} = new{S,T,R}(s, t, r, copy(r))
 end
 
 
+StatsModels.modelcols(t::ResidualTerm{S}, data) where {S} =
+    throw(ArgumentError("ResidualTerm: don't know how to generate model columns for $S"))
+StatsModels.modelcols(t::ResidualTerm{ResidualSampling}, data) =
+    modelcols(t.t, data) + sample!(t.r0, t.r1)
+StatsModels.modelcols(t::ResidualTerm{WildSampling}, data) =
+    modelcols(t.t, data) + t.sampling.noise(t.r0)
+
+# we only ever create one of these terms after the model has been fit once so we don't
+# need to create a new schema for it every time...
+StatsModels.needs_schema(t::ResidualTerm) = false
+StatsModels.termvars(t::ResidualTerm) = StatsModels.termvars(t.t)
+
 """
+bootstrap(statistic, data, model, formula, sampling)
 bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
-function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling::WildSampling)
+function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling)
     class = model.class
-    formula = model.formula
+    formula = apply_schema(model.formula, schema(model.formula, data), model.class)
+
     args = model.args
     kwargs = model.kwargs
-    yy = lhs(formula)
-    y0 = data[yy]
+
     f0 = fit(class, formula, data, args...; kwargs...)
-    t0 = tx(statistic(f0))
-    r0 = predict(f0) - y0
+    r0 = predict(f0) - response(f0)
+    # replace LHS of formula with a special term that resamples from the residuals
+    # whenever it's asked for model columns
+    formula_resid = FormulaTerm(ResidualTerm(sampling, formula.lhs, r0), formula.rhs)
+
     m = nrun(sampling)
+    t0 = tx(statistic(f0))
     t1 = zeros_tuple(t0, m)
-    data1 = deepcopy(data)
+
     for i in 1:m
-        data1[:,yy] = y0 + sampling.noise(r0)
-        f1 = fit(class, formula, data1, args...; kwargs...)
+        f1 = fit(class, formula_resid, data, args...; kwargs...)
         for (j, t) in enumerate(tx(statistic(f1)))
             t1[j][i] = t
         end
