@@ -360,7 +360,8 @@ StatsModels.termvars(t::ResidualTerm) = StatsModels.termvars(t.t)
 bootstrap(statistic, data, model, formula, sampling)
 bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
-function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel, sampling)
+function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel,
+                   sampling::S) where {S<:BootstrapSampling}
     class = model.class
     formula = apply_schema(model.formula, schema(model.formula, data), model.class)
 
