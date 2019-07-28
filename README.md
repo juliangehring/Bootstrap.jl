@@ -18,6 +18,7 @@ Bootstrapping is a widely applicable technique for statistical estimation.
     deterministic bootstrap, suited for small samples sizes
   - Resampling of residuals in generalized linear models (`ResidualSampling`, `WildSampling`)
   - Maximum Entropy bootstrapping for dependent and non-stationary datasets (`MaximumEntropySampling`)
+  - Block bootstrapping for stationary or near-epoch-dependent time-series (`StationarySampling`, `MovingBlockSampling`, `CircularBlockSampling`, `NoOverlapBlockSampling`)
 
 - Confidence intervals:
   - Basic (`BasicConfInt`)
@@ -70,7 +71,7 @@ resamples and with different bootstrapping approaches.
 
 ```julia
   using Statistics  # the `std` methods live here
-  
+
   n_boot = 1000
 
   ## basic bootstrap
