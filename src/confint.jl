@@ -126,7 +126,7 @@ function confint(bs::BootstrapSample, cim::BCaConfInt, i::Int)
     z0 = quantile(Normal(), mean(t1 .< t0))
     jkt = jack_knife_estimate(data(bs), statistic(bs), i)
     resid = (t0 .- jkt) .* (n - 1)
-    a = sum(resid .^ 3) / (6 .* (sum(resid.^2)) .^ (1.5)) # TODO
+    a = sum(resid.^3) / (6 .* (sum(resid.^2)).^(1.5)) # TODO
     qn = quantile.(Ref(Normal()), alpha)
     z1 = z0 .+ qn
     zalpha = cdf.(Ref(Normal()), z0 .+ z1 ./ (1 .- a .* z1)) # TODO

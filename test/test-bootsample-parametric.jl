@@ -106,13 +106,13 @@ using Distributions
         @testset "Wild resampling: Rademacher" begin
             bs = bootstrap(coef, city, Model(LinearModel, @formula(log10(X) ~ log10(U))), WildSampling(n, rademacher))
             test_bootsample(bs, ref, city, n)
-            @test isa( noise(sampling(bs)), Function )
+            @test isa(noise(sampling(bs)), Function)
         end
 
         @testset "Wild resampling: Mammen" begin
             bs = bootstrap(coef, city, Model(LinearModel, @formula(log10(X) ~ log10(U))), WildSampling(n, mammen))
             test_bootsample(bs, ref, city, n)
-            @test isa( noise(sampling(bs)), Function )
+            @test isa(noise(sampling(bs)), Function)
         end
 
     end
@@ -142,7 +142,7 @@ using Distributions
                            Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxIter = max_iter, convTol = conv_tol),
                            WildSampling(n, rademacher))
             test_bootsample(bs, ref, city, n)
-            @test isa( noise(sampling(bs)), Function )
+            @test isa(noise(sampling(bs)), Function)
         end
 
         @testset "Wild resampling with link function: Mammen" begin
@@ -150,7 +150,7 @@ using Distributions
                            Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
                            WildSampling(n, mammen))
             test_bootsample(bs, ref, city, n)
-            @test isa( noise(sampling(bs)), Function )
+            @test isa(noise(sampling(bs)), Function)
         end
 
     end

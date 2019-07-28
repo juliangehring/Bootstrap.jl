@@ -255,7 +255,7 @@ end
 
 exact(n::Int) = ExactIterator(1:n, n)
 
-function iterate(itr::ExactIterator, s=ones(Int, itr.k))
+function iterate(itr::ExactIterator, s = ones(Int, itr.k))
     if length(s) > 0 && s[1] < 1
         return nothing
     end
@@ -263,8 +263,8 @@ function iterate(itr::ExactIterator, s=ones(Int, itr.k))
     for i = itr.k:-1:1
         if s[i] < lastindex(itr.a)
             s[i] = nextind(itr.a, s[i])
-            for j = i:itr.k-1
-                s[j+1] = s[j]
+            for j = i:itr.k - 1
+                s[j + 1] = s[j]
             end
             return (r, s)
         end
@@ -274,11 +274,11 @@ function iterate(itr::ExactIterator, s=ones(Int, itr.k))
 end
 
 eltype(itr::ExactIterator) = typeof(itr.a)
-eltype(itr::ExactIterator{UnitRange{T}}) where {T} = Array{T, 1}
-eltype(itr::ExactIterator{AbstractRange{T}}) where {T} = Array{T, 1}
+eltype(itr::ExactIterator{UnitRange{T}}) where {T} = Array{T,1}
+eltype(itr::ExactIterator{AbstractRange{T}}) where {T} = Array{T,1}
 
 length(itr::ExactIterator) = binomial(length(itr.a) + itr.k - 1, itr.k)
-size(itr::ExactIterator) = (itr.k, )
+size(itr::ExactIterator) = (itr.k,)
 
 
 """
@@ -361,7 +361,7 @@ bootstrap(statistic, data, model, formula, sampling)
 bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
 function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel,
-                   sampling::S) where {S<:BootstrapSampling}
+                   sampling::S) where {S <: BootstrapSampling}
     class = model.class
     formula = apply_schema(model.formula, schema(model.formula, data), model.class)
 
