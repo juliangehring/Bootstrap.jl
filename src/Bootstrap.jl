@@ -13,6 +13,7 @@ using StatsBase
 using Distributions
 using DataFrames
 using StatsModels
+using DependentBootstrap
 
 import Base: iterate, eltype, length, size
 import StatsBase: confint, stderror
@@ -33,6 +34,10 @@ export
     MaximumEntropySampling,
     ResidualSampling,
     WildSampling,
+    StationarySampling,
+    MovingBlockSampling,
+    CircularBlockSampling,
+    NoOverlapBlockSampling,
     BootstrapSample,
     NonParametricBootstrapSample,
     ParametricBootstrapSample,
@@ -57,6 +62,7 @@ include("stats.jl")
 include("nobs.jl")
 include("draw.jl")
 include("bootsampling.jl")
+include("dependent_bootstrap.jl")
 include("get.jl")
 include("show.jl")
 include("confint.jl")
