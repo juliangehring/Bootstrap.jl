@@ -1,4 +1,4 @@
-### Number of observations ###
+## Number of observations
 
 nobs(x::AbstractVector) = length(x)
 

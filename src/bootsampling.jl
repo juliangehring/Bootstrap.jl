@@ -179,7 +179,6 @@ nvar(bs::BootstrapSample) = nvar(original(bs))
 
 tx(x) = tuple(x...)
 
-## TODO: see Unroll.jl for a more efficient version, worth it?
 zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
 
 """
