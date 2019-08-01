@@ -22,7 +22,6 @@ export
     draw!,
     rademacher,
     mammen,
-    iquantile,
     bootstrap,
     BasicSampling,
     AntitheticSampling,
