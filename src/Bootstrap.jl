@@ -1,5 +1,3 @@
-__precompile__()
-
 """
 # Bootstrap package
 
@@ -24,7 +22,6 @@ export
     draw!,
     rademacher,
     mammen,
-    iquantile,
     bootstrap,
     BasicSampling,
     AntitheticSampling,
