@@ -120,26 +120,26 @@ using Distributions
     @testset "Generalized linear regression models" begin
 
         ref = coef(fit(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), city, Normal()))
-        max_iter = 200
-        conv_tol = 1e-3
+        maxiter = 200
+        atol = 1e-3
 
         @testset "Residual resampling" begin
             bs = bootstrap(coef, city,
-                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxIter = max_iter, convTol = conv_tol),
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxiter = maxiter, atol = atol),
                            ResidualSampling(n))
             test_bootsample(bs, ref, city, n)
         end
 
         @testset "Residual resampling with link function" begin
             bs = bootstrap(coef, city,
-                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxiter = maxiter, atol = atol),
                            ResidualSampling(n))
             test_bootsample(bs, ref, city, n)
         end
 
         @testset "Wild resampling: Rademacher" begin
             bs = bootstrap(coef, city,
-                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxIter = max_iter, convTol = conv_tol),
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxiter = maxiter, atol = atol),
                            WildSampling(n, rademacher))
             test_bootsample(bs, ref, city, n)
             @test isa(noise(sampling(bs)), Function)
@@ -147,7 +147,7 @@ using Distributions
 
         @testset "Wild resampling with link function: Mammen" begin
             bs = bootstrap(coef, city,
-                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxiter = maxiter, atol = atol),
                            WildSampling(n, mammen))
             test_bootsample(bs, ref, city, n)
             @test isa(noise(sampling(bs)), Function)

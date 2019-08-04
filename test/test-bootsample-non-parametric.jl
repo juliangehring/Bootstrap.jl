@@ -80,10 +80,10 @@ using StatsBase
     citya = convert(Matrix, city)
 
     city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
-    city_ratio(x::AbstractDataFrame) = mean(x[:X]) ./ mean(x[:U])
+    city_ratio(x::AbstractDataFrame) = mean(x[!,:X]) ./ mean(x[!,:U])
 
     city_cor(x::AbstractArray) = cor(x[:,1], x[:,2])
-    city_cor(x::AbstractDataFrame) = cor(x[:X], x[:U])
+    city_cor(x::AbstractDataFrame) = cor(x[!,:X], x[!,:U])
 
 
     @testset "Basic resampling" begin
