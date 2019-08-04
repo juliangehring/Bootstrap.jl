@@ -15,7 +15,7 @@ end
 function draw!(x::T, o::T) where {T <: AbstractDataFrame}
     idx = sample(1:nobs(x), nobs(o))
     for column in names(x)
-        o[:,column] = x[idx,column]
+        o[!,column] = x[idx,column]
     end
     return o
 end
