@@ -57,7 +57,6 @@ include("bootsampling.jl")
 include("get.jl")
 include("show.jl")
 include("confint.jl")
-include("datasets/Datasets.jl")
 include("deprecates.jl")
 
 end

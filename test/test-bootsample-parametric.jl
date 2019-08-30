@@ -1,14 +1,16 @@
 module TestBootsampleParametric
 
 using Bootstrap
-using Bootstrap.Datasets
 using Test
 
 using DataFrames
-using StatsBase
-using GLM
 using Distributions
+using GLM
+using RDatasets
+using StatsBase
 
+const city = dataset("boot", "city")
+const aircondit = convert(Vector{Float64}, dataset("boot", "aircondit")[!, :Hours])
 
 @testset "Parametric bootstraps" begin
 
