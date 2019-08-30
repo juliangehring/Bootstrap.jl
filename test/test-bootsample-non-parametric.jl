@@ -1,5 +1,3 @@
-module TestBootsampleNonParametric
-
 using Bootstrap
 using Bootstrap.Datasets
 using Test
@@ -248,6 +246,4 @@ using StatsBase
             test_confint_width0(bs)
         end
     end
-end
-
 end

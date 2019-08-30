@@ -1,5 +1,3 @@
-module TestDistributionsDependency
-
 using Distributions
 using Test
 
@@ -16,7 +14,5 @@ using Test
         v = quantile(Normal(), alpha)
         @test isapprox(v, ref, atol = 1e-6)
     end
-
-end
 
 end

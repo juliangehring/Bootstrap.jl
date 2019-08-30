@@ -1,5 +1,3 @@
-module TestUtils
-
 using Bootstrap
 using Test
 using Random
@@ -77,8 +75,5 @@ end
         @test d2 == d1
         
     end
-
-end
-
 
 end

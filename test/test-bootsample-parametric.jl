@@ -1,5 +1,3 @@
-module TestBootsampleParametric
-
 using Bootstrap
 using Bootstrap.Datasets
 using Test
@@ -154,7 +152,5 @@ using Distributions
         end
 
     end
-
-end
 
 end
