@@ -217,6 +217,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "NEWS/#Version-2.2.0-1",
+    "page": "Changelog",
+    "title": "Version 2.2.0",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS/#Changes-1",
+    "page": "Changelog",
+    "title": "Changes",
+    "category": "section",
+    "text": "Support StatsModels v0.6 with FormulaTerm. Contributed by Dave Kleinschmidt (@kleinschmidt) (#57).\nUse RDatasets instead of internal data sets. Contributed by David Widmann (@devmotion) (#60).\nFix deprecations in DataFrames and GLM (#62).\nIncrease compatibility with package management in newer julia versions (#61)."
+},
+
+{
     "location": "NEWS/#Version-2.1.0-1",
     "page": "Changelog",
     "title": "Version 2.1.0",
@@ -225,7 +241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-1",
+    "location": "NEWS/#Changes-2",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -241,7 +257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-2",
+    "location": "NEWS/#Changes-3",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -265,7 +281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-3",
+    "location": "NEWS/#Changes-4",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -297,7 +313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-4",
+    "location": "NEWS/#Changes-5",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -321,7 +337,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-5",
+    "location": "NEWS/#Changes-6",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
