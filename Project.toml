@@ -3,7 +3,7 @@ uuid = "e28b5b4c-05e8-5b66-bc03-6f0c0a0a06e0"
 license = "MIT"
 authors = "Julian Gehring"
 repository = "https://github.com/juliangehring/Bootstrap.jl"
-version = "2.1.0"
+version = "2.2.0"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"

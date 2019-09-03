@@ -1,5 +1,15 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.2.0
+
+### Changes
+
+- Support StatsModels v0.6 with `FormulaTerm`. Contributed by Dave Kleinschmidt (@kleinschmidt) (#57).
+- Use `RDatasets` instead of internal data sets. Contributed by David Widmann (@devmotion) (#60).
+- Fix deprecations in `DataFrames` and `GLM` (#62).
+- Increase compatibility with package management in newer julia versions (#61).
+
+
 ## Version 2.1.0
 
 ### Changes
