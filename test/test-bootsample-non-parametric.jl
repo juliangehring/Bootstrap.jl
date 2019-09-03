@@ -1,15 +1,18 @@
 module TestBootsampleNonParametric
 
 using Bootstrap
-using Bootstrap.Datasets
 using Test
 
 using Statistics
 using Random
 
 using DataFrames
+using RDatasets
 using StatsBase
 
+## 'city' dataset
+const city = dataset("boot", "city")
+const citya = convert(Matrix, city)
 
 @testset "Non-parametric bootstraps" begin
 
@@ -75,9 +78,6 @@ using StatsBase
     end
 
     n = 250
-
-    ## 'city' dataset
-    citya = convert(Matrix, city)
 
     city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
     city_ratio(x::AbstractDataFrame) = mean(x[!,:X]) ./ mean(x[!,:U])
