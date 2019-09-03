@@ -1,14 +1,16 @@
 module TestBootsampleParametric
 
 using Bootstrap
-using Bootstrap.Datasets
 using Test
 
 using DataFrames
-using StatsBase
-using GLM
 using Distributions
+using GLM
+using RDatasets
+using StatsBase
 
+const city = dataset("boot", "city")
+const aircondit = convert(Vector{Float64}, dataset("boot", "aircondit")[!, :Hours])
 
 @testset "Parametric bootstraps" begin
 
@@ -61,11 +63,6 @@ using Distributions
 
     n = 100
 
-    ## log cannot be specified in formula, see GLM issues
-    city2 = DataFrame(twenty = log10.(city[:U]),
-                      thirty = log10.(city[:X]))
-
-
     @testset "Parametric distributions" begin
 
         r = randn(20)
@@ -101,61 +98,61 @@ using Distributions
 
     @testset "Linear regression models" begin
 
-        ref = coef(fit(LinearModel, @formula(thirty ~ twenty), city2))
+        ref = coef(fit(LinearModel, @formula(log10(X) ~ log10(U)), city))
 
         @testset "Residual resampling" begin
-            bs = bootstrap(coef, city2, Model(LinearModel, @formula(thirty ~ twenty)), ResidualSampling(n))
-            test_bootsample(bs, ref, city2, n)
+            bs = bootstrap(coef, city, Model(LinearModel, @formula(log10(X) ~ log10(U))), ResidualSampling(n))
+            test_bootsample(bs, ref, city, n)
         end
 
         @testset "Wild resampling: Rademacher" begin
-            bs = bootstrap(coef, city2, Model(LinearModel, @formula(thirty ~ twenty)), WildSampling(n, rademacher))
-            test_bootsample(bs, ref, city2, n)
-            @test isa( noise(sampling(bs)), Function )
+            bs = bootstrap(coef, city, Model(LinearModel, @formula(log10(X) ~ log10(U))), WildSampling(n, rademacher))
+            test_bootsample(bs, ref, city, n)
+            @test isa(noise(sampling(bs)), Function)
         end
 
         @testset "Wild resampling: Mammen" begin
-            bs = bootstrap(coef, city2, Model(LinearModel, @formula(thirty ~ twenty)), WildSampling(n, mammen))
-            test_bootsample(bs, ref, city2, n)
-            @test isa( noise(sampling(bs)), Function )
+            bs = bootstrap(coef, city, Model(LinearModel, @formula(log10(X) ~ log10(U))), WildSampling(n, mammen))
+            test_bootsample(bs, ref, city, n)
+            @test isa(noise(sampling(bs)), Function)
         end
 
     end
 
     @testset "Generalized linear regression models" begin
 
-        ref = coef(fit(GeneralizedLinearModel, @formula(thirty ~ twenty), city2, Normal()))
-        max_iter = 200
-        conv_tol = 1e-3
+        ref = coef(fit(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), city, Normal()))
+        maxiter = 200
+        atol = 1e-3
 
         @testset "Residual resampling" begin
-            bs = bootstrap(coef, city2,
-                           Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), maxIter = max_iter, convTol = conv_tol),
+            bs = bootstrap(coef, city,
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxiter = maxiter, atol = atol),
                            ResidualSampling(n))
-            test_bootsample(bs, ref, city2, n)
+            test_bootsample(bs, ref, city, n)
         end
 
         @testset "Residual resampling with link function" begin
-            bs = bootstrap(coef, city2,
-                           Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+            bs = bootstrap(coef, city,
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxiter = maxiter, atol = atol),
                            ResidualSampling(n))
-            test_bootsample(bs, ref, city2, n)
+            test_bootsample(bs, ref, city, n)
         end
 
         @testset "Wild resampling: Rademacher" begin
-            bs = bootstrap(coef, city2,
-                           Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), maxIter = max_iter, convTol = conv_tol),
+            bs = bootstrap(coef, city,
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), maxiter = maxiter, atol = atol),
                            WildSampling(n, rademacher))
-            test_bootsample(bs, ref, city2, n)
-            @test isa( noise(sampling(bs)), Function )
+            test_bootsample(bs, ref, city, n)
+            @test isa(noise(sampling(bs)), Function)
         end
 
         @testset "Wild resampling with link function: Mammen" begin
-            bs = bootstrap(coef, city2,
-                           Model(GeneralizedLinearModel, @formula(thirty ~ twenty), Normal(), IdentityLink(), maxIter = max_iter, convTol = conv_tol),
+            bs = bootstrap(coef, city,
+                           Model(GeneralizedLinearModel, @formula(log10(X) ~ log10(U)), Normal(), IdentityLink(), maxiter = maxiter, atol = atol),
                            WildSampling(n, mammen))
-            test_bootsample(bs, ref, city2, n)
-            @test isa( noise(sampling(bs)), Function )
+            test_bootsample(bs, ref, city, n)
+            @test isa(noise(sampling(bs)), Function)
         end
 
     end

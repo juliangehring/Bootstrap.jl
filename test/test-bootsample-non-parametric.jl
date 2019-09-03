@@ -1,15 +1,18 @@
 module TestBootsampleNonParametric
 
 using Bootstrap
-using Bootstrap.Datasets
 using Test
 
 using Statistics
 using Random
 
 using DataFrames
+using RDatasets
 using StatsBase
 
+## 'city' dataset
+const city = dataset("boot", "city")
+const citya = convert(Matrix, city)
 
 @testset "Non-parametric bootstraps" begin
 
@@ -76,14 +79,11 @@ using StatsBase
 
     n = 250
 
-    ## 'city' dataset
-    citya = convert(Matrix, city)
-
     city_ratio(x::AbstractArray) = mean(x[:,2]) ./ mean(x[:,1])
-    city_ratio(x::AbstractDataFrame) = mean(x[:X]) ./ mean(x[:U])
+    city_ratio(x::AbstractDataFrame) = mean(x[!,:X]) ./ mean(x[!,:U])
 
     city_cor(x::AbstractArray) = cor(x[:,1], x[:,2])
-    city_cor(x::AbstractDataFrame) = cor(x[:X], x[:U])
+    city_cor(x::AbstractDataFrame) = cor(x[!,:X], x[!,:U])
 
 
     @testset "Basic resampling" begin
@@ -173,7 +173,7 @@ using StatsBase
             test_bootsample(bs, ref, r, n)
             test_confint(bs)
             ## mean should be unbiased
-            @test isapprox( bias(bs)[1], 0.0, atol = 1e-8 )
+            @test isapprox(bias(bs)[1], 0.0, atol = 1e-8)
         end
 
     end
@@ -207,12 +207,12 @@ using StatsBase
 
         nobs = 100
 
-        function test_obs(n, seed=1234)
+        function test_obs(n, seed = 1234)
             Random.seed!(seed)
             e = randn(n)
             x = zeros(Float64, n)
             for i = 2:n
-                x[i] = 0.8 * x[i-1] + e[i]
+                x[i] = 0.8 * x[i - 1] + e[i]
             end
             return sin.(x)
         end
@@ -234,8 +234,8 @@ using StatsBase
 
         # Add some checks to ensure that our within sample variation is greater than our
         # across sample variation at any given "timestep".
-        @test all(std(samples, dims=2) .< std(r))
-        @test mean(std(samples, dims=2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
+        @test all(std(samples, dims = 2) .< std(r))
+        @test mean(std(samples, dims = 2)) < 0.1  # NOTE: This is about 0.09 in julia and 0.08 in the R package
         @test std(r) > 0.5
 
     end
@@ -244,7 +244,7 @@ using StatsBase
         @testset "All equal" begin
             r = rand(10)
             # In this case our count will always be the same because all values are positive
-            bs = bootstrap(x -> count(x .> 0.0), r, BasicSampling(n))
+            bs = bootstrap(x->count(x .> 0.0), r, BasicSampling(n))
             test_confint_width0(bs)
         end
     end

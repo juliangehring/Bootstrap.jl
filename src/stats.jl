@@ -1,9 +1,9 @@
 ## rademacher
 rademacher(x) = x .* sign.(randn(nobs(x)))
 
-const _mammen_dist = Binomial(1, (sqrt(5)+1)/(2*sqrt(5)))
-const _mammen_val1 = -(sqrt(5)-1)/2
-const _mammen_val2 = (sqrt(5)+1)/2
+const _mammen_dist = Binomial(1, (sqrt(5) + 1) / (2 * sqrt(5)))
+const _mammen_val1 = -(sqrt(5) - 1) / 2
+const _mammen_val2 = (sqrt(5) + 1) / 2
 
 function mammen(x)
     r = rand(_mammen_dist, nobs(x))
@@ -11,7 +11,7 @@ function mammen(x)
 end
 
 ## Number of exact bootstrap runs
-nrun_exact(n::Integer) = binomial(2n-1, n)
+nrun_exact(n::Integer) = binomial(2n - 1, n)
 
 ## Jack-Knife estimate
 function jack_knife_estimate(data, statistic::Function, j::Int = 1, typ::Type = typeof(statistic(data)[j]))
@@ -21,7 +21,7 @@ function jack_knife_estimate(data, statistic::Function, j::Int = 1, typ::Type = 
     for i in 1:n
         idx[i] = false
         if i > 1
-            idx[i-1] = true
+            idx[i - 1] = true
         end
         y[i] = tx(statistic(pick(data, idx)))[j]
     end
@@ -44,14 +44,14 @@ function iquantile(x::AbstractVector, alpha::AbstractFloat, is_sorted::Bool = fa
         x = sort(x)
     end
     n = length(x)
-    k = trunc(Int, (n+1) * alpha)
+    k = trunc(Int, (n + 1) * alpha)
     ## infinity outside of data range
     if k == 0
         return -Inf
-    elseif k > (n-1)
+    elseif k > (n - 1)
         return Inf
     end
-    tx = [quantile(Normal(), a) for a in [alpha, k/(n+1), (k+1)/(n+1)]]
-    qn = (tx[1] - tx[2])/(tx[3] - tx[2]) * (x[k+1] - x[k]) + x[k]
+    tx = [quantile(Normal(), a) for a in [alpha, k / (n + 1), (k + 1) / (n + 1)]]
+    qn = (tx[1] - tx[2]) / (tx[3] - tx[2]) * (x[k + 1] - x[k]) + x[k]
     return qn
 end

@@ -10,20 +10,18 @@ using Random
     x = collect(100:-1:0) ## avoid sorting
 
     ## reference values, computed with boot:::norm_inter (R)
-    qr = (
-        (1.0,      Inf),
+    qr = ((1.0,      Inf),
         (0.0,     -Inf),
         (0.5,     50.0),
         (0.4713,  47.07265),
         (0.1,      9.205641),
-        (0.052,    4.319606)
-    )
+        (0.052,    4.319606))
 
     @testset "Normal-interpolated quantiles" begin
 
         @testset "Reference values: alpha scalar" begin
             for (alpha, ref) in qr
-                @test isapprox( Bootstrap.iquantile(x, alpha), ref, atol = 1e-5 )
+                @test isapprox(Bootstrap.iquantile(x, alpha), ref, atol = 1e-5)
             end
         end
 
@@ -31,7 +29,7 @@ using Random
             a = Float64[x[1] for x in qr]
             r = Float64[x[2] for x in qr]
             y = Bootstrap.iquantile(x, a)
-            @test isapprox(y, r, atol = 1e-4 )
+            @test isapprox(y, r, atol = 1e-4)
         end
 
         @testset "Monotone quantiles" begin

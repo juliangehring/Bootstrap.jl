@@ -1,10 +1,10 @@
 ## draw: unify rand, sample
 
-draw!(x::T, o) where {T<:Distribution} = rand!(x, o)
+draw!(x::T, o) where {T <: Distribution} = rand!(x, o)
 
-draw!(x::T, o::S) where {T<:AbstractVector, S<:AbstractVector} = sample!(x, o)
+draw!(x::T, o::S) where {T <: AbstractVector,S <: AbstractVector} = sample!(x, o)
 
-function draw!(x::T, o::S) where {T<:AbstractMatrix, S<:AbstractMatrix}
+function draw!(x::T, o::S) where {T <: AbstractMatrix,S <: AbstractMatrix}
     idx = sample(1:nobs(x), nobs(o))
     for (to, from) in enumerate(idx)
         o[to,:] = x[from,:]
@@ -12,10 +12,10 @@ function draw!(x::T, o::S) where {T<:AbstractMatrix, S<:AbstractMatrix}
     return o
 end
 
-function draw!(x::T, o::T) where {T<:AbstractDataFrame}
+function draw!(x::T, o::T) where {T <: AbstractDataFrame}
     idx = sample(1:nobs(x), nobs(o))
     for column in names(x)
-        o[:,column] = x[idx,column]
+        o[!,column] = x[idx,column]
     end
     return o
 end
@@ -44,7 +44,7 @@ This is intended to minimize memory allocations and time when drawing random sam
 - `quantiles::Vector{T}`: Preallocated array for sample quantiles.
 - `v::Vector{T}`
 """
-mutable struct MaximumEntropyCache{T<:Real}
+mutable struct MaximumEntropyCache{T <: Real}
     n::Int
     t::Type{T}
     inds::Vector{Int}
@@ -58,8 +58,7 @@ mutable struct MaximumEntropyCache{T<:Real}
 end
 
 function MaximumEntropyCache()
-    MaximumEntropyCache{Float64}(
-        0,
+    MaximumEntropyCache{Float64}(0,
         Float64,
         Int[],
         Float64[],
@@ -112,7 +111,7 @@ Compute our intermediate points for the ordered values.
 function intermediates!(c::MaximumEntropyCache)
     c.Z = zeros(c.t, c.n + 1)
     for i in 2:c.n
-        c.Z[i] = (c.vals[i-1] + c.vals[i]) /  2
+        c.Z[i] = (c.vals[i - 1] + c.vals[i]) /  2
     end
 
     # Insert our lower and upper tails using our trimmed mean
@@ -130,14 +129,14 @@ function med!(c::MaximumEntropyCache)
     c.m = zeros(c.t, c.n)
     c.m[1] = 0.75 * c.vals[1] + 0.25 * c.vals[1]
 
-    for k in 2:(c.n-1)
-        c.m[k] = 0.25 * c.vals[k-1] + 0.5 * c.vals[k] + 0.25 * c.vals[k+1]
+    for k in 2:(c.n - 1)
+        c.m[k] = 0.25 * c.vals[k - 1] + 0.5 * c.vals[k] + 0.25 * c.vals[k + 1]
     end
 
-    c.m[end] = 0.25 * c.vals[end-1] + 0.75 * c.vals[end]
+    c.m[end] = 0.25 * c.vals[end - 1] + 0.75 * c.vals[end]
 end
 
-function draw!(cache::MaximumEntropyCache, x::T, o::T) where T<:AbstractArray
+function draw!(cache::MaximumEntropyCache, x::T, o::T) where T <: AbstractArray
     # Generate random numbers from the [0, 1] uniform interval.
     sort!(rand!(cache.U))
 
