@@ -1,21 +1,22 @@
 abstract type Model end
 
-struct SimpleModel{T} <: Model
+struct SimpleModel{T,A,K} <: Model
     class::T
-    args::Tuple
-    kwargs::Tuple
+    args::A
+    kwargs::K
 end
 
-Model(class, args...; kwargs...) = SimpleModel(class, tuple(args...), tuple(kwargs...))
+Model(class, args...; kwargs...) = SimpleModel(class, args, kwargs)
 
-struct FormulaModel{T} <: Model
+struct FormulaModel{T,A,K} <: Model
     class::T
     formula::FormulaTerm
-    args::Tuple
-    kwargs::Tuple
+    args::A
+    kwargs::K
 end
 
-Model(class, formula::FormulaTerm, args...; kwargs...) = FormulaModel(class, formula, tuple(args...), tuple(kwargs...))
+Model(class, formula::FormulaTerm, args...; kwargs...) =
+    FormulaModel(class, formula, args, kwargs)
 
 abstract type BootstrapSampling end
 
@@ -83,9 +84,9 @@ WildSampling(1000, mammen)
 ```
 
 """
-struct WildSampling <: BootstrapSampling
+struct WildSampling{F} <: BootstrapSampling
     nrun::Int
-    noise::Function
+    noise::F
 end
 
 
@@ -114,30 +115,30 @@ maximumEntropySampling(100, MaximumEntropyCache())
 NOTE: Implementation based off [pymeboot](https://github.com/kirajcg/pymeboot) as the original
 [R package](https://cran.r-project.org/web/packages/meboot/index.html) is GPL licensed.
 """
-struct MaximumEntropySampling <: BootstrapSampling
+struct MaximumEntropySampling{T} <: BootstrapSampling
     nrun::Int
-    cache::MaximumEntropyCache
+    cache::MaximumEntropyCache{T}
 end
 
 MaximumEntropySampling(nrun) = MaximumEntropySampling(nrun, MaximumEntropyCache())
 
 abstract type BootstrapSample end
 
-struct NonParametricBootstrapSample{T} <: BootstrapSample
-    t0::Tuple
-    t1::Tuple
-    statistic::Function
+struct NonParametricBootstrapSample{T,T0,T1,S,B} <: BootstrapSample
+    t0::T0
+    t1::T1
+    statistic::S
     data::T
-    sampling::BootstrapSampling
+    sampling::B
 end
 
-struct ParametricBootstrapSample{T,M} <: BootstrapSample
-    t0::Tuple
-    t1::Tuple
-    statistic::Function
+struct ParametricBootstrapSample{T,M,T0,T1,S,B} <: BootstrapSample
+    t0::T0
+    t1::T1
+    statistic::S
     data::T
     model::M
-    sampling::BootstrapSampling
+    sampling::B
 end
 
 
@@ -179,7 +180,10 @@ nvar(bs::BootstrapSample) = nvar(original(bs))
 
 tx(x) = tuple(x...)
 
-zeros_tuple(t, n) = tuple([zeros(typeof(x), n) for x in t]...)
+zeros_tuple(t::Tuple, m::Int) = _zeros_tuple(typeof(t), m)
+_zeros_tuple(::Type{Tuple{}}, m::Int) = ()
+_zeros_tuple(::Type{T}, m::Int) where T <: Tuple =
+    (zeros(Base.tuple_type_head(T), m), _zeros_tuple(Base.tuple_type_tail(T), m)...)
 
 """
 bootstrap(statistic, data, BasicSampling())
@@ -249,7 +253,7 @@ end
 
 struct ExactIterator{T}
     a::T
-    k::Int64
+    k::Int
 end
 
 exact(n::Int) = ExactIterator(1:n, n)
@@ -345,9 +349,9 @@ end
 
 StatsModels.modelcols(t::ResidualTerm{S}, data) where {S} =
     throw(ArgumentError("ResidualTerm: don't know how to generate model columns for $S"))
-StatsModels.modelcols(t::ResidualTerm{ResidualSampling}, data) =
+StatsModels.modelcols(t::ResidualTerm{<:ResidualSampling}, data) =
     modelcols(t.t, data) + sample!(t.r0, t.r1)
-StatsModels.modelcols(t::ResidualTerm{WildSampling}, data) =
+StatsModels.modelcols(t::ResidualTerm{<:WildSampling}, data) =
     modelcols(t.t, data) + t.sampling.noise(t.r0)
 
 # we only ever create one of these terms after the model has been fit once so we don't
