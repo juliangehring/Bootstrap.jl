@@ -1,4 +1,4 @@
-module TestBootsampleNonParametric
+module TestNonParametricBootstrap
 
 using Bootstrap
 using Test
