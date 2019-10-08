@@ -347,9 +347,9 @@ struct ResidualTerm{S,T,R} <: StatsModels.AbstractTerm
 end
 
 
-StatsModels.modelcols(t::ResidualTerm{S}, data) where {S} =
-    throw(ArgumentError("ResidualTerm: don't know how to generate model columns for $S"))
-StatsModels.modelcols(t::ResidualTerm{<:ResidualSampling}, data) =
+StatsModels.modelcols(t::ResidualTerm, data) =
+    throw(ArgumentError("ResidualTerm: don't know how to generate model columns for $(typeof(t.sampling))"))
+StatsModels.modelcols(t::ResidualTerm{ResidualSampling}, data) =
     modelcols(t.t, data) + sample!(t.r0, t.r1)
 StatsModels.modelcols(t::ResidualTerm{<:WildSampling}, data) =
     modelcols(t.t, data) + t.sampling.noise(t.r0)
@@ -364,7 +364,7 @@ bootstrap(statistic, data, model, formula, sampling)
 bootstrap(statistic, data, model, formula, Wildsampling(nrun, noise))
 """
 function bootstrap(statistic::Function, data::AbstractDataFrame, model::FormulaModel,
-                   sampling::S) where {S <: BootstrapSampling}
+                   sampling::BootstrapSampling)
     class = model.class
     formula = apply_schema(model.formula, schema(model.formula, data), model.class)
 

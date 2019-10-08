@@ -14,9 +14,10 @@ end
 nrun_exact(n::Integer) = binomial(2n - 1, n)
 
 ## Jack-Knife estimate
-function jack_knife_estimate(data, statistic::Function, j::Int = 1, typ::Type = typeof(statistic(data)[j]))
+function jack_knife_estimate(data, statistic::Function, j::Int = 1,
+                             ::Type{T} = typeof(statistic(data)[j])) where T
     n = nobs(data)
-    y = zeros(typ, n)
+    y = zeros(T, n)
     idx = trues(n)
     for i in 1:n
         idx[i] = false
