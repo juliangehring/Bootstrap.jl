@@ -217,6 +217,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "NEWS/#Version-2.2.1-1",
+    "page": "Changelog",
+    "title": "Version 2.2.1",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "NEWS/#Changes-1",
+    "page": "Changelog",
+    "title": "Changes",
+    "category": "section",
+    "text": "Use upper bounds for dependencies. Contributed by Milan Bouchet-Valat (@nalimilan) (#74)."
+},
+
+{
     "location": "NEWS/#Version-2.2.0-1",
     "page": "Changelog",
     "title": "Version 2.2.0",
@@ -225,7 +241,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-1",
+    "location": "NEWS/#Changes-2",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -241,7 +257,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-2",
+    "location": "NEWS/#Changes-3",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -257,7 +273,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-3",
+    "location": "NEWS/#Changes-4",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -281,7 +297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-4",
+    "location": "NEWS/#Changes-5",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -313,7 +329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-5",
+    "location": "NEWS/#Changes-6",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
@@ -337,7 +353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "NEWS/#Changes-6",
+    "location": "NEWS/#Changes-7",
     "page": "Changelog",
     "title": "Changes",
     "category": "section",
