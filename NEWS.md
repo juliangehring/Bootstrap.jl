@@ -1,9 +1,11 @@
 # Bootstrap.jl News and Changes
 
-## Version 2.2.2
+## Version 2.3.0
 
 ### Changes
 
+- Performance improvements through parameterized types. Contributed by David Widmann (@devmotion) (#66).
+- Specialized Jack-Knife estimator. Contributed by David Widmann (@devmotion) (#67).
 - Switch to Github Actions for testing and documentation generation (#75).
 - Update links to external webpages in the documentation (#75).
 - Extend support to `Distributions` v0.24 (#76).
