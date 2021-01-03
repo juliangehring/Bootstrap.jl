@@ -27,14 +27,6 @@ Bootstrapping is a widely applicable technique for statistical estimation.
   - Bias-corrected and accelerated (BCa) (`BCaConfInt`)
 
 
-## Package Status
-
-Reports on package builds for all platforms and test coverage are collected on
-the [package status page](status.md).
-
-The package uses [semantic versioning](https://semver.org/).
-
-
 ## Installation
 
 The `Bootstrap` package is part of the Julia ecosphere and the latest release
@@ -136,3 +128,16 @@ requests or issues if you have suggestions for changes, ideas or questions.
   the term _bootstrapping_ is also used in different other contexts. You can check
   wikipedia for a longer list of
   [meanings associated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
+
+
+## Package Status
+
+[![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliangehring.github.io/Bootstrap.jl/stable)
+
+[![DOI](https://zenodo.org/badge/25918430.svg)](https://zenodo.org/badge/latestdoi/25918430)
+
+![Testing](https://github.com/juliangehring/Bootstrap.jl/workflows/Testing/badge.svg)
+
+[![Coverage](https://codecov.io/gh/juliangehring/Bootstrap.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/juliangehring/Bootstrap.jl)
+
+The package uses [semantic versioning](https://semver.org/).
