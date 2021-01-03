@@ -6,6 +6,7 @@
 
 - Switch to Github Actions for testing and documentation generation (#75).
 - Update links to external webpages in the documentation (#75).
+- Extend support to `Distributions` v0.24 (#76).
 
 
 ## Version 2.2.1
