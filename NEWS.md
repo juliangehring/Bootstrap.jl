@@ -1,5 +1,12 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.2.1
+
+### Changes
+
+- Use upper bounds for dependencies. Contributed by Milan Bouchet-Valat (@nalimilan) (#74).
+
+
 ## Version 2.2.0
 
 ### Changes
