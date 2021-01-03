@@ -10,8 +10,8 @@ BasicConfInt(0.95)
 ```
 
 """
-struct BasicConfInt <: ConfIntMethod
-    level::AbstractFloat
+struct BasicConfInt{T} <: ConfIntMethod
+    level::T
 end
 
 BasicConfInt() = BasicConfInt(_level)
@@ -25,14 +25,14 @@ PercentileConfInt(0.95)
 ```
 
 """
-struct PercentileConfInt <: ConfIntMethod
-    level::AbstractFloat
+struct PercentileConfInt{T} <: ConfIntMethod
+    level::T
 end
 
 PercentileConfInt() = PercentileConfInt(_level)
 
-struct NormalConfInt <: ConfIntMethod
-    level::AbstractFloat
+struct NormalConfInt{T} <: ConfIntMethod
+    level::T
 end
 
 
@@ -46,8 +46,8 @@ NormalConfInt(0.95)
 """
 NormalConfInt() = NormalConfInt(_level)
 
-struct BCaConfInt <: ConfIntMethod
-    level::AbstractFloat
+struct BCaConfInt{T} <: ConfIntMethod
+    level::T
 end
 
 
@@ -61,8 +61,8 @@ BCaConfInt(0.95)
 """
 BCaConfInt() = BCaConfInt(_level)
 
-struct StudentConfInt <: ConfIntMethod
-    level::AbstractFloat
+struct StudentConfInt{T} <: ConfIntMethod
+    level::T
 end
 
 """

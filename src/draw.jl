@@ -1,10 +1,10 @@
 ## draw: unify rand, sample
 
-draw!(x::T, o) where {T <: Distribution} = rand!(x, o)
+draw!(x::Distribution, o) = rand!(x, o)
 
-draw!(x::T, o::S) where {T <: AbstractVector,S <: AbstractVector} = sample!(x, o)
+draw!(x::AbstractVector, o::AbstractVector) = sample!(x, o)
 
-function draw!(x::T, o::S) where {T <: AbstractMatrix,S <: AbstractMatrix}
+function draw!(x::AbstractMatrix, o::AbstractMatrix)
     idx = sample(1:nobs(x), nobs(o))
     for (to, from) in enumerate(idx)
         o[to,:] = x[from,:]
@@ -12,7 +12,7 @@ function draw!(x::T, o::S) where {T <: AbstractMatrix,S <: AbstractMatrix}
     return o
 end
 
-function draw!(x::T, o::T) where {T <: AbstractDataFrame}
+function draw!(x::AbstractDataFrame, o::AbstractDataFrame)
     idx = sample(1:nobs(x), nobs(o))
     for column in names(x)
         o[!,column] = x[idx,column]
@@ -46,7 +46,6 @@ This is intended to minimize memory allocations and time when drawing random sam
 """
 mutable struct MaximumEntropyCache{T <: Real}
     n::Int
-    t::Type{T}
     inds::Vector{Int}
     vals::Vector{T}
     Z::Vector{T}
@@ -58,8 +57,7 @@ mutable struct MaximumEntropyCache{T <: Real}
 end
 
 function MaximumEntropyCache()
-    MaximumEntropyCache{Float64}(0,
-        Float64,
+    MaximumEntropyCache(0,
         Int[],
         Float64[],
         Float64[],
@@ -71,15 +69,14 @@ function MaximumEntropyCache()
     )
 end
 
-function init!(cache::MaximumEntropyCache, x::AbstractArray)
+function init!(cache::MaximumEntropyCache{T}, x::AbstractArray) where T
     cache.n = length(x)
-    cache.t = eltype(x)
     sorted!(cache, x)
     trimmed!(cache, x)
     intermediates!(cache)
     med!(cache)
-    cache.U = zeros(cache.t, cache.n)
-    cache.quantiles = zeros(cache.t, cache.n)
+    cache.U = zeros(T, cache.n)
+    cache.quantiles = zeros(T, cache.n)
     cache.v = [y / cache.n for y in 0:cache.n]
     return nothing
 end
@@ -108,8 +105,8 @@ end
 
 Compute our intermediate points for the ordered values.
 """
-function intermediates!(c::MaximumEntropyCache)
-    c.Z = zeros(c.t, c.n + 1)
+function intermediates!(c::MaximumEntropyCache{T}) where T
+    c.Z = zeros(T, c.n + 1)
     for i in 2:c.n
         c.Z[i] = (c.vals[i - 1] + c.vals[i]) /  2
     end
@@ -125,8 +122,8 @@ end
 Compute the mean of the maximum entropy density within each interval such that
 the ‘mean-preserving constraint’ is satisfied.
 """
-function med!(c::MaximumEntropyCache)
-    c.m = zeros(c.t, c.n)
+function med!(c::MaximumEntropyCache{T}) where T
+    c.m = zeros(T, c.n)
     c.m[1] = 0.75 * c.vals[1] + 0.25 * c.vals[1]
 
     for k in 2:(c.n - 1)

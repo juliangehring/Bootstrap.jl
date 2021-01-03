@@ -1,5 +1,5 @@
-tests = ["test-bootsample-non-parametric",
-         "test-bootsample-parametric",
+tests = ["test-non-parametric",
+         "test-parametric",
          "test-utils",
          "test-dependencies"]
 
