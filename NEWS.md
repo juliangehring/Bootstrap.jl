@@ -1,5 +1,12 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.3.1
+
+### Changes
+
+- Improve documentation deployment.
+
+
 ## Version 2.3.0
 
 ### Changes
