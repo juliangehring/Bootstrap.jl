@@ -15,4 +15,9 @@ makedocs(modules = [Bootstrap],
         "License" => "LICENSE.md"
     ])
 
-deploydocs(repo = "github.com/juliangehring/Bootstrap.jl.git")
+deploydocs(
+    repo = "github.com/juliangehring/Bootstrap.jl.git",
+    target = "build",
+    devbranch = "develop",
+    push_preview = true
+)
