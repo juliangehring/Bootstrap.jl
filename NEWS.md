@@ -1,5 +1,13 @@
 # Bootstrap.jl News and Changes
 
+## [unreleased]
+
+### Changes
+
+- Switch to Github Actions for testing and documentation generation (#75).
+- Update links to external webpages in the documentation (#75).
+
+
 ## Version 2.2.1
 
 ### Changes

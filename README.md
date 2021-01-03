@@ -130,7 +130,6 @@ requests or issues if you have suggestions for changes, ideas or questions.
   [meanings associated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
 
 
-
 ## Package Status
 
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliangehring.github.io/Bootstrap.jl/stable)
