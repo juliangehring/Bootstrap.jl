@@ -1,6 +1,6 @@
 # Bootstrap.jl News and Changes
 
-## [unreleased]
+## Version 2.2.2
 
 ### Changes
 
