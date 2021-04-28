@@ -12,7 +12,7 @@ using StatsBase
 
 ## 'city' dataset
 const city = dataset("boot", "city")
-const citya = convert(Matrix, city)
+const citya = Matrix(city)
 
 @testset "Non-parametric bootstraps" begin
 
