@@ -1,5 +1,13 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.3.2
+
+### Changes
+
+- Extend supported versions of `DataFrames` to v1.0. Contributed by Bogumił Kamiński (@bkamins) (#83).
+- Update DOI badge.
+
+
 ## Version 2.3.1
 
 ### Changes
