@@ -125,7 +125,7 @@ requests or issues if you have suggestions for changes, ideas or questions.
   compiling, ...?
 
   No, not really. This package focuses on an interesting area in statistics, but
-  the term _bootstrapping_ is also used in different other contexts. You can check
+  the term _bootstrapping_ is also used in other contexts. You can check
   wikipedia for a longer list of
   [meanings associated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
 
@@ -134,7 +134,7 @@ requests or issues if you have suggestions for changes, ideas or questions.
 
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliangehring.github.io/Bootstrap.jl/stable)
 
-[![DOI](https://zenodo.org/badge/25918430.svg)](https://zenodo.org/badge/latestdoi/25918430)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.596080.svg)](https://doi.org/10.5281/zenodo.596080)
 
 ![Testing](https://github.com/juliangehring/Bootstrap.jl/workflows/Testing/badge.svg)
 
