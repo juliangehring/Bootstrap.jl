@@ -1,5 +1,12 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.3.3
+
+### Changes
+
+- Extend supported versions of `Distributions` to v0.25.
+
+
 ## Version 2.3.2
 
 ### Changes
