@@ -77,6 +77,13 @@ StudentConfInt() = StudentConfInt(_level)
 
 level(cim::ConfIntMethod) = cim.level
 
+"""
+    confint(bs::BootstrapSample, cim::ConfIntMethod, [i::Int])
+
+Return the confidence interval for the bootstrapped sample `bs` with the
+method defined by `cim`. If `i` is specified, only the confidence interval
+for the `ith` variable is returned.
+"""
 function confint(bs::BootstrapSample, cim::ConfIntMethod)
     tuple([confint(bs, cim, i) for i in 1:nvar(bs)]...)
 end
