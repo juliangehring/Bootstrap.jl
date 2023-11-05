@@ -1,5 +1,14 @@
 # Bootstrap.jl News and Changes
 
+## Version 2.4.0
+
+### Changes
+
+- Extend compatibility for `Statistics`, `StatsBase` and `StatsModels`.
+- Clarify return value of `confint`. Contributed by Hector Perez (@hdavid16) (#95).
+- Update docstrings. Contributed by Hector Perez (@hdavid16) (#95).
+
+
 ## Version 2.3.3
 
 ### Changes
