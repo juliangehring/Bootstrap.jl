@@ -7,6 +7,7 @@
 - Extend compatibility for `Statistics`, `StatsBase` and `StatsModels`.
 - Clarify return value of `confint`. Contributed by Hector Perez (@hdavid16) (#95).
 - Update docstrings. Contributed by Hector Perez (@hdavid16) (#95).
+- Update documentation.
 
 
 ## Version 2.3.3
