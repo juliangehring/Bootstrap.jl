@@ -121,17 +121,6 @@ Contributions of any kind are very welcome. Please feel free to open pull
 requests or issues if you have suggestions for changes, ideas or questions.
 
 
-## Frequently Asked Questions
-
-- Does it have anything to do with twitter themes, webpage frameworks,
-  compiling, ...?
-
-  No, not really. This package focuses on an interesting area in statistics, but
-  the term _bootstrapping_ is also used in other contexts. You can check
-  wikipedia for a longer list of
-  [meanings associated with bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_(disambiguation)).
-
-
 ## Package Status
 
 [![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliangehring.github.io/Bootstrap.jl/stable)
