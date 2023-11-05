@@ -81,7 +81,9 @@ estimated bias and standard error of our statistic.
 ```
 
 Furthermore, we can estimate confidence intervals (CIs) for our statistic of
-interest, based on the bootstrapped samples.
+interest, based on the bootstrapped samples. `confint` returns a `Tuple` of `Tuples`,
+where each `Tuple` is of the form `(statistic_value, upper_confidence_bound, lower_confidence_bound)`.
+A confidence interval is returned for each variable in the bootstrap model.
 
 ```julia
   ## calculate 95% confidence intervals

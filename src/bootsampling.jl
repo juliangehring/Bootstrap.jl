@@ -163,7 +163,7 @@ nrun(bs::BootstrapSample) = nrun(sampling(bs))
 Return the statistic function of a `BootstrapSample`
 
 ```julia
-bs = bootstrap(randn(20), mean, BasicSampling(100))
+bs = bootstrap(mean, randn(20), BasicSampling(100))
 statistic(bs)
 ```
 
