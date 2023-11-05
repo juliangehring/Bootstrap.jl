@@ -4,9 +4,9 @@
 
 ### Changes
 
-- Extend compatibility for `Statistics`, `StatsBase` and `StatsModels`.
+- Extend compatibility for `Statistics`, `StatsBase`, `StatsModels` and `Random`.
 - Clarify return value of `confint`. Contributed by Hector Perez (@hdavid16) (#95).
-- Update docstrings. Contributed by Hector Perez (@hdavid16) (#95).
+- Update doc strings. Contributed by Hector Perez (@hdavid16) (#95).
 - Update documentation.
 
 
